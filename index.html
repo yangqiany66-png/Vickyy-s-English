@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vicky's English</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f6f7fb;
+      color: #202124;
+    }
+
+    header {
+      background: white;
+      padding: 20px 40px;
+      border-bottom: 1px solid #e5e5e5;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .xp {
+      font-weight: bold;
+    }
+
+    nav {
+      background: white;
+      padding: 10px 40px;
+      border-bottom: 1px solid #e5e5e5;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+    }
+
+    nav button {
+      border: none;
+      background: #f0f1f5;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    nav button:hover {
+      background: #e2e4ff;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #6257e8, #8d82ff);
+      color: white;
+      padding: 40px;
+      border-radius: 20px;
+      margin-bottom: 25px;
+    }
+
+    .hero h1 {
+      font-size: 34px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      margin-bottom: 25px;
+      font-size: 17px;
+    }
+
+    .start-btn {
+      background: white;
+      color: #6257e8;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 16px;
+      border: 1px solid #e5e5e5;
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .progress {
+      margin-top: 15px;
+      height: 10px;
+      background: #e8e8ef;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 20%;
+      height: 100%;
+      background: #6257e8;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .lesson {
+      margin-top: 20px;
+    }
+
+    .lesson button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      background: #6257e8;
+      color: white;
+      cursor: pointer;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 150px;
+      margin-top: 15px;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      resize: vertical;
+    }
+
+    @media (max-width: 700px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        padding: 15px 20px;
+      }
+
+      nav {
+        padding: 10px 20px;
+      }
+
+      .hero {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">Vicky's English</div>
+  <div class="xp">⭐ XP: <span id="xp">0</span></div>
+</header>
+
+<nav>
+  <button onclick="showSection('home')">🏠 Home</button>
+  <button onclick="showSection('today')">🎯 Today</button>
+  <button onclick="showSection('vocab')">🧠 Vocabulary</button>
+  <button onclick="showSection('grammar')">📘 Grammar</button>
+  <button onclick="showSection('listening')">🎧 Listening</button>
+  <button onclick="showSection('speaking')">🗣️ Speaking</button>
+  <button onclick="showSection('reading')">📖 Reading</button>
+  <button onclick="showSection('writing')">✍️ Writing</button>
+  <button onclick="showSection('catti')">📝 CATTI</button>
+  <button onclick="showSection('progress')">📈 Progress</button>
+</nav>
+
+<main>
+
+  <!-- HOME -->
+  <section id="home" class="section active">
+
+    <div class="hero">
+      <h1>Welcome to Vicky's English 👋</h1>
+      <p>
+        Your personal English learning space.
+        Learn a little every day and keep moving forward.
+      </p>
+
+      <button class="start-btn" onclick="showSection('today')">
+        Start Today's Quest →
+      </button>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <h2>🎯 Today's Goal</h2>
+        <p>Complete 5 small English tasks today.</p>
+
+        <div class="progress">
+          <div class="progress-bar"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🔥 Streak</h2>
+        <p><strong id="streak">0</strong> days</p>
+      </div>
+
+      <div class="card">
+        <h2>📝 CATTI</h2>
+        <p>Level 3 Translation</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- TODAY -->
+  <section id="today" class="section">
+
+    <h1>🎯 Today's Tasks</h1>
+
+    <div class="grid lesson">
+
+      <div class="card">
+        <h2>🧠 Vocabulary</h2>
+        <p>Learn 5 useful English words.</p>
+        <button onclick="completeTask()">Complete +10 XP</button>
+      </div>
+
+      <div class="card">
+        <h2>📘 Grammar</h2>
+        <p>Practice one important grammar point.</p>
+        <button onclick="completeTask()">Complete +10 XP</button>
+      </div>
+
+      <div class="card">
+        <h2>🎧 Listening</h2>
+        <p>Listen to a short English sentence.</p>
+        <button onclick="completeTask()">Complete +10 XP</button>
+      </div>
+
+      <div class="card">
+        <h2>🗣️ Speaking</h2>
+        <p>Read one English sentence aloud.</p>
+        <button onclick="completeTask()">Complete +10 XP</button>
+      </div>
+
+      <div class="card">
+        <h2>📝 CATTI</h2>
+        <p>Complete one translation exercise.</p>
+        <button onclick="completeTask()">Complete +10 XP</button>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- VOCABULARY -->
+  <section id="vocab" class="section">
+
+    <h1>🧠 Vocabulary</h1>
+
+    <div class="grid lesson">
+
+      <div class="card">
+        <h2>signal</h2>
+        <p>n. 信号；迹象</p>
+        <p>Example: This is a clear signal of change.</p>
+      </div>
+
+      <div class="card">
+        <h2>urgent</h2>
+        <p>adj. 紧急的；迫切的</p>
+        <p>Example: We have an urgent need.</p>
+      </div>
+
+      <div class="card">
+        <h2>innovation</h2>
+        <p>n. 创新</p>
+        <p>Example: Technological innovation is important.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- GRAMMAR -->
+  <section id="grammar" class="section">
+
+    <h1>📘 Grammar</h1>
+
+    <div class="card lesson">
+
+      <h2>Present Perfect</h2>
+
+      <p>
+        Structure:
+        <strong>have / has + past participle</strong>
+      </p>
+
+      <p>
+        Example:
+        I have studied English for several years.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- LISTENING -->
+  <section id="listening" class="section">
+
+    <h1>🎧 Listening</h1>
+
+    <div class="card lesson">
+
+      <h2>Today's Sentence</h2>
+
+      <p>
+        The digital economy is changing the way we live.
+      </p>
+
+      <button onclick="speakEnglish()">
+        🔊 Listen
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- SPEAKING -->
+  <section id="speaking" class="section">
+
+    <h1>🗣️ Speaking</h1>
+
+    <div class="card lesson">
+
+      <h2>Repeat after me</h2>
+
+      <p>
+        The digital economy is changing the way we live.
+      </p>
+
+      <button onclick="speakEnglish()">
+        🔊 Play sentence
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- READING -->
+  <section id="reading" class="section">
+
+    <h1>📖 Reading</h1>
+
+    <div class="card lesson">
+
+      <h2>Technology and Society</h2>
+
+      <p>
+        Technological innovation is transforming many aspects
+        of daily life. New technologies create opportunities,
+        but they also require people to develop new skills.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- WRITING -->
+  <section id="writing" class="section">
+
+    <h1>✍️ Writing</h1>
+
+    <div class="card lesson">
+
+      <h2>Translation Practice</h2>
+
+      <p>科技创新正在改变我们的生活方式。</p>
+
+      <textarea placeholder="Write your English translation here..."></textarea>
+
+      <button onclick="showAnswer()">
+        Show Reference
+      </button>
+
+      <p id="answer" style="display:none; margin-top:15px;">
+        Technological innovation is changing the way we live.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- CATTI -->
+  <section id="catti" class="section">
+
+    <h1>📝 CATTI Level 3</h1>
+
+    <div class="card lesson">
+
+      <h2>English → Chinese</h2>
+
+      <p>
+        Globalization has deepened economic interdependence
+        among countries.
+      </p>
+
+      <textarea placeholder="Write your Chinese translation here..."></textarea>
+
+      <button onclick="showCattiAnswer()">
+        Show Reference
+      </button>
+
+      <p id="cattiAnswer" style="display:none; margin-top:15px;">
+        全球化加深了各国之间的经济相互依存。
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- PROGRESS -->
+  <section id="progress" class="section">
+
+    <h1>📈 My Progress</h1>
+
+    <div class="grid lesson">
+
+      <div class="card">
+        <h2>⭐ XP</h2>
+        <p id="progressXP">0</p>
+      </div>
+
+      <div class="card">
+        <h2>🔥 Streak</h2>
+        <p id="progressStreak">0 days</p>
+      </div>
+
+      <div class="card">
+        <h2>🎯 Tasks</h2>
+        <p id="tasks">0</p>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<script>
+
+let xp = Number(localStorage.getItem("vickyXP")) || 0;
+let tasks = Number(localStorage.getItem("vickyTasks")) || 0;
+let streak = Number(localStorage.getItem("vickyStreak")) || 0;
+
+document.getElementById("xp").textContent = xp;
+document.getElementById("progressXP").textContent = xp;
+document.getElementById("tasks").textContent = tasks;
+document.getElementById("progressStreak").textContent = streak + " days";
+document.getElementById("streak").textContent = streak;
+
+
+function showSection(id) {
+
+  const sections = document.querySelectorAll(".section");
+
+  sections.forEach(section => {
+    section.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+}
+
+
+function completeTask() {
+
+  xp += 10;
+  tasks += 1;
+
+  localStorage.setItem("vickyXP", xp);
+  localStorage.setItem("vickyTasks", tasks);
+
+  document.getElementById("xp").textContent = xp;
+  document.getElementById("progressXP").textContent = xp;
+  document.getElementById("tasks").textContent = tasks;
+
+  alert("Great job! +10 XP 🎉");
+
+}
+
+
+function speakEnglish() {
+
+  const text =
+    "The digital economy is changing the way we live.";
+
+  const speech =
+    new SpeechSynthesisUtterance(text);
+
+  speech.lang = "en-US";
+  speech.rate = 0.8;
+
+  speechSynthesis.speak(speech);
+
+}
+
+
+function showAnswer() {
+
+  document.getElementById("answer").style.display = "block";
+
+}
+
+
+function showCattiAnswer() {
+
+  document.getElementById("cattiAnswer").style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>
