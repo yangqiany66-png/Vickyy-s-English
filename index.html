@@ -1,563 +1,894 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vicky's English</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vicky's English</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+* {
+  box-sizing: border-box;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f6f7fb;
-      color: #202124;
-    }
+body {
+  margin: 0;
+  font-family: Arial, "Microsoft YaHei", sans-serif;
+  background: #f5f7fb;
+  color: #202124;
+}
 
-    header {
-      background: white;
-      padding: 20px 40px;
-      border-bottom: 1px solid #e5e5e5;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+header {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
 
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
+.header-inner {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-    .xp {
-      font-weight: bold;
-    }
+.logo {
+  font-size: 24px;
+  font-weight: bold;
+}
 
-    nav {
-      background: white;
-      padding: 10px 40px;
-      border-bottom: 1px solid #e5e5e5;
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-    }
+.xp-box {
+  background: rgba(255,255,255,.18);
+  padding: 8px 14px;
+  border-radius: 20px;
+}
 
-    nav button {
-      border: none;
-      background: #f0f1f5;
-      padding: 10px 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      white-space: nowrap;
-    }
+nav {
+  max-width: 1100px;
+  margin: 15px auto 0;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+}
 
-    nav button:hover {
-      background: #e2e4ff;
-    }
+nav button {
+  border: none;
+  background: rgba(255,255,255,.15);
+  color: white;
+  padding: 9px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
 
-    main {
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 0 20px;
-    }
+nav button:hover,
+nav button.active {
+  background: white;
+  color: #667eea;
+}
 
-    .hero {
-      background: linear-gradient(135deg, #6257e8, #8d82ff);
-      color: white;
-      padding: 40px;
-      border-radius: 20px;
-      margin-bottom: 25px;
-    }
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 30px 18px;
+}
 
-    .hero h1 {
-      font-size: 34px;
-      margin-bottom: 10px;
-    }
+.page {
+  display: none;
+}
 
-    .hero p {
-      margin-bottom: 25px;
-      font-size: 17px;
-    }
+.page.active {
+  display: block;
+}
 
-    .start-btn {
-      background: white;
-      color: #6257e8;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-    }
+.hero {
+  background: white;
+  border-radius: 24px;
+  padding: 35px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.06);
+  margin-bottom: 25px;
+}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
+.hero h1 {
+  margin-top: 0;
+  font-size: 34px;
+}
 
-    .card {
-      background: white;
-      padding: 25px;
-      border-radius: 16px;
-      border: 1px solid #e5e5e5;
-    }
+.hero p {
+  color: #666;
+  font-size: 17px;
+  line-height: 1.7;
+}
 
-    .card h2 {
-      margin-bottom: 10px;
-    }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
 
-    .card p {
-      color: #666;
-      line-height: 1.6;
-    }
+.card {
+  background: white;
+  padding: 22px;
+  border-radius: 18px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.05);
+}
 
-    .progress {
-      margin-top: 15px;
-      height: 10px;
-      background: #e8e8ef;
-      border-radius: 10px;
-      overflow: hidden;
-    }
+.card h3 {
+  margin-top: 0;
+}
 
-    .progress-bar {
-      width: 20%;
-      height: 100%;
-      background: #6257e8;
-    }
+.stat {
+  font-size: 30px;
+  font-weight: bold;
+  color: #667eea;
+}
 
-    .section {
-      display: none;
-    }
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 16px;
+  margin: 10px 0;
+  background: #f8f9ff;
+  border-radius: 14px;
+}
 
-    .section.active {
-      display: block;
-    }
+button.primary {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 10px 17px;
+  border-radius: 10px;
+  cursor: pointer;
+}
 
-    .lesson {
-      margin-top: 20px;
-    }
+button.primary:hover {
+  opacity: .9;
+}
 
-    .lesson button {
-      margin-top: 15px;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 8px;
-      background: #6257e8;
-      color: white;
-      cursor: pointer;
-    }
+button.secondary {
+  background: #eee;
+  color: #333;
+  border: none;
+  padding: 10px 17px;
+  border-radius: 10px;
+  cursor: pointer;
+}
 
-    textarea {
-      width: 100%;
-      min-height: 150px;
-      margin-top: 15px;
-      padding: 12px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      resize: vertical;
-    }
+.word {
+  font-size: 32px;
+  font-weight: bold;
+  color: #667eea;
+}
 
-    @media (max-width: 700px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
+.example {
+  background: #f5f7ff;
+  padding: 15px;
+  border-radius: 12px;
+  margin: 15px 0;
+  line-height: 1.7;
+}
 
-      header {
-        padding: 15px 20px;
-      }
+textarea {
+  width: 100%;
+  min-height: 140px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 16px;
+  resize: vertical;
+}
 
-      nav {
-        padding: 10px 20px;
-      }
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 16px;
+}
 
-      .hero {
-        padding: 25px;
-      }
-    }
-  </style>
+.reference {
+  display: none;
+  background: #eef8ee;
+  border-left: 4px solid #4caf50;
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 8px;
+  line-height: 1.7;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 14px;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: #667eea;
+  transition: .3s;
+}
+
+.badge {
+  display: inline-block;
+  background: #fff3cd;
+  padding: 8px 12px;
+  border-radius: 20px;
+  margin: 5px;
+}
+
+.small {
+  color: #777;
+  font-size: 14px;
+}
+
+.section-title {
+  margin-top: 0;
+}
+
+@media(max-width:700px) {
+  .hero {
+    padding: 24px;
+  }
+
+  .hero h1 {
+    font-size: 27px;
+  }
+
+  .header-inner {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .task {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <div class="logo">Vicky's English</div>
-  <div class="xp">⭐ XP: <span id="xp">0</span></div>
+  <div class="header-inner">
+    <div class="logo">📚 Vicky's English</div>
+    <div class="xp-box">⭐ <span id="xp">0</span> XP</div>
+  </div>
+
+  <nav>
+    <button class="active" onclick="showPage('home',this)">🏠 首页</button>
+    <button onclick="showPage('today',this)">☀️ 今日</button>
+    <button onclick="showPage('vocabulary',this)">📚 单词</button>
+    <button onclick="showPage('grammar',this)">📝 语法</button>
+    <button onclick="showPage('listening',this)">🎧 听力</button>
+    <button onclick="showPage('speaking',this)">🗣️ 口语</button>
+    <button onclick="showPage('reading',this)">📖 阅读</button>
+    <button onclick="showPage('writing',this)">✍️ 写作</button>
+    <button onclick="showPage('catti',this)">🎯 CATTI</button>
+    <button onclick="showPage('progress',this)">📊 进度</button>
+  </nav>
 </header>
 
-<nav>
-  <button onclick="showSection('home')">🏠 Home</button>
-  <button onclick="showSection('today')">🎯 Today</button>
-  <button onclick="showSection('vocab')">🧠 Vocabulary</button>
-  <button onclick="showSection('grammar')">📘 Grammar</button>
-  <button onclick="showSection('listening')">🎧 Listening</button>
-  <button onclick="showSection('speaking')">🗣️ Speaking</button>
-  <button onclick="showSection('reading')">📖 Reading</button>
-  <button onclick="showSection('writing')">✍️ Writing</button>
-  <button onclick="showSection('catti')">📝 CATTI</button>
-  <button onclick="showSection('progress')">📈 Progress</button>
-</nav>
+<div class="container">
 
-<main>
+<!-- HOME -->
+<section id="home" class="page active">
 
-  <!-- HOME -->
-  <section id="home" class="section active">
+  <div class="hero">
+    <h1>Welcome to Vicky's English 👋</h1>
+    <p>
+      这是属于你的英语学习空间。<br>
+      从基础英语开始，一步一步走向 CATTI 三级笔译。
+    </p>
 
-    <div class="hero">
-      <h1>Welcome to Vicky's English 👋</h1>
-      <p>
-        Your personal English learning space.
-        Learn a little every day and keep moving forward.
-      </p>
+    <button class="primary" onclick="showPage('today')">
+      开始今天的学习 →
+    </button>
+  </div>
 
-      <button class="start-btn" onclick="showSection('today')">
-        Start Today's Quest →
-      </button>
+  <div class="cards">
+
+    <div class="card">
+      <h3>⭐ 我的 XP</h3>
+      <div class="stat" id="homeXP">0</div>
+      <p class="small">坚持学习就能获得 XP</p>
     </div>
 
-    <div class="grid">
+    <div class="card">
+      <h3>🔥 连续学习</h3>
+      <div class="stat"><span id="streak">0</span> 天</div>
+      <p class="small">每天完成任务即可保持记录</p>
+    </div>
+
+    <div class="card">
+      <h3>🏆 当前等级</h3>
+      <div class="stat">Lv.<span id="level">1</span></div>
+      <p class="small">继续积累 XP 解锁等级</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- TODAY -->
+<section id="today" class="page">
+
+  <div class="hero">
+    <h1>☀️ Today's Learning</h1>
+    <p>今天不用学很多，完成下面几个小任务就可以。</p>
+  </div>
+
+  <div class="card">
+
+    <div class="task">
+      <div>
+        <strong>📚 Vocabulary</strong>
+        <div class="small">学习 3 个核心单词</div>
+      </div>
+      <button class="primary" onclick="completeTask('vocabTask',10)">+10 XP</button>
+    </div>
+
+    <div class="task">
+      <div>
+        <strong>📝 Grammar</strong>
+        <div class="small">复习一个语法知识点</div>
+      </div>
+      <button class="primary" onclick="completeTask('grammarTask',10)">+10 XP</button>
+    </div>
+
+    <div class="task">
+      <div>
+        <strong>🎧 Listening</strong>
+        <div class="small">听一句英语</div>
+      </div>
+      <button class="primary" onclick="completeTask('listenTask',10)">+10 XP</button>
+    </div>
+
+    <div class="task">
+      <div>
+        <strong>🗣️ Speaking</strong>
+        <div class="small">朗读一句英语</div>
+      </div>
+      <button class="primary" onclick="completeTask('speakTask',10)">+10 XP</button>
+    </div>
+
+    <div class="task">
+      <div>
+        <strong>🎯 CATTI</strong>
+        <div class="small">完成一道翻译训练</div>
+      </div>
+      <button class="primary" onclick="completeTask('cattiTask',10)">+10 XP</button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- VOCABULARY -->
+<section id="vocabulary" class="page">
+
+  <div class="hero">
+    <h1>📚 Vocabulary</h1>
+    <p>先掌握高频、实用、CATTI 常见词汇。</p>
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="word">signal</div>
+      <p>n. 信号；迹象</p>
+
+      <div class="example">
+        The price increase is a signal that demand is rising.
+        <br>
+        价格上涨是需求正在增加的一个信号。
+      </div>
+
+      <button class="primary" onclick="speak('signal')">🔊 发音</button>
+    </div>
+
+    <div class="card">
+      <div class="word">urgent</div>
+      <p>adj. 紧急的；迫切的</p>
+
+      <div class="example">
+        We need to solve this problem urgently.
+        <br>
+        我们需要紧急解决这个问题。
+      </div>
+
+      <button class="primary" onclick="speak('urgent')">🔊 发音</button>
+    </div>
+
+    <div class="card">
+      <div class="word">innovation</div>
+      <p>n. 创新</p>
+
+      <div class="example">
+        Innovation plays an important role in economic growth.
+        <br>
+        创新在经济增长中发挥着重要作用。
+      </div>
+
+      <button class="primary" onclick="speak('innovation')">🔊 发音</button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- GRAMMAR -->
+<section id="grammar" class="page">
+
+  <div class="hero">
+    <h1>📝 Grammar</h1>
+
+    <h2>Present Perfect 现在完成时</h2>
+
+    <p>
+      结构：
+      <strong>have / has + 过去分词</strong>
+    </p>
+
+    <div class="example">
+      I have finished my work.
+      <br>
+      我已经完成了我的工作。
+    </div>
+
+    <p>
+      常用于表示过去发生的事情对现在产生影响，
+      或者从过去持续到现在的情况。
+    </p>
+
+    <button class="primary"
+      onclick="showAnswer('grammarAnswer')">
+      查看例句
+    </button>
+
+    <div id="grammarAnswer" class="reference">
+      Globalization has changed the way countries cooperate.
+      <br>
+      全球化改变了各国合作的方式。
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- LISTENING -->
+<section id="listening" class="page">
+
+  <div class="hero">
+
+    <h1>🎧 Listening</h1>
+
+    <p>先从短句开始，不追求一次听懂。</p>
+
+    <div class="example">
+      <strong>The digital economy is changing the way we live.</strong>
+      <br><br>
+      数字经济正在改变我们的生活方式。
+    </div>
+
+    <button class="primary"
+      onclick="speak('The digital economy is changing the way we live.')">
+      🔊 播放
+    </button>
+
+    <button class="secondary"
+      onclick="showAnswer('listenAnswer')">
+      查看中文
+    </button>
+
+    <div id="listenAnswer" class="reference">
+      数字经济正在改变我们的生活方式。
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SPEAKING -->
+<section id="speaking" class="page">
+
+  <div class="hero">
+
+    <h1>🗣️ Speaking</h1>
+
+    <p>听 → 跟读 → 再自己说。</p>
+
+    <div class="example">
+      The digital economy is changing the way we live.
+    </div>
+
+    <button class="primary"
+      onclick="speak('The digital economy is changing the way we live.')">
+      🔊 听标准发音
+    </button>
+
+    <p>
+      <strong>你的任务：</strong>
+      大声朗读 3 遍。
+    </p>
+
+    <p class="small">
+      先不要追求完美，重点是敢开口。
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- READING -->
+<section id="reading" class="page">
+
+  <div class="hero">
+
+    <h1>📖 Reading</h1>
+
+    <h2>Technology and Society</h2>
+
+    <div class="example">
+
+      Technology has become an important part of modern society.
+      It has changed the way people work, communicate and learn.
+      At the same time, technological development has also created
+      new challenges for society.
+
+    </div>
+
+    <button class="primary"
+      onclick="showAnswer('readingAnswer')">
+      查看中文
+    </button>
+
+    <div id="readingAnswer" class="reference">
+
+      科技已经成为现代社会的重要组成部分。
+      它改变了人们工作、交流和学习的方式。
+      与此同时，技术的发展也给社会带来了新的挑战。
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- WRITING -->
+<section id="writing" class="page">
+
+  <div class="hero">
+
+    <h1>✍️ Writing</h1>
+
+    <p>先自己翻译，再看参考答案。</p>
+
+    <div class="example">
+      科技创新正在改变我们的生活方式。
+    </div>
+
+    <textarea
+      id="writingInput"
+      placeholder="在这里写你的英文翻译……">
+    </textarea>
+
+    <br><br>
+
+    <button class="primary"
+      onclick="showAnswer('writingAnswer')">
+      查看参考答案
+    </button>
+
+    <div id="writingAnswer" class="reference">
+
+      Technological innovation is changing the way we live.
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CATTI -->
+<section id="catti" class="page">
+
+  <div class="hero">
+
+    <h1>🎯 CATTI 三级笔译</h1>
+
+    <p>
+      训练原则：<strong>先自己翻译，再看参考答案。</strong>
+    </p>
+
+    <div class="example">
+
+      <strong>English → Chinese</strong>
+
+      <br><br>
+
+      Globalization has deepened economic interdependence
+      among countries.
+
+    </div>
+
+    <textarea
+      id="cattiInput"
+      placeholder="先写你的中文翻译……">
+    </textarea>
+
+    <br><br>
+
+    <button class="primary"
+      onclick="showAnswer('cattiAnswer')">
+      查看参考答案
+    </button>
+
+    <div id="cattiAnswer" class="reference">
+
+      全球化加深了各国之间的经济相互依存。
+
+      <br><br>
+
+      <strong>核心表达：</strong>
+
+      <br>
+      globalization = 全球化
+      <br>
+      deepen = 加深
+      <br>
+      economic interdependence = 经济相互依存
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PROGRESS -->
+<section id="progress" class="page">
+
+  <div class="hero">
+
+    <h1>📊 My Progress</h1>
+
+    <div class="cards">
 
       <div class="card">
-        <h2>🎯 Today's Goal</h2>
-        <p>Complete 5 small English tasks today.</p>
+        <h3>⭐ XP</h3>
+        <div class="stat" id="progressXP">0</div>
+      </div>
 
-        <div class="progress">
-          <div class="progress-bar"></div>
+      <div class="card">
+        <h3>🔥 Streak</h3>
+        <div class="stat">
+          <span id="progressStreak">0</span> 天
         </div>
       </div>
 
       <div class="card">
-        <h2>🔥 Streak</h2>
-        <p><strong id="streak">0</strong> days</p>
-      </div>
-
-      <div class="card">
-        <h2>📝 CATTI</h2>
-        <p>Level 3 Translation</p>
+        <h3>🏆 Level</h3>
+        <div class="stat">
+          Lv.<span id="progressLevel">1</span>
+        </div>
       </div>
 
     </div>
 
-  </section>
+    <br>
 
+    <h3>等级进度</h3>
 
-  <!-- TODAY -->
-  <section id="today" class="section">
-
-    <h1>🎯 Today's Tasks</h1>
-
-    <div class="grid lesson">
-
-      <div class="card">
-        <h2>🧠 Vocabulary</h2>
-        <p>Learn 5 useful English words.</p>
-        <button onclick="completeTask()">Complete +10 XP</button>
-      </div>
-
-      <div class="card">
-        <h2>📘 Grammar</h2>
-        <p>Practice one important grammar point.</p>
-        <button onclick="completeTask()">Complete +10 XP</button>
-      </div>
-
-      <div class="card">
-        <h2>🎧 Listening</h2>
-        <p>Listen to a short English sentence.</p>
-        <button onclick="completeTask()">Complete +10 XP</button>
-      </div>
-
-      <div class="card">
-        <h2>🗣️ Speaking</h2>
-        <p>Read one English sentence aloud.</p>
-        <button onclick="completeTask()">Complete +10 XP</button>
-      </div>
-
-      <div class="card">
-        <h2>📝 CATTI</h2>
-        <p>Complete one translation exercise.</p>
-        <button onclick="completeTask()">Complete +10 XP</button>
-      </div>
-
+    <div class="progress-bar">
+      <div class="progress-fill" id="levelBar"></div>
     </div>
 
-  </section>
+    <p id="levelText" class="small"></p>
 
+    <h3>🏆 成就</h3>
 
-  <!-- VOCABULARY -->
-  <section id="vocab" class="section">
+    <div id="badges"></div>
 
-    <h1>🧠 Vocabulary</h1>
+  </div>
 
-    <div class="grid lesson">
+</section>
 
-      <div class="card">
-        <h2>signal</h2>
-        <p>n. 信号；迹象</p>
-        <p>Example: This is a clear signal of change.</p>
-      </div>
-
-      <div class="card">
-        <h2>urgent</h2>
-        <p>adj. 紧急的；迫切的</p>
-        <p>Example: We have an urgent need.</p>
-      </div>
-
-      <div class="card">
-        <h2>innovation</h2>
-        <p>n. 创新</p>
-        <p>Example: Technological innovation is important.</p>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- GRAMMAR -->
-  <section id="grammar" class="section">
-
-    <h1>📘 Grammar</h1>
-
-    <div class="card lesson">
-
-      <h2>Present Perfect</h2>
-
-      <p>
-        Structure:
-        <strong>have / has + past participle</strong>
-      </p>
-
-      <p>
-        Example:
-        I have studied English for several years.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- LISTENING -->
-  <section id="listening" class="section">
-
-    <h1>🎧 Listening</h1>
-
-    <div class="card lesson">
-
-      <h2>Today's Sentence</h2>
-
-      <p>
-        The digital economy is changing the way we live.
-      </p>
-
-      <button onclick="speakEnglish()">
-        🔊 Listen
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- SPEAKING -->
-  <section id="speaking" class="section">
-
-    <h1>🗣️ Speaking</h1>
-
-    <div class="card lesson">
-
-      <h2>Repeat after me</h2>
-
-      <p>
-        The digital economy is changing the way we live.
-      </p>
-
-      <button onclick="speakEnglish()">
-        🔊 Play sentence
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- READING -->
-  <section id="reading" class="section">
-
-    <h1>📖 Reading</h1>
-
-    <div class="card lesson">
-
-      <h2>Technology and Society</h2>
-
-      <p>
-        Technological innovation is transforming many aspects
-        of daily life. New technologies create opportunities,
-        but they also require people to develop new skills.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- WRITING -->
-  <section id="writing" class="section">
-
-    <h1>✍️ Writing</h1>
-
-    <div class="card lesson">
-
-      <h2>Translation Practice</h2>
-
-      <p>科技创新正在改变我们的生活方式。</p>
-
-      <textarea placeholder="Write your English translation here..."></textarea>
-
-      <button onclick="showAnswer()">
-        Show Reference
-      </button>
-
-      <p id="answer" style="display:none; margin-top:15px;">
-        Technological innovation is changing the way we live.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- CATTI -->
-  <section id="catti" class="section">
-
-    <h1>📝 CATTI Level 3</h1>
-
-    <div class="card lesson">
-
-      <h2>English → Chinese</h2>
-
-      <p>
-        Globalization has deepened economic interdependence
-        among countries.
-      </p>
-
-      <textarea placeholder="Write your Chinese translation here..."></textarea>
-
-      <button onclick="showCattiAnswer()">
-        Show Reference
-      </button>
-
-      <p id="cattiAnswer" style="display:none; margin-top:15px;">
-        全球化加深了各国之间的经济相互依存。
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- PROGRESS -->
-  <section id="progress" class="section">
-
-    <h1>📈 My Progress</h1>
-
-    <div class="grid lesson">
-
-      <div class="card">
-        <h2>⭐ XP</h2>
-        <p id="progressXP">0</p>
-      </div>
-
-      <div class="card">
-        <h2>🔥 Streak</h2>
-        <p id="progressStreak">0 days</p>
-      </div>
-
-      <div class="card">
-        <h2>🎯 Tasks</h2>
-        <p id="tasks">0</p>
-      </div>
-
-    </div>
-
-  </section>
-
-</main>
+</div>
 
 
 <script>
 
-let xp = Number(localStorage.getItem("vickyXP")) || 0;
-let tasks = Number(localStorage.getItem("vickyTasks")) || 0;
-let streak = Number(localStorage.getItem("vickyStreak")) || 0;
+let xp = Number(localStorage.getItem("vicky_xp")) || 0;
+let streak = Number(localStorage.getItem("vicky_streak")) || 0;
+let lastStudy = localStorage.getItem("vicky_lastStudy");
 
-document.getElementById("xp").textContent = xp;
-document.getElementById("progressXP").textContent = xp;
-document.getElementById("tasks").textContent = tasks;
-document.getElementById("progressStreak").textContent = streak + " days";
-document.getElementById("streak").textContent = streak;
-
-
-function showSection(id) {
-
-  const sections = document.querySelectorAll(".section");
-
-  sections.forEach(section => {
-    section.classList.remove("active");
-  });
-
-  document.getElementById(id).classList.add("active");
-
+function saveData() {
+  localStorage.setItem("vicky_xp", xp);
+  localStorage.setItem("vicky_streak", streak);
+  localStorage.setItem("vicky_lastStudy", lastStudy || "");
 }
 
-
-function completeTask() {
-
-  xp += 10;
-  tasks += 1;
-
-  localStorage.setItem("vickyXP", xp);
-  localStorage.setItem("vickyTasks", tasks);
+function updateDisplay() {
 
   document.getElementById("xp").textContent = xp;
-  document.getElementById("progressXP").textContent = xp;
-  document.getElementById("tasks").textContent = tasks;
+  document.getElementById("homeXP").textContent = xp;
 
-  alert("Great job! +10 XP 🎉");
+  document.getElementById("streak").textContent = streak;
+  document.getElementById("progressXP").textContent = xp;
+  document.getElementById("progressStreak").textContent = streak;
+
+  const level = Math.floor(xp / 100) + 1;
+
+  document.getElementById("level").textContent = level;
+  document.getElementById("progressLevel").textContent = level;
+
+  const current = xp % 100;
+
+  document.getElementById("levelBar").style.width =
+    current + "%";
+
+  document.getElementById("levelText").textContent =
+    current + " / 100 XP 到达 Lv." + (level + 1);
+
+  updateBadges();
+}
+
+function updateStreak() {
+
+  const today = new Date().toDateString();
+
+  if (lastStudy !== today) {
+
+    if (lastStudy) {
+
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+
+      if (lastStudy === yesterday.toDateString()) {
+        streak++;
+      } else {
+        streak = 1;
+      }
+
+    } else {
+      streak = 1;
+    }
+
+    lastStudy = today;
+    saveData();
+  }
+}
+
+function completeTask(task, amount) {
+
+  const key = "vicky_task_" + task;
+
+  if (localStorage.getItem(key) === "done") {
+
+    alert("这个任务今天已经完成啦 😊");
+
+    return;
+  }
+
+  xp += amount;
+
+  localStorage.setItem(key, "done");
+
+  updateStreak();
+  saveData();
+  updateDisplay();
+
+  alert("完成！+" + amount + " XP ⭐");
 
 }
 
+function showPage(id, button) {
 
-function speakEnglish() {
+  document.querySelectorAll(".page")
+    .forEach(page => page.classList.remove("active"));
 
-  const text =
-    "The digital economy is changing the way we live.";
+  document.getElementById(id)
+    .classList.add("active");
 
-  const speech =
+  document.querySelectorAll("nav button")
+    .forEach(btn => btn.classList.remove("active"));
+
+  if (button) {
+    button.classList.add("active");
+  }
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+
+function showAnswer(id) {
+
+  const box = document.getElementById(id);
+
+  if (box.style.display === "block") {
+    box.style.display = "none";
+  } else {
+    box.style.display = "block";
+  }
+
+}
+
+function speak(text) {
+
+  if (!("speechSynthesis" in window)) {
+
+    alert("你的浏览器暂时不支持语音播放。");
+
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const utterance =
     new SpeechSynthesisUtterance(text);
 
-  speech.lang = "en-US";
-  speech.rate = 0.8;
+  utterance.lang = "en-US";
+  utterance.rate = 0.85;
 
-  speechSynthesis.speak(speech);
-
+  speechSynthesis.speak(utterance);
 }
 
+function updateBadges() {
 
-function showAnswer() {
+  const badges = [];
 
-  document.getElementById("answer").style.display = "block";
+  if (xp >= 10) {
+    badges.push("🌱 第一次学习");
+  }
 
+  if (xp >= 100) {
+    badges.push("⭐ 100 XP");
+  }
+
+  if (xp >= 300) {
+    badges.push("🔥 学习达人");
+  }
+
+  if (streak >= 3) {
+    badges.push("📅 连续学习 3 天");
+  }
+
+  if (streak >= 7) {
+    badges.push("🏆 连续学习 7 天");
+  }
+
+  if (badges.length === 0) {
+    badges.push("🌱 完成第一个任务解锁成就");
+  }
+
+  document.getElementById("badges").innerHTML =
+    badges.map(b => `<span class="badge">${b}</span>`).join("");
 }
 
-
-function showCattiAnswer() {
-
-  document.getElementById("cattiAnswer").style.display = "block";
-
-}
+updateDisplay();
 
 </script>
 
