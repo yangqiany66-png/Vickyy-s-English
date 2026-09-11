@@ -15,72 +15,1710 @@ button.primary{background:var(--accent);color:#fff;font-weight:700;margin-top:10
 input,textarea,select{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);font:inherit}.question{font-size:20px;margin:15px 0}.answer{margin:7px 0;text-align:left;width:100%;background:#fff;border:1px solid var(--line)}.answer.correct{outline:3px solid #8bd8ad}.answer.wrong{outline:3px solid #f3a0a0}
 .resource{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:8px 0;padding:12px;border:1px solid var(--line);border-radius:14px}
 .small{font-size:12px}.hidden{display:none}@media(max-width:800px){.grid,.two{grid-template-columns:1fr}.app{padding:12px}.hero{padding:20px}.hero h1{font-size:25px}}
+```html
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#fafafa;
+  color:#222;
+}
+
+button,input,select,textarea{
+  font:inherit;
+}
+
+a{
+  -webkit-tap-highlight-color:transparent;
+}
+
+.media-v5{
+  display:grid;
+  gap:18px;
+  max-width:1200px;
+  margin:0 auto;
+  padding:22px 16px 50px;
+}
+
+.media-hero{
+  padding:24px;
+  border-radius:22px;
+  background:linear-gradient(135deg,#eef7ff,#f8f4ff);
+  border:1px solid rgba(100,100,180,.12);
+}
+
+.media-hero h2{
+  margin:0 0 8px;
+  font-size:25px;
+}
+
+.media-hero p{
+  margin:0;
+  color:#666;
+  line-height:1.7;
+}
+
+.media-stats{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:16px;
+}
+
+.media-stat{
+  background:rgba(255,255,255,.85);
+  padding:9px 13px;
+  border-radius:12px;
+  font-size:13px;
+}
+
+.media-filter{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.media-filter button{
+  border:0;
+  padding:9px 15px;
+  border-radius:999px;
+  background:#f1f1f5;
+  cursor:pointer;
+}
+
+.media-filter button.active{
+  background:#222;
+  color:white;
+}
+
+.media-search{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.media-search input{
+  flex:1;
+  min-width:220px;
+  padding:12px 14px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  background:white;
+}
+
+.media-search select{
+  padding:12px 14px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  background:white;
+}
+
+.media-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:16px;
+}
+
+.media-card-v5{
+  background:white;
+  border:1px solid #e8e8ee;
+  border-radius:20px;
+  padding:19px;
+  box-shadow:0 5px 20px rgba(0,0,0,.04);
+  transition:.2s;
+}
+
+.media-card-v5:hover{
+  transform:translateY(-2px);
+  box-shadow:0 9px 25px rgba(0,0,0,.07);
+}
+
+.media-icon{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.media-card-v5 h3{
+  margin:5px 0;
+}
+
+.media-org{
+  font-size:13px;
+  color:#888;
+}
+
+.media-desc{
+  color:#666;
+  line-height:1.6;
+  font-size:14px;
+  min-height:45px;
+}
+
+.media-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin:12px 0;
+}
+
+.media-tag{
+  background:#f4f4f7;
+  padding:5px 9px;
+  border-radius:8px;
+  font-size:12px;
+}
+
+.media-level{
+  background:#fff3d9;
+  color:#9a6700;
+}
+
+.media-actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.media-actions button,
+.media-actions a{
+  border:0;
+  padding:9px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  text-decoration:none;
+  font-size:13px;
+}
+
+.media-main-btn{
+  background:#222;
+  color:white !important;
+}
+
+.media-secondary-btn{
+  background:#f1f1f5;
+  color:#333;
+}
+
+.media-done-btn{
+  background:#eef8ef;
+  color:#237a35;
+}
+
+.media-done-btn.done{
+  background:#dff5e3;
+}
+
+.media-progress{
+  height:7px;
+  background:#eee;
+  border-radius:99px;
+  overflow:hidden;
+  margin:12px 0;
+}
+
+.media-progress span{
+  display:block;
+  height:100%;
+  width:0;
+  background:#222;
+  transition:.25s;
+}
+
+.media-lessons{
+  margin-top:14px;
+  border-top:1px solid #eee;
+  padding-top:14px;
+}
+
+.media-lessons-title{
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+.media-lesson-list{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:8px;
+}
+
+.media-lesson{
+  display:block;
+  padding:10px;
+  border-radius:10px;
+  background:#f7f7f9;
+  text-decoration:none;
+  color:#333;
+  font-size:13px;
+}
+
+.media-lesson:hover{
+  background:#ececf1;
+}
+
+.media-lesson.done{
+  background:#e9f8ec;
+  color:#207337;
+}
+
+.lesson-no{
+  font-weight:700;
+  margin-right:5px;
+}
+
+.media-modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:9999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.media-modal.show{
+  display:flex;
+}
+
+.media-modal-box{
+  width:min(860px,100%);
+  max-height:92vh;
+  overflow-y:auto;
+  background:white;
+  border-radius:22px;
+  padding:24px;
+}
+
+.media-modal-head{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.media-close{
+  border:0;
+  background:#f2f2f4;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+.study-modes{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:10px;
+  margin-top:18px;
+}
+
+.study-mode{
+  padding:15px;
+  border-radius:14px;
+  background:#f7f7f9;
+  cursor:pointer;
+  border:1px solid transparent;
+}
+
+.study-mode:hover{
+  border-color:#ddd;
+}
+
+.study-mode strong{
+  display:block;
+  margin-bottom:5px;
+}
+
+.study-mode span{
+  color:#777;
+  font-size:12px;
+}
+
+.mode-panel{
+  margin-top:16px;
+  padding:16px;
+  border:1px solid #eee;
+  border-radius:15px;
+  background:#fff;
+}
+
+.mode-panel h4{
+  margin:0 0 8px;
+}
+
+.check-list{
+  display:grid;
+  gap:9px;
+  margin-top:12px;
+}
+
+.check-list label{
+  display:flex;
+  gap:9px;
+  align-items:flex-start;
+  background:#f7f7f9;
+  padding:10px;
+  border-radius:10px;
+}
+
+.note-area{
+  width:100%;
+  min-height:130px;
+  border:1px solid #ddd;
+  border-radius:12px;
+  padding:12px;
+  resize:vertical;
+}
+
+.player-card{
+  background:#111;
+  color:white;
+  border-radius:18px;
+  padding:18px;
+  margin-top:18px;
+}
+
+.player-note{
+  font-size:12px;
+  color:#bbb;
+  line-height:1.6;
+}
+
+.player-controls{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.player-controls button{
+  border:0;
+  border-radius:9px;
+  padding:8px 11px;
+  cursor:pointer;
+}
+
+.empty{
+  padding:30px;
+  text-align:center;
+  color:#777;
+  background:white;
+  border-radius:18px;
+  border:1px solid #eee;
+}
+
+.toast{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  background:#222;
+  color:white;
+  padding:12px 15px;
+  border-radius:12px;
+  z-index:10000;
+  opacity:0;
+  transform:translateY(10px);
+  pointer-events:none;
+  transition:.2s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media(max-width:600px){
+
+  .media-v5{
+    padding:12px 10px 35px;
+  }
+
+  .media-hero{
+    padding:18px;
+  }
+
+  .media-hero h2{
+    font-size:21px;
+  }
+
+  .media-card-v5{
+    padding:16px;
+  }
+
+  .media-actions a,
+  .media-actions button{
+    flex:1;
+    text-align:center;
+    min-width:110px;
+  }
+
+  .media-modal{
+    padding:8px;
+  }
+
+  .media-modal-box{
+    padding:17px;
+    border-radius:18px;
+  }
+}
 </style>
 </head>
-<body><div class="app">
-<div class="top"><div class="brand">Vicky<span>Quest</span> 🌍</div><div class="badge" id="xp">⭐ 0 XP</div></div>
-<nav id="nav">
-<button class="active" data-page="today">🏠 Today</button><button data-page="adventure">🗺️ Adventure</button><button data-page="practice">🎯 Practice</button><button data-page="video">🎬 Video</button><button data-page="chill">😌 Chill</button><button data-page="review">🔄 Review</button><button data-page="progress">📊 Progress</button>
+
+<body>
+
+<main class="media-v5">
+
+<section class="media-hero">
+
+<h2>🎬 Vicky's English · Media Library</h2>
+
+<p>
+真实英语学习资源库。打开官方课程学习，也可以在 Vicky's English
+里记录学习模式、学习笔记、完成进度和 XP。
+</p>
+
+<div class="media-stats">
+
+<span class="media-stat">🌍 16 个真实资源</span>
+
+<span class="media-stat">🇺🇸 VOA Level 1 · 52 Lessons</span>
+
+<span class="media-stat">🎧 听力 / 精听 / 跟读</span>
+
+<span class="media-stat">📱 手机 + 💻 电脑</span>
+
+<span class="media-stat">⚡ RPG XP</span>
+
+</div>
+
+</section>
+
+
+<section class="media-search">
+
+<input
+id="mediaSearch"
+placeholder="搜索资源，例如 VOA、BBC、听力、CATTI……">
+
+<select id="mediaLevel">
+
+<option value="全部">全部等级</option>
+<option value="A1">A1</option>
+<option value="A2">A2</option>
+<option value="B1">B1</option>
+<option value="B2">B2</option>
+<option value="C1">C1</option>
+
+</select>
+
+</section>
+
+
+<nav class="media-filter" id="mediaFilter">
+
+<button class="active" data-filter="全部">全部</button>
+
+<button data-filter="A1">A1–A2</button>
+
+<button data-filter="B1">B1–B2</button>
+
+<button data-filter="B2">B2–C1</button>
+
+<button data-filter="VOA">VOA</button>
+
+<button data-filter="BBC">BBC</button>
+
+<button data-filter="British Council">
+British Council
+</button>
+
+<button data-filter="已完成">
+已完成
+</button>
+
 </nav>
 
-<section id="today" class="section active">
-<div class="hero"><h1>Today’s English Adventure ✨</h1><div id="greeting">Choose how you feel today, and VickyQuest will adapt.</div><div class="modes" style="margin-top:14px">
-<button class="soft" onclick="setMood('😫 Tired','5–10 min gentle quest')">😫 Tired</button><button class="soft" onclick="setMood('🙂 Normal','30 min balanced quest')">🙂 Normal</button><button class="soft" onclick="setMood('🔥 Motivated','Challenge + Boss mode')">🔥 Motivated</button><button class="soft" onclick="setMood('😌 Relaxed','Chill & Learn mode')">😌 Relaxed</button></div></div>
-<div class="grid">
-<div class="card quest"><div class="big">⭐</div><h3>Main Quest</h3><p class="muted">CATTI + Grammar + Listening</p><div class="progress"><i></i></div><button class="primary" onclick="go('practice')">Continue 30 min</button></div>
-<div class="card"><div class="big">🔄</div><h3>Smart Review</h3><p class="muted" id="reviewCount">No mistakes yet. Your future mistakes will appear here.</p><button class="primary" onclick="go('review')">Review mistakes</button></div>
-<div class="card"><div class="big">🎲</div><h3>Surprise Me</h3><p class="muted">No idea what to study? Get a quick mixed quest.</p><button class="primary" onclick="surprise()">Start surprise</button></div>
-</div></section>
 
-<section id="adventure" class="section"><div class="hero"><h1>🗺️ English Adventure Map</h1><div>Learn → challenge → review → unlock → level up.</div></div><div class="grid" id="map"></div></section>
+<div id="mediaV5Container"></div>
 
-<section id="practice" class="section"><div class="two"><div>
-<div class="card"><h3>🎮 Quick Challenge</h3><div class="muted">Answer correctly to earn XP. Wrong answers go to your Mistake Book.</div><div class="question" id="question"></div><div id="answers"></div><button class="soft" onclick="newQuestion()">Next challenge →</button></div>
-<div class="card" style="margin-top:14px"><h3>⭐ CATTI Mini Translation</h3><p>Technology has created new opportunities, but workers also need support to adapt to change.</p><textarea id="translation" rows="4" placeholder="Write your Chinese translation here..."></textarea><button class="primary" onclick="saveTranslation()">Save to CATTI Bank</button></div>
+</main>
+
+
+<div
+id="mediaModalV5"
+class="media-modal"
+onclick="if(event.target===this)closeMediaV5()">
+
+<div class="media-modal-box">
+
+<div id="mediaModalContent"></div>
+
 </div>
-<div><div class="card"><h3>🗣️ Speaking Lab</h3><p class="muted">Works with browser speech tools when supported.</p><p id="speakSentence">Technology has changed the way we live.</p><button class="soft" onclick="speak()">🔊 Listen</button><button class="soft" onclick="record()">🎙️ Speak</button><div id="speechResult" class="muted" style="margin-top:10px"></div>
-<div class="modes" style="margin-top:12px"><span class="pill">Repeat</span><span class="pill">Slow Shadowing</span><span class="pill">Normal Shadowing</span><span class="pill">Role Play</span><span class="pill">Retell</span><span class="pill">Chinese → English</span></div></div>
-<div class="card" style="margin-top:14px"><h3>🎧 Listening Lab</h3><p class="muted">Listen first, then challenge yourself.</p><button class="primary" onclick="speak()">▶ Play sentence</button><button class="soft" onclick="document.getElementById('dictation').classList.toggle('hidden')">✍ Dictation</button><div id="dictation" class="hidden"><input id="dictInput" placeholder="Type what you heard..."><button class="soft" onclick="checkDictation()">Check</button></div></div></div></div></section>
 
-<section id="video" class="section"><div class="hero"><h1>🎬 Video World</h1><div>16 resource worlds · Watch · Listen · Shadow · Role Play · Quiz</div></div><div class="card" style="margin-top:14px"><div id="resources"></div></div></section>
-
-<section id="chill" class="section"><div class="hero"><h1>😌 Chill & Learn</h1><div>Low-pressure English for days when you still want to stay connected.</div></div><div class="grid">
-<div class="card"><div class="big">🎵</div><h3>Music English</h3><p class="muted">Lyrics learning, missing lyrics, sing along, speak the rhythm.</p><button class="primary" onclick="alert('Music mode structure is ready. Add legal/official music sources or your own playlists in the next content pack.')">Explore</button></div>
-<div class="card"><div class="big">🌙</div><h3>Night English</h3><p class="muted">Slow English, simple stories and calm listening.</p><button class="primary" onclick="go('video')">Choose video</button></div>
-<div class="card"><div class="big">🎮</div><h3>English Games</h3><p class="muted">Word puzzle · Grammar battle · Sentence builder · Sound challenge.</p><button class="primary" onclick="go('practice')">Play challenge</button></div>
-</div></section>
-
-<section id="review" class="section"><div class="hero"><h1>🔄 Mistake Book</h1><div>Your mistakes become future review quests.</div></div><div class="card" style="margin-top:14px"><div id="mistakes"></div><button class="primary" onclick="clearMastered()">Mark all reviewed</button></div></section>
-
-<section id="progress" class="section"><div class="hero"><h1>📊 Your English Journey</h1><div>Progress is saved on this device.</div></div><div class="grid"><div class="card"><h3>⭐ XP</h3><div class="big" id="xp2">0</div></div><div class="card"><h3>🔥 Total Challenges</h3><div class="big" id="total">0</div></div><div class="card"><h3>🌱 Learning Days</h3><div class="big" id="days">1</div></div></div>
-<div class="card" style="margin-top:14px"><h3>💾 Backup</h3><p class="muted">Export your learning data as a JSON backup file.</p><button class="primary" onclick="backup()">Export backup</button></div></section>
 </div>
+
+
+<div id="toast" class="toast"></div>
+
+
 <script>
-const resources=[
-["🌱 Starting Out","A1–A2","British Council"],["🏙️ Word on the Street","B1–B2","British Council"],["🇬🇧 Britain is GREAT","B2–C1","British Council"],["🎭 Shakespeare","B2","British Council"],["📺 British Council Video Zone","Mixed","British Council"],["🇺🇸 VOA Let's Learn English Level 1","52 lessons","VOA"],["🇺🇸 VOA Let's Learn English Level 2","Intermediate","VOA"],["🎞️ VOA English @ the Movies","Video","VOA"],["⏱️ VOA English in a Minute","Short","VOA"],["📺 VOA Video","Mixed","VOA"],["🇬🇧 BBC Learning English","Mixed","BBC"],["📚 USA Learns","Beginner+","USA Learns"],["📰 News in Levels","Levelled","News"],["💡 TED-Ed","Mixed","TED-Ed"],["▶️ YouTube English Learning","Open","YouTube"],["📱 Bilibili English Learning","Open","Bilibili"]];
-let data=JSON.parse(localStorage.getItem('vqData')||'{"xp":0,"total":0,"mistakes":[],"days":1,"translations":[]}');
-const qs=[
-["Grammar Boss: Technology ___ changed our lives.","has","have","are"],
-["Vocabulary: Which means '合作'?","cooperation","competition","communication"],
-["Listening phrase: Sustainable development requires international ___.","cooperation","collection","condition"],
-["Grammar: He ___ to work yesterday.","went","go","goes"]
+
+const STORAGE={
+
+done:"VickysEnglishV5_MediaDone",
+
+notes:"VickysEnglishV5_MediaNotes",
+
+mode:"VickysEnglishV5_MediaMode",
+
+xp:"VickysEnglishV5_XP"
+
+};
+
+
+const MEDIA_RESOURCES=[
+
+{
+id:"starting-out",
+icon:"🌱",
+name:"Starting Out",
+org:"British Council",
+level:"A1–A2",
+desc:"生活场景英语，适合基础阶段。官方页面提供视频、Transcript 和互动练习。",
+url:"https://learnenglish.britishcouncil.org/free-resources/general/video-series/starting-out",
+modes:["观看","精听","跟读","词汇","Transcript","练习"]
+},
+
+{
+id:"word-street",
+icon:"🏙️",
+name:"Word on the Street",
+org:"British Council",
+level:"B1–B2",
+desc:"通过真实生活场景学习英国英语、表达和词汇。",
+url:"https://learnenglish.britishcouncil.org/free-resources/general/video-series/word-street",
+modes:["观看","精听","跟读","词汇","Transcript","练习"]
+},
+
+{
+id:"britain-great",
+icon:"🇬🇧",
+name:"Britain is GREAT",
+org:"British Council",
+level:"B2–C1",
+desc:"通过英国文化、社会和真实人物提高英语。",
+url:"https://learnenglish.britishcouncil.org/free-resources/general/video-series/britain-great",
+modes:["观看","精听","词汇","表达","Transcript","练习"]
+},
+
+{
+id:"shakespeare",
+icon:"🎭",
+name:"Shakespeare",
+org:"British Council",
+level:"B2",
+desc:"用现代英语了解 Shakespeare 的经典作品和表达。",
+url:"https://learnenglish.britishcouncil.org/free-resources/general/video-series/shakespeare",
+modes:["观看","精听","词汇","文化","Transcript","练习"]
+},
+
+{
+id:"bc-video-zone",
+icon:"📺",
+name:"British Council Video Zone",
+org:"British Council",
+level:"B2–C1",
+desc:"真实视频、不同口音、习惯用语和表达训练。",
+url:"https://learnenglish.britishcouncil.org/free-resources/general/video-zone",
+modes:["观看","精听","跟读","词汇","表达"]
+},
+
+{
+id:"voa-l1",
+icon:"🇺🇸",
+name:"Let's Learn English Level 1",
+org:"VOA Learning English",
+level:"A1–A2",
+desc:"完整 52 课基础英语课程，包含视频、口语、词汇、写作和练习。",
+url:"https://learningenglish.voanews.com/p/5644.html",
+modes:["52课","观看","精听","口语","词汇","写作"]
+},
+
+{
+id:"voa-l2",
+icon:"🇺🇸",
+name:"Let's Learn English Level 2",
+org:"VOA Learning English",
+level:"B1–B2",
+desc:"中级课程，继续训练视频、口语、词汇和写作。",
+url:"https://learningenglish.voanews.com/p/6765.html",
+modes:["课程","观看","精听","口语","词汇","写作"]
+},
+
+{
+id:"voa-movies",
+icon:"🎞️",
+name:"English @ the Movies",
+org:"VOA Learning English",
+level:"B1–B2",
+desc:"从电影片段学习真实英语表达和影视词汇。",
+url:"https://learningenglish.voanews.com/z/4691",
+modes:["电影","听力","词汇","表达","跟读"]
+},
+
+{
+id:"voa-minute",
+icon:"⏱️",
+name:"English in a Minute",
+org:"VOA Learning English",
+level:"B1–B2",
+desc:"短视频学习常用英语表达。",
+url:"https://learningenglish.voanews.com/z/3619",
+modes:["短视频","听力","词汇","表达","跟读"]
+},
+
+{
+id:"voa-video",
+icon:"📺",
+name:"VOA Video",
+org:"VOA Learning English",
+level:"B1–C1",
+desc:"VOA Learning English 视频资源，适合新闻和听力训练。",
+url:"https://learningenglish.voanews.com/",
+modes:["新闻","视频","精听","词汇","跟读"]
+},
+
+{
+id:"bbc",
+icon:"🇬🇧",
+name:"BBC Learning English",
+org:"BBC",
+level:"A2–C1",
+desc:"综合英语资源，包括 6 Minute English、新闻、词汇、语法和发音。",
+url:"https://www.bbc.co.uk/learningenglish",
+modes:["听力","词汇","语法","新闻","跟读","发音"]
+},
+
+{
+id:"usa-learns",
+icon:"📚",
+name:"USA Learns",
+org:"USA Learns",
+level:"A1–B2",
+desc:"免费系统课程，覆盖听说读写、语法、词汇和发音。",
+url:"https://www.usalearns.org/",
+modes:["课程","听力","口语","阅读","写作","语法"]
+},
+
+{
+id:"news-levels",
+icon:"📰",
+name:"News in Levels",
+org:"News in Levels",
+level:"A1–B2",
+desc:"用不同难度等级的新闻练习阅读和听力。",
+url:"https://www.newsinlevels.com/",
+modes:["新闻","阅读","听力","词汇","写作","口语"]
+},
+
+{
+id:"ted-ed",
+icon:"💡",
+name:"TED-Ed",
+org:"TED",
+level:"B1–C1",
+desc:"知识类动画视频，适合真实英语听力和知识输入。",
+url:"https://ed.ted.com/",
+modes:["视频","精听","词汇","跟读","知识"]
+},
+
+{
+id:"youtube",
+icon:"▶️",
+name:"YouTube 英语学习",
+org:"YouTube",
+level:"A1–C1",
+desc:"英语学习视频搜索入口，可以自己选择适合的课程和老师。",
+url:"https://www.youtube.com/results?search_query=English+learning",
+modes:["视频","听力","跟读","口语","词汇"]
+},
+
+{
+id:"bilibili",
+icon:"📱",
+name:"哔哩哔哩英语学习资源",
+org:"哔哩哔哩",
+level:"A1–C1",
+desc:"英语学习、听力、口语、词汇以及 CATTI 等内容搜索入口。",
+url:"https://search.bilibili.com/all?keyword=%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0",
+modes:["视频","听力","口语","词汇","CATTI"]
+}
+
 ];
-function save(){localStorage.setItem('vqData',JSON.stringify(data));renderStats();renderMistakes()}
-function go(id){document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id))}
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>go(b.dataset.page));
-function setMood(m,t){document.getElementById('greeting').textContent=m+' mode: '+t+' — today can adapt to your energy.'}
-function renderMap(){let mods=[["🌱 Vocabulary",4],["🏰 Grammar",3],["🎧 Listening",2],["🗣 Speaking",2],["🎬 Video",5],["⭐ CATTI",3]];document.getElementById('map').innerHTML=mods.map(x=>`<div class="card"><div class="big">${x[0].split(' ')[0]}</div><h3>${x[0].slice(3)}</h3><p>Level ${x[1]}</p><div class="progress"><i style="width:${x[1]*16}%"></i></div><button class="primary" onclick="go('practice')">Continue</button></div>`).join('')}
-function renderResources(){document.getElementById('resources').innerHTML=resources.map((r,i)=>`<div class="resource"><div><b>${r[0]}</b><div class="muted">${r[1]} · ${r[2]}</div><div class="modes"><span class="pill">Watch</span><span class="pill">Listen</span><span class="pill">Shadow</span><span class="pill">Quiz</span></div></div><button class="primary" onclick="alert('Resource hub '+(i+1)+' selected. Official playable links/content packs can be attached here without changing your learning system.')">Open</button></div>`).join('')}
-function newQuestion(){let q=qs[Math.floor(Math.random()*qs.length)];document.getElementById('question').textContent=q[0];let a=q.slice(1).sort(()=>Math.random()-.5);document.getElementById('answers').innerHTML=a.map(x=>`<button class="answer" onclick="answer(this,'${x.replace(/'/g,"\\'")}','${q[1]}','${q[0].replace(/'/g,"\\'")}')">${x}</button>`).join('')}
-function answer(btn,val,correct,q){data.total++;if(val===correct){btn.classList.add('correct');data.xp+=10;setTimeout(newQuestion,500)}else{btn.classList.add('wrong');data.mistakes.unshift({q,correct,val,date:new Date().toLocaleDateString()});}save()}
-function renderMistakes(){let el=document.getElementById('mistakes');document.getElementById('reviewCount').textContent=data.mistakes.length?data.mistakes.length+' mistake(s) waiting for review.':'No mistakes yet. Your future mistakes will appear here.';el.innerHTML=data.mistakes.length?data.mistakes.map(m=>`<div class="resource"><div><b>❌ ${m.q}</b><div class="muted">Your answer: ${m.val} · Correct: ${m.correct}</div></div><span class="pill">${m.date}</span></div>`).join(''):'<p class="muted">🎉 Your Mistake Book is empty for now.</p>'}
-function clearMastered(){data.mistakes=[];save()}
-function renderStats(){document.getElementById('xp').textContent='⭐ '+data.xp+' XP';document.getElementById('xp2').textContent=data.xp;document.getElementById('total').textContent=data.total;document.getElementById('days').textContent=data.days}
-function speak(){speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(document.getElementById('speakSentence').textContent);u.lang='en-US';speechSynthesis.speak(u)}
-function record(){let R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R){document.getElementById('speechResult').textContent='Speech recognition is not supported in this browser. You can still use Listen & Repeat and recording tools.';return}let r=new R();r.lang='en-US';r.onresult=e=>document.getElementById('speechResult').textContent='You said: '+e.results[0][0].transcript;r.start()}
-function checkDictation(){let v=document.getElementById('dictInput').value.trim().toLowerCase(),a=document.getElementById('speakSentence').textContent.toLowerCase();alert(v===a?'🎉 Perfect! +10 XP':'Keep practicing. Correct sentence: '+a);if(v===a){data.xp+=10;save()}else{data.mistakes.unshift({q:'Dictation',correct:a,val:v||'(blank)',date:new Date().toLocaleDateString()});save()}}
-function saveTranslation(){let t=document.getElementById('translation').value.trim();if(t){data.translations.push(t);data.xp+=5;save();alert('Saved to CATTI Bank +5 XP')}}
-function surprise(){let options=['🎬 Video Shadowing','🗣 Speaking Challenge','🎧 Listening Dictation','🏰 Grammar Boss'];alert('🎲 Today’s Surprise Quest: '+options[Math.floor(Math.random()*options.length)]);go('practice')}
-function backup(){let blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='VickyQuest-backup.json';a.click()}
-renderMap();renderResources();renderStats();renderMistakes();newQuestion();
-</script></body></html>
+
+
+const VOA_L1=[
+
+["1","Welcome!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-one/3111026.html"],
+
+["2","Hello, I'm Anna!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-2-hello/3113733.html"],
+
+["3","I'm Here!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-3-i-am-here/3126527.html"],
+
+["4","What Is It?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-4/3168920.html"],
+
+["5","Where Are You?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-5-where-are-you/3168971.html"],
+
+["6","Where Is the Gym?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-6-where-is-the-gym/3225958.html"],
+
+["7","What Are You Doing?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-7-what-are-you-doing/3240468.html"],
+
+["8","Are You Busy?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-8-are-you-busy/3253185.html"],
+
+["9","Is It Cold?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-9-is-it-cold/3261789.html"],
+
+["10","Come Over to My Place","https://learningenglish.voanews.com/a/lets-learn-english-lesson-10/3285228.html"],
+
+["11","This Is My Neighborhood","https://learningenglish.voanews.com/a/lets-learn-english-lesson-11-this-is-my-neighborhood/3293986.html"],
+
+["12","Meet My Family","https://learningenglish.voanews.com/a/lets-learn-english-lesson-12-meet-my-family/3301733.html"],
+
+["13","Happy Birthday, William Shakespeare!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-13-happy-birthday-william-shakespeare/3312239.html"],
+
+["14","How About This?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-14-how-about-this/3323771.html"],
+
+["15","I Love People-Watching!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-15-i-love-people-watching/3343720.html"],
+
+["16","Where Are You From?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-16-where-are-you-from/3355849.html"],
+
+["17","Are You Free on Friday?","https://learningenglish.voanews.com/a/are-you-free-on-friday-lets-learn-english/3355785.html"],
+
+["18","She Always Does That","https://learningenglish.voanews.com/a/lets-learn-english-lesson-18-she-always-does-that/3357748.html"],
+
+["19","When Do I Start?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-19-when-do-you-start/3357760.html"],
+
+["20","What Can You Do?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-20-what-can-you-do/3384429.html"],
+
+["21","Can You Come to the Party?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-21-can-you-come-to-the-party/3406732.html"],
+
+["22","Next Summer...","https://learningenglish.voanews.com/a/lets-learn-english-lesson-22/3397314.html"],
+
+["23","What Do You Want?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-23-what-do-you-want/3413753.html"],
+
+["24","Yesterday Was Amazing!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-24-yesterday-was-amazing/3439164.html"],
+
+["25","Watch Out!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-25-watch-out/3431138.html"],
+
+["26","This Game Is Fun!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-26-this-game-is-fun/3457248.html"],
+
+["27","I Can't Come In","https://learningenglish.voanews.com/a/lets-learn-english-lesson-27-i-cant-come-in/3457316.html"],
+
+["28","I Passed It!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-28-i-passed-it/3487865.html"],
+
+["29","A Long Time Ago","https://learningenglish.voanews.com/a/lets-learn-english-lesson-29-a-long-time-ago/3509519.html"],
+
+["30","Rolling on the River","https://learningenglish.voanews.com/a/lets-learn-english-lesson-30-rolling-river/3522798.html"],
+
+["31","Take Me Out to the Ball Game","https://learningenglish.voanews.com/a/lets-learn-english-lesson-31-take-me-out-to-the-ball-game/3535235.html"],
+
+["32","Welcome to the Treehouse!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-32-welcome-treehouse/3547306.html"],
+
+["33","Learning America's Sport","https://learningenglish.voanews.com/a/lesson-33-learning-americas-sport/3555047.html"],
+
+["34","What Will I Do?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-34-what-will-i-do/3566043.html"],
+
+["35","Let's Make Dinner!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-35-lets-make-dinner/3571922.html"],
+
+["36","I Can Fix This!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-36-i-can-fix-this/3568962.html"],
+
+["37","Let's Agree to Disagree","https://learningenglish.voanews.com/a/lets-learn-english-lesson-37-lets-agree-to-disagree/3574029.html"],
+
+["38","She's My Best Friend!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-38-shes-my-best-friend/3591967.html"],
+
+["39","It's Unbelievable!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-39-its-unbelieveable/3598920.html"],
+
+["40","The Woods Are Alive","https://learningenglish.voanews.com/a/lets-learn-english-lesson-40-the-woods-are-alive/3630341.html"],
+
+["41","Teamwork Works Best With a Team","https://learningenglish.voanews.com/a/lets-learn-english-lesson-41-teamwork/3635015.html"],
+
+["42","I Was Minding My Own Business","https://learningenglish.voanews.com/a/lets-learn-english-lesson-42-i-was-minding-my-own-business/3647264.html"],
+
+["43","Time for Plan B","https://learningenglish.voanews.com/a/lets-learn-english-lesson-43-time-for-plan-b/3666458.html"],
+
+["44","Making Healthy Choices","https://learningenglish.voanews.com/a/lets-learn-english-lesson-44-making-healthy-choices/3688552.html"],
+
+["45","This Land is Your Land","https://learningenglish.voanews.com/a/lesson-45-this-land-is-your-land/3710209.html"],
+
+["46","May I Borrow That?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-46-may-i-borrow-that/3723588.html"],
+
+["47","How Can I Help?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-47-how-can-i-help/3737352.html"],
+
+["48","Have You Ever ...?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-48-have-you-ever/3753664.html"],
+
+["49","Operation Spy!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-49-operation-spy/3763537.html"],
+
+["50","Back to School","https://learningenglish.voanews.com/a/lets-learn-english-lesson-50-back-to-school/3771173.html"],
+
+["51","A Good Habit","https://learningenglish.voanews.com/a/lets-learn-english-lesson-51-a-good-habit/3773577.html"],
+
+["52","Taking Chances","https://learningenglish.voanews.com/a/lets-learn-english-lesson-52-taking-chances/3805454.html"]
+
+];
+
+
+function getJSON(key,fallback){
+
+  try{
+    return JSON.parse(localStorage.getItem(key)) ?? fallback;
+  }catch(e){
+    return fallback;
+  }
+
+}
+
+
+function saveJSON(key,value){
+
+  localStorage.setItem(key,JSON.stringify(value));
+
+}
+
+
+function getDone(){
+
+  return getJSON(STORAGE.done,[]);
+
+}
+
+
+function getNotes(){
+
+  return getJSON(STORAGE.notes,{});
+
+}
+
+
+function getModes(){
+
+  return getJSON(STORAGE.mode,{});
+
+}
+
+
+function getXP(){
+
+  return Number(localStorage.getItem(STORAGE.xp)||0);
+
+}
+
+
+function addXP(number){
+
+  const xp=getXP()+number;
+
+  localStorage.setItem(STORAGE.xp,String(xp));
+
+  toast("⚡ +"+number+" XP");
+
+}
+
+
+function toast(text){
+
+  const el=document.getElementById("toast");
+
+  el.textContent=text;
+
+  el.classList.add("show");
+
+  clearTimeout(window.__toastTimer);
+
+  window.__toastTimer=setTimeout(()=>{
+
+    el.classList.remove("show");
+
+  },1800);
+
+}
+
+
+function isDone(id){
+
+  return getDone().includes(id);
+
+}
+
+
+function completeResource(id){
+
+  const done=getDone();
+
+  if(done.includes(id)){
+
+    toast("已经完成过啦");
+
+    return;
+
+  }
+
+  done.push(id);
+
+  saveJSON(STORAGE.done,done);
+
+  addXP(20);
+
+  renderMediaV5();
+
+}
+
+
+function toggleLessonDone(number){
+
+  const key="voa1-"+number;
+
+  const done=getDone();
+
+  const index=done.indexOf(key);
+
+  if(index>=0){
+
+    done.splice(index,1);
+
+  }else{
+
+    done.push(key);
+
+    addXP(5);
+
+  }
+
+  saveJSON(STORAGE.done,done);
+
+  renderMediaV5();
+
+}
+
+
+function modeText(mode){
+
+  const map={
+
+    "观看":"打开官方视频或课程，先完整看一遍，不急着查词。",
+
+    "精听":"第一遍不看字幕；第二遍结合官方 Transcript；第三遍暂停复听。",
+
+    "跟读":"一句一句播放并跟读，模仿节奏、重音、连读和语音。",
+
+    "词汇":"记录真正影响理解的词和短语，不需要一次背太多。",
+
+    "Transcript":"使用官方课程页面提供的 Transcript 或文本。",
+
+    "练习":"完成官方页面提供的练习、Quiz 或 Worksheet。",
+
+    "表达":"摘出 3–5 个可以主动使用的表达并自己造句。",
+
+    "口语":"听一句 → 暂停 → 复述 → 再播放比较。",
+
+    "写作":"完成官方写作任务，再回到 Vicky's English 记录。",
+
+    "52课":"从 Lesson 1–52 选择当前课程，一课一课完成。",
+
+    "课程":"进入官方课程主页，从适合自己的课程开始。",
+
+    "电影":"观看电影片段，注意真实语境中的表达。",
+
+    "短视频":"一分钟一条，先听整体，再精听关键词。",
+
+    "新闻":"先听标题和大意，再精听细节。",
+
+    "视频":"选择一条真实视频进行听力训练。",
+
+    "听力":"先听大意，再进行第二遍精听。",
+
+    "阅读":"先独立阅读，再听对应内容。",
+
+    "语法":"学习规则后立即做题或自己造句。",
+
+    "发音":"模仿原音，重点练重音、节奏和连读。",
+
+    "CATTI":"记录正式表达、固定搭配和适合笔译的句型。",
+
+    "知识":"先理解视频主题，再处理语言。",
+
+    "文化":"先理解文化背景，再学习其中的英语表达。"
+
+  };
+
+  return map[mode] || "完成一轮本模式学习。";
+
+}
+
+
+function renderVOALessons(){
+
+  const done=getDone();
+
+  const completed=VOA_L1.filter(
+    lesson=>done.includes("voa1-"+lesson[0])
+  ).length;
+
+  return `
+
+  <div class="media-lessons">
+
+    <div class="media-lessons-title">
+
+      🇺🇸 52 Lessons · 已完成 ${completed}/52
+
+    </div>
+
+    <div class="media-lesson-list">
+
+      ${VOA_L1.map(lesson=>{
+
+        const finished=done.includes("voa1-"+lesson[0]);
+
+        return `
+
+        <div>
+
+          <a
+            class="media-lesson ${finished?"done":""}"
+            href="${lesson[2]}"
+            target="_blank"
+            rel="noopener">
+
+            <span class="lesson-no">
+
+              ${finished?"✓":"Lesson "+lesson[0]}
+
+            </span>
+
+            ${lesson[1]}
+
+          </a>
+
+          <button
+            style="margin-top:4px;border:0;background:transparent;cursor:pointer;font-size:12px"
+            onclick="toggleLessonDone('${lesson[0]}')">
+
+            ${finished?"取消完成":"✓ 标记完成 +5 XP"}
+
+          </button>
+
+        </div>
+
+        `;
+
+      }).join("")}
+
+    </div>
+
+  </div>
+
+  `;
+
+}
+
+
+function renderCard(item){
+
+  const done=isDone(item.id);
+
+  let progress=done?100:0;
+
+  if(item.id==="voa-l1"){
+
+    progress=Math.round(
+
+      VOA_L1.filter(
+        lesson=>isDone("voa1-"+lesson[0])
+      ).length/52*100
+
+    );
+
+  }
+
+  return `
+
+  <article class="media-card-v5">
+
+    <div class="media-icon">
+      ${item.icon}
+    </div>
+
+    <h3>${item.name}</h3>
+
+    <div class="media-org">
+      ${item.org}
+    </div>
+
+    <p class="media-desc">
+      ${item.desc}
+    </p>
+
+    <div class="media-tags">
+
+      <span class="media-tag media-level">
+        ${item.level}
+      </span>
+
+      ${item.modes.slice(0,4).map(
+        mode=>`<span class="media-tag">${mode}</span>`
+      ).join("")}
+
+    </div>
+
+    <div class="media-progress">
+
+      <span style="width:${progress}%"></span>
+
+    </div>
+
+    <div class="media-actions">
+
+      <a
+        class="media-main-btn"
+        href="${item.url}"
+        target="_blank"
+        rel="noopener">
+
+        打开官方资源 ↗
+
+      </a>
+
+      <button
+        class="media-secondary-btn"
+        onclick="openMedia('${item.id}')">
+
+        学习模式
+
+      </button>
+
+      <button
+        class="media-done-btn ${done?"done":""}"
+        onclick="completeResource('${item.id}')">
+
+        ${done?"✓ 已完成":"+ 完成资源"}
+
+      </button>
+
+    </div>
+
+    ${item.id==="voa-l1"?renderVOALessons():""}
+
+  </article>
+
+  `;
+
+}
+
+
+function renderMediaV5(filter="全部"){
+
+  const search=
+    (document.getElementById("mediaSearch")?.value||"")
+    .trim()
+    .toLowerCase();
+
+  const level=
+    document.getElementById("mediaLevel")?.value||"全部";
+
+  const list=MEDIA_RESOURCES.filter(item=>{
+
+    const text=(
+      item.name+
+      " "+
+      item.org+
+      " "+
+      item.desc+
+      " "+
+      item.level
+    ).toLowerCase();
+
+    const matchesSearch=
+      !search||
+      text.includes(search);
+
+    const matchesLevel=
+      level==="全部"||
+      item.level.includes(level);
+
+    let matchesFilter=true;
+
+    if(filter==="已完成"){
+
+      matchesFilter=isDone(item.id);
+
+    }else if(filter==="VOA"){
+
+      matchesFilter=item.org.includes("VOA");
+
+    }else if(filter==="BBC"){
+
+      matchesFilter=item.org==="BBC";
+
+    }else if(filter==="British Council"){
+
+      matchesFilter=item.org==="British Council";
+
+    }else if(["A1","B1","B2"].includes(filter)){
+
+      matchesFilter=item.level.includes(filter);
+
+    }
+
+    return matchesSearch&&matchesLevel&&matchesFilter;
+
+  });
+
+  const container=
+    document.getElementById("mediaV5Container");
+
+  if(!list.length){
+
+    container.innerHTML=
+      '<div class="empty">没有找到匹配资源。</div>';
+
+    return;
+
+  }
+
+  container.innerHTML=
+    '<div class="media-grid">'+
+    list.map(renderCard).join("")+
+    '</div>';
+
+}
+
+
+function openMedia(id){
+
+  const item=
+    MEDIA_RESOURCES.find(item=>item.id===id);
+
+  if(!item)return;
+
+  const notes=getNotes();
+
+  document.getElementById("mediaModalContent").innerHTML=`
+
+    <div class="media-modal-head">
+
+      <div>
+
+        <div class="media-icon">
+          ${item.icon}
+        </div>
+
+        <h2>${item.name}</h2>
+
+        <div class="media-org">
+          ${item.org} · ${item.level}
+        </div>
+
+      </div>
+
+      <button
+        class="media-close"
+        onclick="closeMediaV5()">
+
+        ✕
+
+      </button>
+
+    </div>
+
+    <p>${item.desc}</p>
+
+    <div class="media-actions">
+
+      <a
+        class="media-main-btn"
+        href="${item.url}"
+        target="_blank"
+        rel="noopener">
+
+        打开真实官方资源 ↗
+
+      </a>
+
+    </div>
+
+    <h3 style="margin-top:24px">
+      🎯 选择学习模式
+    </h3>
+
+    <div class="study-modes">
+
+      ${item.modes.map(mode=>`
+
+        <div
+          class="study-mode"
+          onclick='selectMode("${item.id}","${mode}")'>
+
+          <strong>${mode}</strong>
+
+          <span>
+            ${modeText(mode)}
+          </span>
+
+        </div>
+
+      `).join("")}
+
+    </div>
+
+    <div
+      id="modePanel"
+      class="mode-panel">
+
+      <h4>
+        🎯 选择一个学习模式
+      </h4>
+
+      <p style="color:#777">
+        选择上面的学习模式开始。
+        真实课程内容来自官方资源。
+      </p>
+
+    </div>
+
+    <div class="mode-panel">
+
+      <h4>
+        📝 我的学习笔记
+      </h4>
+
+      <textarea
+        class="note-area"
+        id="mediaNotes">${(notes[id]||"")
+          .replace(/</g,"&lt;")
+          .replace(/>/g,"&gt;")}</textarea>
+
+      <div
+        class="media-actions"
+        style="margin-top:10px">
+
+        <button
+          class="media-secondary-btn"
+          onclick="saveNote('${id}')">
+
+          保存笔记
+
+        </button>
+
+      </div>
+
+    </div>
+
+    ${item.id==="voa-l1"?renderVOALessons():""}
+
+  `;
+
+  document
+    .getElementById("mediaModalV5")
+    .classList.add("show");
+
+}
+
+
+let speechRate=1;
+
+let currentSpeech=null;
+
+
+function selectMode(id,mode){
+
+  const item=
+    MEDIA_RESOURCES.find(item=>item.id===id);
+
+  if(!item)return;
+
+  const panel=
+    document.getElementById("modePanel");
+
+  let audioTools="";
+
+  const listeningModes=[
+    "听力",
+    "精听",
+    "跟读",
+    "观看",
+    "电影",
+    "短视频",
+    "视频"
+  ];
+
+  if(listeningModes.includes(mode)){
+
+    audioTools=`
+
+      <div class="player-card">
+
+        <strong>
+          🎧 听力辅助
+        </strong>
+
+        <p class="player-note">
+
+          官方课程里的真实音频/视频请通过
+          「打开官方资源」播放。
+          Vicky's English 不伪造第三方音频。
+          如果当前浏览器支持语音合成，
+          下面也可以用系统声音进行辅助跟读。
+
+        </p>
+
+        <div class="player-controls">
+
+          <button onclick="speakResource('${id}')">
+            🔊 朗读辅助
+          </button>
+
+          <button onclick="stopSpeech()">
+            ⏹ 停止
+          </button>
+
+          <button onclick="changeSpeechRate(.8)">
+            🐢 0.8×
+          </button>
+
+          <button onclick="changeSpeechRate(1)">
+            ▶ 1×
+          </button>
+
+          <button onclick="changeSpeechRate(1.25)">
+            ⚡ 1.25×
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }
+
+  panel.innerHTML=`
+
+    <h4>
+      🎯 ${mode}模式
+    </h4>
+
+    <p>
+      ${modeText(mode)}
+    </p>
+
+    <div class="check-list">
+
+      <label>
+        <input type="checkbox">
+        第一遍：完整输入，不急着查词
+      </label>
+
+      <label>
+        <input type="checkbox">
+        第二遍：处理听不懂的部分
+      </label>
+
+      <label>
+        <input type="checkbox">
+        第三遍：主动输出 / 跟读 / 复述
+      </label>
+
+      <label>
+        <input type="checkbox">
+        记录本次最重要的 3 个词或表达
+      </label>
+
+    </div>
+
+    ${audioTools}
+
+    <div
+      class="media-actions"
+      style="margin-top:14px">
+
+      <a
+        class="media-main-btn"
+        href="${item.url}"
+        target="_blank"
+        rel="noopener">
+
+        现在去官方资源学习 ↗
+
+      </a>
+
+      <button
+        class="media-done-btn"
+        onclick="completeResource('${id}');closeMediaV5()">
+
+        完成本资源 +20 XP
+
+      </button>
+
+    </div>
+
+  `;
+
+}
+
+
+function speakResource(id){
+
+  const item=
+    MEDIA_RESOURCES.find(item=>item.id===id);
+
+  if(!item)return;
+
+  if(!("speechSynthesis" in window)){
+
+    toast("当前浏览器不支持语音朗读");
+
+    return;
+
+  }
+
+  stopSpeech();
+
+  const text=
+    item.name+
+    ". "+
+    item.desc+
+    ". "+
+    modeText(
+      getJSON(STORAGE.mode,{})[id]||"听力"
+    );
+
+  currentSpeech=
+    new SpeechSynthesisUtterance(text);
+
+  currentSpeech.lang="en-US";
+
+  currentSpeech.rate=speechRate;
+
+  window.speechSynthesis.speak(currentSpeech);
+
+}
+
+
+function stopSpeech(){
+
+  if("speechSynthesis" in window){
+
+    window.speechSynthesis.cancel();
+
+  }
+
+}
+
+
+function changeSpeechRate(rate){
+
+  speechRate=rate;
+
+  toast("朗读速度 "+rate+"×");
+
+}
+
+
+function saveNote(id){
+
+  const textarea=
+    document.getElementById("mediaNotes");
+
+  if(!textarea)return;
+
+  const notes=getNotes();
+
+  notes[id]=textarea.value;
+
+  saveJSON(STORAGE.notes,notes);
+
+  toast("📝 笔记已保存");
+
+}
+
+
+function closeMediaV5(){
+
+  document
+    .getElementById("mediaModalV5")
+    .classList.remove("show");
+
+  stopSpeech();
+
+}
+
+
+document
+  .getElementById("mediaFilter")
+  .addEventListener("click",event=>{
+
+    const button=
+      event.target.closest("button");
+
+    if(!button)return;
+
+    document
+      .querySelectorAll("#mediaFilter button")
+      .forEach(item=>
+        item.classList.remove("active")
+      );
+
+    button.classList.add("active");
+
+    renderMediaV5(button.dataset.filter);
+
+  });
+
+
+document
+  .getElementById("mediaSearch")
+  .addEventListener(
+    "input",
+    ()=>{
+      renderMediaV5(
+        document
+          .querySelector("#mediaFilter button.active")
+          ?.dataset.filter||
+        "全部"
+      );
+    }
+  );
+
+
+document
+  .getElementById("mediaLevel")
+  .addEventListener(
+    "change",
+    ()=>{
+      renderMediaV5(
+        document
+          .querySelector("#mediaFilter button.active")
+          ?.dataset.filter||
+        "全部"
+      );
+    }
+  );
+
+
+document.addEventListener(
+  "keydown",
+  event=>{
+    if(event.key==="Escape"){
+      closeMediaV5();
+    }
+  }
+);
+
+
+renderMediaV5();
+
+</script>
+
+</body>
+</html>
+```
