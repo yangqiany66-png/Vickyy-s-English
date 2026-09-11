@@ -1,1724 +1,4560 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VickyQuest English Adventure</title>
+<title>Vicky's English 🌍</title>
+
 <style>
-:root{--bg:#f7f7fb;--card:#fff;--ink:#24263a;--muted:#73778a;--accent:#665cf6;--accent2:#f0eeff;--line:#e8e8f0}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-.app{max-width:1180px;margin:auto;padding:18px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-size:24px;font-weight:800}.brand span{color:var(--accent)}
-.badge,button{border:0;border-radius:14px;padding:10px 14px;font:inherit}.badge{background:var(--accent2);color:var(--accent);font-weight:700}
-nav{display:flex;gap:8px;overflow:auto;margin:18px 0;padding-bottom:3px}nav button{background:#fff;white-space:nowrap;border:1px solid var(--line)}nav button.active{background:var(--accent);color:white}
-.hero{background:linear-gradient(135deg,#665cf6,#938cff);color:white;border-radius:24px;padding:25px}.hero h1{margin:0 0 8px;font-size:30px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px}.card h3{margin:0 0 7px}.muted{color:var(--muted);font-size:14px}.big{font-size:26px}.progress{height:9px;background:#ececf3;border-radius:20px;overflow:hidden;margin:10px 0}.progress i{display:block;height:100%;background:var(--accent);width:35%}
-button.primary{background:var(--accent);color:#fff;font-weight:700;margin-top:10px}button.soft{background:var(--accent2);color:var(--accent);font-weight:700;margin:5px}.section{display:none}.section.active{display:block}.quest{border-left:4px solid var(--accent)}.two{display:grid;grid-template-columns:1.2fr .8fr;gap:14px}.modes{display:flex;flex-wrap:wrap;gap:7px}.pill{padding:7px 10px;border-radius:999px;background:#f3f3f8;font-size:13px}
-input,textarea,select{width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);font:inherit}.question{font-size:20px;margin:15px 0}.answer{margin:7px 0;text-align:left;width:100%;background:#fff;border:1px solid var(--line)}.answer.correct{outline:3px solid #8bd8ad}.answer.wrong{outline:3px solid #f3a0a0}
-.resource{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:8px 0;padding:12px;border:1px solid var(--line);border-radius:14px}
-.small{font-size:12px}.hidden{display:none}@media(max-width:800px){.grid,.two{grid-template-columns:1fr}.app{padding:12px}.hero{padding:20px}.hero h1{font-size:25px}}
-```html
-<style>
+:root{
+  --bg:#f6f7fb;
+  --card:#ffffff;
+  --ink:#202238;
+  --muted:#74798f;
+  --line:#e7e8f0;
+  --primary:#685cf6;
+  --primary2:#eeeaff;
+  --green:#28b779;
+  --orange:#ff9d42;
+  --red:#ef6262;
+  --blue:#4d9cff;
+  --shadow:0 12px 35px rgba(45,40,100,.08);
+}
+
 *{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
 
 body{
   margin:0;
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  background:#fafafa;
-  color:#222;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
 }
 
-button,input,select,textarea{
-  font:inherit;
-}
+button,input,textarea,select{font:inherit}
 
-a{
-  -webkit-tap-highlight-color:transparent;
-}
-
-.media-v5{
-  display:grid;
-  gap:18px;
-  max-width:1200px;
-  margin:0 auto;
-  padding:22px 16px 50px;
-}
-
-.media-hero{
-  padding:24px;
-  border-radius:22px;
-  background:linear-gradient(135deg,#eef7ff,#f8f4ff);
-  border:1px solid rgba(100,100,180,.12);
-}
-
-.media-hero h2{
-  margin:0 0 8px;
-  font-size:25px;
-}
-
-.media-hero p{
-  margin:0;
-  color:#666;
-  line-height:1.7;
-}
-
-.media-stats{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:16px;
-}
-
-.media-stat{
-  background:rgba(255,255,255,.85);
-  padding:9px 13px;
-  border-radius:12px;
-  font-size:13px;
-}
-
-.media-filter{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-}
-
-.media-filter button{
-  border:0;
-  padding:9px 15px;
-  border-radius:999px;
-  background:#f1f1f5;
+button{
   cursor:pointer;
+  border:0;
 }
 
-.media-filter button.active{
-  background:#222;
-  color:white;
+button:disabled{
+  cursor:not-allowed;
+  opacity:.55;
 }
 
-.media-search{
+.app{
+  max-width:1450px;
+  margin:auto;
+  padding:18px;
+}
+
+.topbar{
   display:flex;
-  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:15px;
+}
+
+.brand{
+  font-size:25px;
+  font-weight:900;
+  letter-spacing:-.5px;
+}
+
+.brand span{color:var(--primary)}
+
+.stats{
+  display:flex;
   flex-wrap:wrap;
+  gap:7px;
 }
 
-.media-search input{
-  flex:1;
-  min-width:220px;
-  padding:12px 14px;
-  border:1px solid #ddd;
-  border-radius:12px;
+.stat{
   background:white;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:8px 12px;
+  font-size:13px;
+  font-weight:700;
+  box-shadow:0 4px 15px rgba(0,0,0,.03);
 }
 
-.media-search select{
-  padding:12px 14px;
-  border:1px solid #ddd;
-  border-radius:12px;
-  background:white;
+.nav{
+  display:flex;
+  gap:7px;
+  overflow-x:auto;
+  padding:5px 0 10px;
+  scrollbar-width:none;
 }
 
-.media-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:16px;
-}
+.nav::-webkit-scrollbar{display:none}
 
-.media-card-v5{
-  background:white;
-  border:1px solid #e8e8ee;
-  border-radius:20px;
-  padding:19px;
-  box-shadow:0 5px 20px rgba(0,0,0,.04);
+.nav button{
+  white-space:nowrap;
+  background:#fff;
+  color:var(--ink);
+  border:1px solid var(--line);
+  border-radius:13px;
+  padding:10px 13px;
   transition:.2s;
 }
 
-.media-card-v5:hover{
-  transform:translateY(-2px);
-  box-shadow:0 9px 25px rgba(0,0,0,.07);
+.nav button:hover{
+  transform:translateY(-1px);
 }
 
-.media-icon{
-  font-size:30px;
-  margin-bottom:8px;
+.nav button.active{
+  background:var(--primary);
+  color:#fff;
+  border-color:var(--primary);
 }
 
-.media-card-v5 h3{
+.section{display:none}
+.section.active{display:block}
+
+.hero{
+  border-radius:26px;
+  padding:28px;
+  color:#fff;
+  background:
+    radial-gradient(circle at 90% 20%,rgba(255,255,255,.25),transparent 30%),
+    linear-gradient(135deg,#685cf6,#8f83ff);
+  box-shadow:var(--shadow);
+}
+
+.hero h1{
+  margin:0 0 8px;
+  font-size:31px;
+}
+
+.hero p{
   margin:5px 0;
+  opacity:.92;
 }
 
-.media-org{
-  font-size:13px;
-  color:#888;
-}
-
-.media-desc{
-  color:#666;
-  line-height:1.6;
-  font-size:14px;
-  min-height:45px;
-}
-
-.media-tags{
+.hero-actions{
   display:flex;
   flex-wrap:wrap;
-  gap:6px;
-  margin:12px 0;
-}
-
-.media-tag{
-  background:#f4f4f7;
-  padding:5px 9px;
-  border-radius:8px;
-  font-size:12px;
-}
-
-.media-level{
-  background:#fff3d9;
-  color:#9a6700;
-}
-
-.media-actions{
-  display:flex;
   gap:8px;
-  flex-wrap:wrap;
-}
-
-.media-actions button,
-.media-actions a{
-  border:0;
-  padding:9px 12px;
-  border-radius:10px;
-  cursor:pointer;
-  text-decoration:none;
-  font-size:13px;
-}
-
-.media-main-btn{
-  background:#222;
-  color:white !important;
-}
-
-.media-secondary-btn{
-  background:#f1f1f5;
-  color:#333;
-}
-
-.media-done-btn{
-  background:#eef8ef;
-  color:#237a35;
-}
-
-.media-done-btn.done{
-  background:#dff5e3;
-}
-
-.media-progress{
-  height:7px;
-  background:#eee;
-  border-radius:99px;
-  overflow:hidden;
-  margin:12px 0;
-}
-
-.media-progress span{
-  display:block;
-  height:100%;
-  width:0;
-  background:#222;
-  transition:.25s;
-}
-
-.media-lessons{
-  margin-top:14px;
-  border-top:1px solid #eee;
-  padding-top:14px;
-}
-
-.media-lessons-title{
-  font-weight:700;
-  margin-bottom:10px;
-}
-
-.media-lesson-list{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
-  gap:8px;
-}
-
-.media-lesson{
-  display:block;
-  padding:10px;
-  border-radius:10px;
-  background:#f7f7f9;
-  text-decoration:none;
-  color:#333;
-  font-size:13px;
-}
-
-.media-lesson:hover{
-  background:#ececf1;
-}
-
-.media-lesson.done{
-  background:#e9f8ec;
-  color:#207337;
-}
-
-.lesson-no{
-  font-weight:700;
-  margin-right:5px;
-}
-
-.media-modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.45);
-  z-index:9999;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-}
-
-.media-modal.show{
-  display:flex;
-}
-
-.media-modal-box{
-  width:min(860px,100%);
-  max-height:92vh;
-  overflow-y:auto;
-  background:white;
-  border-radius:22px;
-  padding:24px;
-}
-
-.media-modal-head{
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-}
-
-.media-close{
-  border:0;
-  background:#f2f2f4;
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  cursor:pointer;
-}
-
-.study-modes{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-  gap:10px;
   margin-top:18px;
 }
 
-.study-mode{
-  padding:15px;
-  border-radius:14px;
-  background:#f7f7f9;
-  cursor:pointer;
-  border:1px solid transparent;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:15px;
 }
 
-.study-mode:hover{
-  border-color:#ddd;
+.grid4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:15px;
 }
 
-.study-mode strong{
-  display:block;
-  margin-bottom:5px;
+.two{
+  display:grid;
+  grid-template-columns:1.25fr .75fr;
+  gap:15px;
+  margin-top:15px;
 }
 
-.study-mode span{
-  color:#777;
-  font-size:12px;
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:18px;
+  box-shadow:0 7px 25px rgba(40,35,90,.04);
 }
 
-.mode-panel{
-  margin-top:16px;
-  padding:16px;
-  border:1px solid #eee;
-  border-radius:15px;
-  background:#fff;
-}
-
-.mode-panel h4{
+.card h2,
+.card h3{
   margin:0 0 8px;
 }
 
-.check-list{
-  display:grid;
-  gap:9px;
-  margin-top:12px;
+.big{
+  font-size:30px;
+  font-weight:900;
 }
 
-.check-list label{
-  display:flex;
-  gap:9px;
-  align-items:flex-start;
-  background:#f7f7f9;
-  padding:10px;
-  border-radius:10px;
-}
-
-.note-area{
-  width:100%;
-  min-height:130px;
-  border:1px solid #ddd;
-  border-radius:12px;
-  padding:12px;
-  resize:vertical;
-}
-
-.player-card{
-  background:#111;
-  color:white;
-  border-radius:18px;
-  padding:18px;
-  margin-top:18px;
-}
-
-.player-note{
-  font-size:12px;
-  color:#bbb;
+.muted{
+  color:var(--muted);
+  font-size:14px;
   line-height:1.6;
 }
 
-.player-controls{
+.small{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.primary{
+  background:var(--primary);
+  color:white;
+  border-radius:12px;
+  padding:10px 14px;
+  font-weight:750;
+}
+
+.secondary{
+  background:var(--primary2);
+  color:var(--primary);
+  border-radius:12px;
+  padding:10px 14px;
+  font-weight:750;
+}
+
+.whiteBtn{
+  background:#fff;
+  color:var(--primary);
+  border-radius:12px;
+  padding:10px 14px;
+  font-weight:750;
+}
+
+.softBtn{
+  background:#f3f3f8;
+  color:var(--ink);
+  border-radius:12px;
+  padding:9px 12px;
+}
+
+.danger{
+  background:#fff0f0;
+  color:var(--red);
+}
+
+.green{
+  color:var(--green);
+}
+
+.orange{
+  color:var(--orange);
+}
+
+.progress{
+  height:9px;
+  background:#ececf3;
+  border-radius:99px;
+  overflow:hidden;
+  margin:10px 0;
+}
+
+.progress i{
+  display:block;
+  height:100%;
+  background:var(--primary);
+  border-radius:99px;
+  transition:.4s;
+}
+
+.progress.greenBar i{background:var(--green)}
+.progress.orangeBar i{background:var(--orange)}
+.progress.blueBar i{background:var(--blue)}
+
+.row{
   display:flex;
-  gap:8px;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.wrap{
+  display:flex;
   flex-wrap:wrap;
+  gap:8px;
+}
+
+.pill{
+  display:inline-block;
+  background:#f1f1f7;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:12px;
+}
+
+.level{
+  color:var(--primary);
+  background:var(--primary2);
+  font-weight:800;
+}
+
+.quest{
+  border-left:4px solid var(--primary);
+}
+
+.quest.done{
+  opacity:.65;
+  border-left-color:var(--green);
+}
+
+.questIcon{
+  font-size:30px;
+}
+
+.module{
+  min-height:150px;
+  position:relative;
+  overflow:hidden;
+}
+
+.moduleIcon{
+  font-size:30px;
+  margin-bottom:7px;
+}
+
+.module button{
   margin-top:10px;
 }
 
-.player-controls button{
-  border:0;
-  border-radius:9px;
-  padding:8px 11px;
+.levelCard{
+  text-align:center;
+  transition:.2s;
+}
+
+.levelCard:hover{
+  transform:translateY(-3px);
+}
+
+.levelCard.locked{
+  opacity:.55;
+}
+
+.levelCard.current{
+  border:2px solid var(--primary);
+}
+
+.question{
+  font-size:23px;
+  line-height:1.45;
+  font-weight:800;
+  margin:18px 0;
+}
+
+.answerGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.answer{
+  text-align:left;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+  transition:.15s;
+}
+
+.answer:hover{
+  border-color:var(--primary);
+  background:#faf9ff;
+}
+
+.answer.correct{
+  border:2px solid var(--green);
+  background:#effbf5;
+}
+
+.answer.wrong{
+  border:2px solid var(--red);
+  background:#fff2f2;
+}
+
+textarea,
+input,
+select{
+  width:100%;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fff;
+  color:var(--ink);
+  outline:none;
+}
+
+textarea:focus,
+input:focus,
+select:focus{
+  border-color:var(--primary);
+  box-shadow:0 0 0 3px var(--primary2);
+}
+
+textarea{
+  resize:vertical;
+  min-height:130px;
+}
+
+.field{
+  margin:10px 0;
+}
+
+.field label{
+  display:block;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.optionGrid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.option{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px;
+  background:white;
   cursor:pointer;
 }
 
-.empty{
-  padding:30px;
+.option.selected{
+  border:2px solid var(--primary);
+  background:var(--primary2);
+}
+
+.choiceRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.choice{
+  padding:9px 12px;
+  border-radius:12px;
+  background:#f2f2f7;
+}
+
+.choice.selected{
+  background:var(--primary);
+  color:#fff;
+}
+
+.resource{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  border:1px solid var(--line);
+  border-radius:15px;
+  padding:13px;
+  margin:8px 0;
+}
+
+.resourceTitle{
+  font-weight:800;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  background:#f1f0ff;
+  color:var(--primary);
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+}
+
+.mistake{
+  border-left:4px solid var(--red);
+}
+
+.successBox{
+  background:#effbf5;
+  border:1px solid #bcebd5;
+  color:#187d54;
+  border-radius:14px;
+  padding:12px;
+}
+
+.warningBox{
+  background:#fff8e9;
+  border:1px solid #ffe0a2;
+  color:#9a6500;
+  border-radius:14px;
+  padding:12px;
+}
+
+.chart{
+  display:flex;
+  align-items:flex-end;
+  gap:8px;
+  height:150px;
+  padding-top:20px;
+}
+
+.bar{
+  flex:1;
+  background:linear-gradient(to top,var(--primary),#aaa2ff);
+  border-radius:7px 7px 2px 2px;
+  min-height:5px;
+  position:relative;
+}
+
+.bar span{
+  position:absolute;
+  bottom:-22px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:10px;
+  color:var(--muted);
+}
+
+.radar{
+  display:grid;
+  gap:9px;
+}
+
+.skillLine{
+  display:grid;
+  grid-template-columns:95px 1fr 40px;
+  align-items:center;
+  gap:8px;
+}
+
+.heatmap{
+  display:grid;
+  grid-template-columns:repeat(14,1fr);
+  gap:4px;
+}
+
+.heat{
+  aspect-ratio:1;
+  border-radius:4px;
+  background:#eeeef4;
+}
+
+.heat.l1{background:#d9d5ff}
+.heat.l2{background:#b7afff}
+.heat.l3{background:#8c82ff}
+.heat.l4{background:#685cf6}
+
+.mapLine{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+
+.mapNode{
   text-align:center;
-  color:#777;
-  background:white;
+  padding:16px 8px;
   border-radius:18px;
-  border:1px solid #eee;
+  background:#fff;
+  border:1px solid var(--line);
+  position:relative;
+}
+
+.mapNode:not(:last-child):after{
+  content:"→";
+  position:absolute;
+  right:-13px;
+  top:45%;
+  color:var(--muted);
+  font-weight:bold;
+}
+
+.mapNode.boss{
+  border:2px solid #ffad45;
+  background:#fffaf1;
+}
+
+.timer{
+  font-size:34px;
+  font-weight:900;
+  color:var(--primary);
+}
+
+.combo{
+  color:var(--orange);
+  font-weight:900;
+}
+
+.lockNote{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.hidden{display:none!important}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(18,17,35,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:1000;
+}
+
+.modalBox{
+  background:white;
+  border-radius:25px;
+  max-width:760px;
+  width:100%;
+  max-height:90vh;
+  overflow:auto;
+  padding:25px;
+  box-shadow:0 30px 100px rgba(0,0,0,.25);
+}
+
+.modalBox h1{
+  margin-top:0;
+}
+
+.step{
+  display:none;
+}
+
+.step.active{
+  display:block;
+}
+
+.footer{
+  text-align:center;
+  padding:30px 0 15px;
+  color:var(--muted);
+  font-size:12px;
 }
 
 .toast{
   position:fixed;
-  right:18px;
-  bottom:18px;
-  background:#222;
-  color:white;
-  padding:12px 15px;
-  border-radius:12px;
-  z-index:10000;
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:#242238;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:14px;
   opacity:0;
-  transform:translateY(10px);
   pointer-events:none;
-  transition:.2s;
+  transition:.3s;
+  z-index:2000;
 }
 
 .toast.show{
   opacity:1;
-  transform:translateY(0);
+  transform:translateX(-50%) translateY(0);
 }
 
-@media(max-width:600px){
+@media(max-width:1050px){
+  .grid4{grid-template-columns:repeat(2,1fr)}
+  .two{grid-template-columns:1fr}
+}
 
-  .media-v5{
-    padding:12px 10px 35px;
-  }
-
-  .media-hero{
-    padding:18px;
-  }
-
-  .media-hero h2{
-    font-size:21px;
-  }
-
-  .media-card-v5{
-    padding:16px;
-  }
-
-  .media-actions a,
-  .media-actions button{
-    flex:1;
-    text-align:center;
-    min-width:110px;
-  }
-
-  .media-modal{
-    padding:8px;
-  }
-
-  .media-modal-box{
-    padding:17px;
-    border-radius:18px;
-  }
+@media(max-width:800px){
+  .app{padding:11px}
+  .grid,.grid4{grid-template-columns:1fr}
+  .answerGrid,.optionGrid{grid-template-columns:1fr}
+  .mapLine{grid-template-columns:repeat(2,1fr)}
+  .mapNode:not(:last-child):after{display:none}
+  .hero{padding:21px}
+  .hero h1{font-size:25px}
+  .topbar{align-items:flex-start;flex-direction:column}
+  .resource{align-items:flex-start;flex-direction:column}
+  .resource button{width:100%}
 }
 </style>
 </head>
 
 <body>
 
-<main class="media-v5">
-
-<section class="media-hero">
-
-<h2>🎬 Vicky's English · Media Library</h2>
-
-<p>
-真实英语学习资源库。打开官方课程学习，也可以在 Vicky's English
-里记录学习模式、学习笔记、完成进度和 XP。
-</p>
-
-<div class="media-stats">
-
-<span class="media-stat">🌍 16 个真实资源</span>
-
-<span class="media-stat">🇺🇸 VOA Level 1 · 52 Lessons</span>
-
-<span class="media-stat">🎧 听力 / 精听 / 跟读</span>
-
-<span class="media-stat">📱 手机 + 💻 电脑</span>
-
-<span class="media-stat">⚡ RPG XP</span>
-
-</div>
-
-</section>
-
-
-<section class="media-search">
-
-<input
-id="mediaSearch"
-placeholder="搜索资源，例如 VOA、BBC、听力、CATTI……">
-
-<select id="mediaLevel">
-
-<option value="全部">全部等级</option>
-<option value="A1">A1</option>
-<option value="A2">A2</option>
-<option value="B1">B1</option>
-<option value="B2">B2</option>
-<option value="C1">C1</option>
-
-</select>
-
-</section>
-
-
-<nav class="media-filter" id="mediaFilter">
-
-<button class="active" data-filter="全部">全部</button>
-
-<button data-filter="A1">A1–A2</button>
-
-<button data-filter="B1">B1–B2</button>
-
-<button data-filter="B2">B2–C1</button>
-
-<button data-filter="VOA">VOA</button>
-
-<button data-filter="BBC">BBC</button>
-
-<button data-filter="British Council">
-British Council
-</button>
-
-<button data-filter="已完成">
-已完成
-</button>
-
-</nav>
-
-
-<div id="mediaV5Container"></div>
-
-</main>
-
-
-<div
-id="mediaModalV5"
-class="media-modal"
-onclick="if(event.target===this)closeMediaV5()">
-
-<div class="media-modal-box">
-
-<div id="mediaModalContent"></div>
-
-</div>
-
-</div>
-
-
-<div id="toast" class="toast"></div>
-
-
-<script>
-
-const STORAGE={
-
-done:"VickysEnglishV5_MediaDone",
-
-notes:"VickysEnglishV5_MediaNotes",
-
-mode:"VickysEnglishV5_MediaMode",
-
-xp:"VickysEnglishV5_XP"
-
-};
-
-
-const MEDIA_RESOURCES=[
-
-{
-id:"starting-out",
-icon:"🌱",
-name:"Starting Out",
-org:"British Council",
-level:"A1–A2",
-desc:"生活场景英语，适合基础阶段。官方页面提供视频、Transcript 和互动练习。",
-url:"https://learnenglish.britishcouncil.org/free-resources/general/video-series/starting-out",
-modes:["观看","精听","跟读","词汇","Transcript","练习"]
-},
-
-{
-id:"word-street",
-icon:"🏙️",
-name:"Word on the Street",
-org:"British Council",
-level:"B1–B2",
-desc:"通过真实生活场景学习英国英语、表达和词汇。",
-url:"https://learnenglish.britishcouncil.org/free-resources/general/video-series/word-street",
-modes:["观看","精听","跟读","词汇","Transcript","练习"]
-},
-
-{
-id:"britain-great",
-icon:"🇬🇧",
-name:"Britain is GREAT",
-org:"British Council",
-level:"B2–C1",
-desc:"通过英国文化、社会和真实人物提高英语。",
-url:"https://learnenglish.britishcouncil.org/free-resources/general/video-series/britain-great",
-modes:["观看","精听","词汇","表达","Transcript","练习"]
-},
-
-{
-id:"shakespeare",
-icon:"🎭",
-name:"Shakespeare",
-org:"British Council",
-level:"B2",
-desc:"用现代英语了解 Shakespeare 的经典作品和表达。",
-url:"https://learnenglish.britishcouncil.org/free-resources/general/video-series/shakespeare",
-modes:["观看","精听","词汇","文化","Transcript","练习"]
-},
-
-{
-id:"bc-video-zone",
-icon:"📺",
-name:"British Council Video Zone",
-org:"British Council",
-level:"B2–C1",
-desc:"真实视频、不同口音、习惯用语和表达训练。",
-url:"https://learnenglish.britishcouncil.org/free-resources/general/video-zone",
-modes:["观看","精听","跟读","词汇","表达"]
-},
-
-{
-id:"voa-l1",
-icon:"🇺🇸",
-name:"Let's Learn English Level 1",
-org:"VOA Learning English",
-level:"A1–A2",
-desc:"完整 52 课基础英语课程，包含视频、口语、词汇、写作和练习。",
-url:"https://learningenglish.voanews.com/p/5644.html",
-modes:["52课","观看","精听","口语","词汇","写作"]
-},
-
-{
-id:"voa-l2",
-icon:"🇺🇸",
-name:"Let's Learn English Level 2",
-org:"VOA Learning English",
-level:"B1–B2",
-desc:"中级课程，继续训练视频、口语、词汇和写作。",
-url:"https://learningenglish.voanews.com/p/6765.html",
-modes:["课程","观看","精听","口语","词汇","写作"]
-},
-
-{
-id:"voa-movies",
-icon:"🎞️",
-name:"English @ the Movies",
-org:"VOA Learning English",
-level:"B1–B2",
-desc:"从电影片段学习真实英语表达和影视词汇。",
-url:"https://learningenglish.voanews.com/z/4691",
-modes:["电影","听力","词汇","表达","跟读"]
-},
-
-{
-id:"voa-minute",
-icon:"⏱️",
-name:"English in a Minute",
-org:"VOA Learning English",
-level:"B1–B2",
-desc:"短视频学习常用英语表达。",
-url:"https://learningenglish.voanews.com/z/3619",
-modes:["短视频","听力","词汇","表达","跟读"]
-},
-
-{
-id:"voa-video",
-icon:"📺",
-name:"VOA Video",
-org:"VOA Learning English",
-level:"B1–C1",
-desc:"VOA Learning English 视频资源，适合新闻和听力训练。",
-url:"https://learningenglish.voanews.com/",
-modes:["新闻","视频","精听","词汇","跟读"]
-},
-
-{
-id:"bbc",
-icon:"🇬🇧",
-name:"BBC Learning English",
-org:"BBC",
-level:"A2–C1",
-desc:"综合英语资源，包括 6 Minute English、新闻、词汇、语法和发音。",
-url:"https://www.bbc.co.uk/learningenglish",
-modes:["听力","词汇","语法","新闻","跟读","发音"]
-},
-
-{
-id:"usa-learns",
-icon:"📚",
-name:"USA Learns",
-org:"USA Learns",
-level:"A1–B2",
-desc:"免费系统课程，覆盖听说读写、语法、词汇和发音。",
-url:"https://www.usalearns.org/",
-modes:["课程","听力","口语","阅读","写作","语法"]
-},
-
-{
-id:"news-levels",
-icon:"📰",
-name:"News in Levels",
-org:"News in Levels",
-level:"A1–B2",
-desc:"用不同难度等级的新闻练习阅读和听力。",
-url:"https://www.newsinlevels.com/",
-modes:["新闻","阅读","听力","词汇","写作","口语"]
-},
-
-{
-id:"ted-ed",
-icon:"💡",
-name:"TED-Ed",
-org:"TED",
-level:"B1–C1",
-desc:"知识类动画视频，适合真实英语听力和知识输入。",
-url:"https://ed.ted.com/",
-modes:["视频","精听","词汇","跟读","知识"]
-},
-
-{
-id:"youtube",
-icon:"▶️",
-name:"YouTube 英语学习",
-org:"YouTube",
-level:"A1–C1",
-desc:"英语学习视频搜索入口，可以自己选择适合的课程和老师。",
-url:"https://www.youtube.com/results?search_query=English+learning",
-modes:["视频","听力","跟读","口语","词汇"]
-},
-
-{
-id:"bilibili",
-icon:"📱",
-name:"哔哩哔哩英语学习资源",
-org:"哔哩哔哩",
-level:"A1–C1",
-desc:"英语学习、听力、口语、词汇以及 CATTI 等内容搜索入口。",
-url:"https://search.bilibili.com/all?keyword=%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0",
-modes:["视频","听力","口语","词汇","CATTI"]
-}
-
-];
-
-
-const VOA_L1=[
-
-["1","Welcome!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-one/3111026.html"],
-
-["2","Hello, I'm Anna!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-2-hello/3113733.html"],
-
-["3","I'm Here!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-3-i-am-here/3126527.html"],
-
-["4","What Is It?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-4/3168920.html"],
-
-["5","Where Are You?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-5-where-are-you/3168971.html"],
-
-["6","Where Is the Gym?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-6-where-is-the-gym/3225958.html"],
-
-["7","What Are You Doing?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-7-what-are-you-doing/3240468.html"],
-
-["8","Are You Busy?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-8-are-you-busy/3253185.html"],
-
-["9","Is It Cold?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-9-is-it-cold/3261789.html"],
-
-["10","Come Over to My Place","https://learningenglish.voanews.com/a/lets-learn-english-lesson-10/3285228.html"],
-
-["11","This Is My Neighborhood","https://learningenglish.voanews.com/a/lets-learn-english-lesson-11-this-is-my-neighborhood/3293986.html"],
-
-["12","Meet My Family","https://learningenglish.voanews.com/a/lets-learn-english-lesson-12-meet-my-family/3301733.html"],
-
-["13","Happy Birthday, William Shakespeare!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-13-happy-birthday-william-shakespeare/3312239.html"],
-
-["14","How About This?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-14-how-about-this/3323771.html"],
-
-["15","I Love People-Watching!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-15-i-love-people-watching/3343720.html"],
-
-["16","Where Are You From?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-16-where-are-you-from/3355849.html"],
-
-["17","Are You Free on Friday?","https://learningenglish.voanews.com/a/are-you-free-on-friday-lets-learn-english/3355785.html"],
-
-["18","She Always Does That","https://learningenglish.voanews.com/a/lets-learn-english-lesson-18-she-always-does-that/3357748.html"],
-
-["19","When Do I Start?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-19-when-do-you-start/3357760.html"],
-
-["20","What Can You Do?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-20-what-can-you-do/3384429.html"],
-
-["21","Can You Come to the Party?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-21-can-you-come-to-the-party/3406732.html"],
-
-["22","Next Summer...","https://learningenglish.voanews.com/a/lets-learn-english-lesson-22/3397314.html"],
-
-["23","What Do You Want?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-23-what-do-you-want/3413753.html"],
-
-["24","Yesterday Was Amazing!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-24-yesterday-was-amazing/3439164.html"],
-
-["25","Watch Out!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-25-watch-out/3431138.html"],
-
-["26","This Game Is Fun!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-26-this-game-is-fun/3457248.html"],
-
-["27","I Can't Come In","https://learningenglish.voanews.com/a/lets-learn-english-lesson-27-i-cant-come-in/3457316.html"],
-
-["28","I Passed It!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-28-i-passed-it/3487865.html"],
-
-["29","A Long Time Ago","https://learningenglish.voanews.com/a/lets-learn-english-lesson-29-a-long-time-ago/3509519.html"],
-
-["30","Rolling on the River","https://learningenglish.voanews.com/a/lets-learn-english-lesson-30-rolling-river/3522798.html"],
-
-["31","Take Me Out to the Ball Game","https://learningenglish.voanews.com/a/lets-learn-english-lesson-31-take-me-out-to-the-ball-game/3535235.html"],
-
-["32","Welcome to the Treehouse!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-32-welcome-treehouse/3547306.html"],
-
-["33","Learning America's Sport","https://learningenglish.voanews.com/a/lesson-33-learning-americas-sport/3555047.html"],
-
-["34","What Will I Do?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-34-what-will-i-do/3566043.html"],
-
-["35","Let's Make Dinner!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-35-lets-make-dinner/3571922.html"],
-
-["36","I Can Fix This!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-36-i-can-fix-this/3568962.html"],
-
-["37","Let's Agree to Disagree","https://learningenglish.voanews.com/a/lets-learn-english-lesson-37-lets-agree-to-disagree/3574029.html"],
-
-["38","She's My Best Friend!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-38-shes-my-best-friend/3591967.html"],
-
-["39","It's Unbelievable!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-39-its-unbelieveable/3598920.html"],
-
-["40","The Woods Are Alive","https://learningenglish.voanews.com/a/lets-learn-english-lesson-40-the-woods-are-alive/3630341.html"],
-
-["41","Teamwork Works Best With a Team","https://learningenglish.voanews.com/a/lets-learn-english-lesson-41-teamwork/3635015.html"],
-
-["42","I Was Minding My Own Business","https://learningenglish.voanews.com/a/lets-learn-english-lesson-42-i-was-minding-my-own-business/3647264.html"],
-
-["43","Time for Plan B","https://learningenglish.voanews.com/a/lets-learn-english-lesson-43-time-for-plan-b/3666458.html"],
-
-["44","Making Healthy Choices","https://learningenglish.voanews.com/a/lets-learn-english-lesson-44-making-healthy-choices/3688552.html"],
-
-["45","This Land is Your Land","https://learningenglish.voanews.com/a/lesson-45-this-land-is-your-land/3710209.html"],
-
-["46","May I Borrow That?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-46-may-i-borrow-that/3723588.html"],
-
-["47","How Can I Help?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-47-how-can-i-help/3737352.html"],
-
-["48","Have You Ever ...?","https://learningenglish.voanews.com/a/lets-learn-english-lesson-48-have-you-ever/3753664.html"],
-
-["49","Operation Spy!","https://learningenglish.voanews.com/a/lets-learn-english-lesson-49-operation-spy/3763537.html"],
-
-["50","Back to School","https://learningenglish.voanews.com/a/lets-learn-english-lesson-50-back-to-school/3771173.html"],
-
-["51","A Good Habit","https://learningenglish.voanews.com/a/lets-learn-english-lesson-51-a-good-habit/3773577.html"],
-
-["52","Taking Chances","https://learningenglish.voanews.com/a/lets-learn-english-lesson-52-taking-chances/3805454.html"]
-
-];
-
-
-function getJSON(key,fallback){
-
-  try{
-    return JSON.parse(localStorage.getItem(key)) ?? fallback;
-  }catch(e){
-    return fallback;
-  }
-
-}
-
-
-function saveJSON(key,value){
-
-  localStorage.setItem(key,JSON.stringify(value));
-
-}
-
-
-function getDone(){
-
-  return getJSON(STORAGE.done,[]);
-
-}
-
-
-function getNotes(){
-
-  return getJSON(STORAGE.notes,{});
-
-}
-
-
-function getModes(){
-
-  return getJSON(STORAGE.mode,{});
-
-}
-
-
-function getXP(){
-
-  return Number(localStorage.getItem(STORAGE.xp)||0);
-
-}
-
-
-function addXP(number){
-
-  const xp=getXP()+number;
-
-  localStorage.setItem(STORAGE.xp,String(xp));
-
-  toast("⚡ +"+number+" XP");
-
-}
-
-
-function toast(text){
-
-  const el=document.getElementById("toast");
-
-  el.textContent=text;
-
-  el.classList.add("show");
-
-  clearTimeout(window.__toastTimer);
-
-  window.__toastTimer=setTimeout(()=>{
-
-    el.classList.remove("show");
-
-  },1800);
-
-}
-
-
-function isDone(id){
-
-  return getDone().includes(id);
-
-}
-
-
-function completeResource(id){
-
-  const done=getDone();
-
-  if(done.includes(id)){
-
-    toast("已经完成过啦");
-
-    return;
-
-  }
-
-  done.push(id);
-
-  saveJSON(STORAGE.done,done);
-
-  addXP(20);
-
-  renderMediaV5();
-
-}
-
-
-function toggleLessonDone(number){
-
-  const key="voa1-"+number;
-
-  const done=getDone();
-
-  const index=done.indexOf(key);
-
-  if(index>=0){
-
-    done.splice(index,1);
-
-  }else{
-
-    done.push(key);
-
-    addXP(5);
-
-  }
-
-  saveJSON(STORAGE.done,done);
-
-  renderMediaV5();
-
-}
-
-
-function modeText(mode){
-
-  const map={
-
-    "观看":"打开官方视频或课程，先完整看一遍，不急着查词。",
-
-    "精听":"第一遍不看字幕；第二遍结合官方 Transcript；第三遍暂停复听。",
-
-    "跟读":"一句一句播放并跟读，模仿节奏、重音、连读和语音。",
-
-    "词汇":"记录真正影响理解的词和短语，不需要一次背太多。",
-
-    "Transcript":"使用官方课程页面提供的 Transcript 或文本。",
-
-    "练习":"完成官方页面提供的练习、Quiz 或 Worksheet。",
-
-    "表达":"摘出 3–5 个可以主动使用的表达并自己造句。",
-
-    "口语":"听一句 → 暂停 → 复述 → 再播放比较。",
-
-    "写作":"完成官方写作任务，再回到 Vicky's English 记录。",
-
-    "52课":"从 Lesson 1–52 选择当前课程，一课一课完成。",
-
-    "课程":"进入官方课程主页，从适合自己的课程开始。",
-
-    "电影":"观看电影片段，注意真实语境中的表达。",
-
-    "短视频":"一分钟一条，先听整体，再精听关键词。",
-
-    "新闻":"先听标题和大意，再精听细节。",
-
-    "视频":"选择一条真实视频进行听力训练。",
-
-    "听力":"先听大意，再进行第二遍精听。",
-
-    "阅读":"先独立阅读，再听对应内容。",
-
-    "语法":"学习规则后立即做题或自己造句。",
-
-    "发音":"模仿原音，重点练重音、节奏和连读。",
-
-    "CATTI":"记录正式表达、固定搭配和适合笔译的句型。",
-
-    "知识":"先理解视频主题，再处理语言。",
-
-    "文化":"先理解文化背景，再学习其中的英语表达。"
-
-  };
-
-  return map[mode] || "完成一轮本模式学习。";
-
-}
-
-
-function renderVOALessons(){
-
-  const done=getDone();
-
-  const completed=VOA_L1.filter(
-    lesson=>done.includes("voa1-"+lesson[0])
-  ).length;
-
-  return `
-
-  <div class="media-lessons">
-
-    <div class="media-lessons-title">
-
-      🇺🇸 52 Lessons · 已完成 ${completed}/52
-
+<div class="app">
+
+  <div class="topbar">
+    <div class="brand">Vicky<span>'s English</span> 🌍</div>
+
+    <div class="stats">
+      <div class="stat" id="levelStat">🌱 L2</div>
+      <div class="stat" id="xpStat">⭐ 0 XP</div>
+      <div class="stat" id="coinStat">🪙 0</div>
+      <div class="stat" id="streakStat">🔥 0</div>
     </div>
-
-    <div class="media-lesson-list">
-
-      ${VOA_L1.map(lesson=>{
-
-        const finished=done.includes("voa1-"+lesson[0]);
-
-        return `
-
-        <div>
-
-          <a
-            class="media-lesson ${finished?"done":""}"
-            href="${lesson[2]}"
-            target="_blank"
-            rel="noopener">
-
-            <span class="lesson-no">
-
-              ${finished?"✓":"Lesson "+lesson[0]}
-
-            </span>
-
-            ${lesson[1]}
-
-          </a>
-
-          <button
-            style="margin-top:4px;border:0;background:transparent;cursor:pointer;font-size:12px"
-            onclick="toggleLessonDone('${lesson[0]}')">
-
-            ${finished?"取消完成":"✓ 标记完成 +5 XP"}
-
-          </button>
-
-        </div>
-
-        `;
-
-      }).join("")}
-
-    </div>
-
   </div>
 
-  `;
+  <nav class="nav" id="nav">
+    <button class="active" data-page="today">🏠 Today</button>
+    <button data-page="learn">📚 Learn</button>
+    <button data-page="challenge">🗺️ Quest</button>
+    <button data-page="listening">🎧 Listening</button>
+    <button data-page="speaking">🗣️ Speaking</button>
+    <button data-page="grammar">🏰 Grammar</button>
+    <button data-page="vocabulary">🧠 Words + IPA</button>
+    <button data-page="reading">📖 Reading</button>
+    <button data-page="writing">✍️ Writing</button>
+    <button data-page="catti">🇨🇳 CATTI 3</button>
+    <button data-page="media">🎬 Media</button>
+    <button data-page="review">🔄 Review</button>
+    <button data-page="chill">😌 Chill</button>
+    <button data-page="progress">📊 Progress</button>
+    <button data-page="settings">⚙️ Settings</button>
+  </nav>
 
-}
+  <!-- TODAY -->
+  <section id="today" class="section active">
 
+    <div class="hero">
+      <h1 id="todayTitle">Good morning, Vicky ✨</h1>
+      <p id="todaySubtitle">今天不需要学很多，只需要向前走一点。</p>
 
-function renderCard(item){
-
-  const done=isDone(item.id);
-
-  let progress=done?100:0;
-
-  if(item.id==="voa-l1"){
-
-    progress=Math.round(
-
-      VOA_L1.filter(
-        lesson=>isDone("voa1-"+lesson[0])
-      ).length/52*100
-
-    );
-
-  }
-
-  return `
-
-  <article class="media-card-v5">
-
-    <div class="media-icon">
-      ${item.icon}
+      <div class="hero-actions">
+        <button class="whiteBtn" onclick="startWarmup()">🔥 2-Min Warm-up</button>
+        <button class="whiteBtn" onclick="startDailyQuest()">🎯 Start Today's Quest</button>
+        <button class="whiteBtn" onclick="go('chill')">😌 I want something easy</button>
+      </div>
     </div>
 
-    <h3>${item.name}</h3>
+    <div class="grid">
 
-    <div class="media-org">
-      ${item.org}
-    </div>
-
-    <p class="media-desc">
-      ${item.desc}
-    </p>
-
-    <div class="media-tags">
-
-      <span class="media-tag media-level">
-        ${item.level}
-      </span>
-
-      ${item.modes.slice(0,4).map(
-        mode=>`<span class="media-tag">${mode}</span>`
-      ).join("")}
-
-    </div>
-
-    <div class="media-progress">
-
-      <span style="width:${progress}%"></span>
-
-    </div>
-
-    <div class="media-actions">
-
-      <a
-        class="media-main-btn"
-        href="${item.url}"
-        target="_blank"
-        rel="noopener">
-
-        打开官方资源 ↗
-
-      </a>
-
-      <button
-        class="media-secondary-btn"
-        onclick="openMedia('${item.id}')">
-
-        学习模式
-
-      </button>
-
-      <button
-        class="media-done-btn ${done?"done":""}"
-        onclick="completeResource('${item.id}')">
-
-        ${done?"✓ 已完成":"+ 完成资源"}
-
-      </button>
-
-    </div>
-
-    ${item.id==="voa-l1"?renderVOALessons():""}
-
-  </article>
-
-  `;
-
-}
-
-
-function renderMediaV5(filter="全部"){
-
-  const search=
-    (document.getElementById("mediaSearch")?.value||"")
-    .trim()
-    .toLowerCase();
-
-  const level=
-    document.getElementById("mediaLevel")?.value||"全部";
-
-  const list=MEDIA_RESOURCES.filter(item=>{
-
-    const text=(
-      item.name+
-      " "+
-      item.org+
-      " "+
-      item.desc+
-      " "+
-      item.level
-    ).toLowerCase();
-
-    const matchesSearch=
-      !search||
-      text.includes(search);
-
-    const matchesLevel=
-      level==="全部"||
-      item.level.includes(level);
-
-    let matchesFilter=true;
-
-    if(filter==="已完成"){
-
-      matchesFilter=isDone(item.id);
-
-    }else if(filter==="VOA"){
-
-      matchesFilter=item.org.includes("VOA");
-
-    }else if(filter==="BBC"){
-
-      matchesFilter=item.org==="BBC";
-
-    }else if(filter==="British Council"){
-
-      matchesFilter=item.org==="British Council";
-
-    }else if(["A1","B1","B2"].includes(filter)){
-
-      matchesFilter=item.level.includes(filter);
-
-    }
-
-    return matchesSearch&&matchesLevel&&matchesFilter;
-
-  });
-
-  const container=
-    document.getElementById("mediaV5Container");
-
-  if(!list.length){
-
-    container.innerHTML=
-      '<div class="empty">没有找到匹配资源。</div>';
-
-    return;
-
-  }
-
-  container.innerHTML=
-    '<div class="media-grid">'+
-    list.map(renderCard).join("")+
-    '</div>';
-
-}
-
-
-function openMedia(id){
-
-  const item=
-    MEDIA_RESOURCES.find(item=>item.id===id);
-
-  if(!item)return;
-
-  const notes=getNotes();
-
-  document.getElementById("mediaModalContent").innerHTML=`
-
-    <div class="media-modal-head">
-
-      <div>
-
-        <div class="media-icon">
-          ${item.icon}
+      <div class="card quest">
+        <div class="row">
+          <div>
+            <div class="badge">⭐ TODAY'S MAIN QUEST</div>
+            <h2>今日主线</h2>
+          </div>
+          <div class="questIcon">⚔️</div>
         </div>
 
-        <h2>${item.name}</h2>
+        <p class="muted" id="dailyQuestText">
+          根据你的等级和目标自动生成。
+        </p>
 
-        <div class="media-org">
-          ${item.org} · ${item.level}
+        <div class="progress">
+          <i id="dailyProgress" style="width:0%"></i>
+        </div>
+
+        <div class="row">
+          <span class="small" id="dailyProgressText">0 / 5 tasks</span>
+          <button class="primary" onclick="startDailyQuest()">继续</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="badge">🔄 SMART REVIEW</div>
+        <h2>今天该复习什么？</h2>
+        <p class="muted" id="reviewSummary">
+          暂时没有到期复习。
+        </p>
+        <button class="secondary" onclick="go('review')">进入复习</button>
+      </div>
+
+      <div class="card">
+        <div class="badge">🎲 SURPRISE</div>
+        <h2>不知道学什么？</h2>
+        <p class="muted">
+          让 Vicky's English 根据你的情况随机安排一个任务。
+        </p>
+        <button class="primary" onclick="surpriseQuest()">🎲 Surprise Me</button>
+      </div>
+
+    </div>
+
+    <div class="grid4">
+
+      <div class="card">
+        <div class="big">🎧</div>
+        <h3>Listening</h3>
+        <div class="progress">
+          <i id="listenProgress" style="width:35%"></i>
+        </div>
+        <span class="small">优先训练</span>
+      </div>
+
+      <div class="card">
+        <div class="big">🗣️</div>
+        <h3>Speaking</h3>
+        <div class="progress greenBar">
+          <i id="speakProgress" style="width:20%"></i>
+        </div>
+        <span class="small">跟读 + 情景表达</span>
+      </div>
+
+      <div class="card">
+        <div class="big">🏰</div>
+        <h3>Grammar</h3>
+        <div class="progress orangeBar">
+          <i id="grammarProgress" style="width:30%"></i>
+        </div>
+        <span class="small">根据错题动态调整</span>
+      </div>
+
+      <div class="card">
+        <div class="big">🇨🇳</div>
+        <h3>CATTI 3</h3>
+        <div class="progress blueBar">
+          <i id="cattiProgress" style="width:12%"></i>
+        </div>
+        <span class="small">长期主线</span>
+      </div>
+
+    </div>
+
+    <div class="card" style="margin-top:15px">
+      <div class="row">
+        <div>
+          <h2>🌱 Your Learning Tree</h2>
+          <p class="muted">你不是在刷题，你是在一点一点解锁自己的英语世界。</p>
+        </div>
+        <span class="badge" id="badgeCount">🏆 0 badges</span>
+      </div>
+
+      <div class="mapLine">
+        <div class="mapNode">🌱<br><b>Start</b></div>
+        <div class="mapNode">📖<br><b>Understand</b></div>
+        <div class="mapNode">🎧<br><b>Listen</b></div>
+        <div class="mapNode">🗣️<br><b>Speak</b></div>
+        <div class="mapNode">⚔️<br><b>Challenge</b></div>
+        <div class="mapNode boss">👹<br><b>Boss</b></div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- LEARN -->
+  <section id="learn" class="section">
+
+    <div class="hero">
+      <h1>📚 Learn Hub</h1>
+      <p>自由学习模式。不计时、不强迫，你想学什么就学什么。</p>
+    </div>
+
+    <div class="grid">
+
+      <div class="card module">
+        <div class="moduleIcon">🎧</div>
+        <h3>Listening</h3>
+        <p class="muted">精听、泛听、听写、跟读、倍速挑战。</p>
+        <button class="primary" onclick="go('listening')">进入</button>
+      </div>
+
+      <div class="card module">
+        <div class="moduleIcon">🗣️</div>
+        <h3>Speaking</h3>
+        <p class="muted">Shadowing、情景对话、1-minute speech。</p>
+        <button class="primary" onclick="go('speaking')">进入</button>
+      </div>
+
+      <div class="card module">
+        <div class="moduleIcon">🏰</div>
+        <h3>Grammar</h3>
+        <p class="muted">语法树 + 错题 + 长难句。</p>
+        <button class="primary" onclick="go('grammar')">进入</button>
+      </div>
+
+      <div class="card module">
+        <div class="moduleIcon">🧠</div>
+        <h3>Vocabulary + IPA</h3>
+        <p class="muted">音标、自然拼读、连读、重音、词汇。</p>
+        <button class="primary" onclick="go('vocabulary')">进入</button>
+      </div>
+
+      <div class="card module">
+        <div class="moduleIcon">📖</div>
+        <h3>Reading</h3>
+        <p class="muted">分级阅读、新闻、长难句、阅读理解。</p>
+        <button class="primary" onclick="go('reading')">进入</button>
+      </div>
+
+      <div class="card module">
+        <div class="moduleIcon">✍️</div>
+        <h3>Writing</h3>
+        <p class="muted">邮件、日记、议论文、图片写作。</p>
+        <button class="primary" onclick="go('writing')">进入</button>
+      </div>
+
+      <div class="card module">
+        <div class="moduleIcon">🇨🇳</div>
+        <h3>CATTI 3</h3>
+        <p class="muted">英译中、中译英、术语、翻译技巧。</p>
+        <button class="primary" onclick="go('catti')">进入</button>
+      </div>
+
+      <div class="card module">
+        <div class="moduleIcon">🎬</div>
+        <h3>Media World</h3>
+        <p class="muted">British Council、VOA、BBC、TED等。</p>
+        <button class="primary" onclick="go('media')">进入</button>
+      </div>
+
+      <div class="card module">
+        <div class="moduleIcon">😌</div>
+        <h3>Chill</h3>
+        <p class="muted">音乐、影视、小练习，轻松保持英语连接。</p>
+        <button class="primary" onclick="go('chill')">进入</button>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CHALLENGE -->
+  <section id="challenge" class="section">
+
+    <div class="hero">
+      <h1>🗺️ English Adventure</h1>
+      <p>Learn → Fight → Review → Level Up → Boss</p>
+    </div>
+
+    <div class="card" style="margin-top:15px">
+      <div class="row">
+        <div>
+          <h2 id="questLevelTitle">L2 Elementary Adventure</h2>
+          <p class="muted">根据你的能力自动调整难度。</p>
+        </div>
+
+        <div style="text-align:right">
+          <div class="timer" id="questTimer">60</div>
+          <div class="small">seconds</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid4">
+
+      <div class="card levelCard current">
+        <div class="big">🌱</div>
+        <h3>L0</h3>
+        <p class="small">Zero Base</p>
+        <button class="secondary" onclick="startLevelQuest('L0')">进入</button>
+      </div>
+
+      <div class="card levelCard current">
+        <div class="big">🌿</div>
+        <h3>L1</h3>
+        <p class="small">Beginner</p>
+        <button class="secondary" onclick="startLevelQuest('L1')">进入</button>
+      </div>
+
+      <div class="card levelCard current">
+        <div class="big">🌳</div>
+        <h3>L2</h3>
+        <p class="small">Elementary</p>
+        <button class="primary" onclick="startLevelQuest('L2')">进入</button>
+      </div>
+
+      <div class="card levelCard">
+        <div class="big">🏕️</div>
+        <h3>L3</h3>
+        <p class="small">Intermediate</p>
+        <button class="secondary" onclick="startLevelQuest('L3')">挑战</button>
+      </div>
+
+      <div class="card levelCard">
+        <div class="big">🏰</div>
+        <h3>L4</h3>
+        <p class="small">Upper-Intermediate</p>
+        <button class="secondary" onclick="startLevelQuest('L4')">挑战</button>
+      </div>
+
+      <div class="card levelCard boss">
+        <div class="big">👹</div>
+        <h3>L5–L6</h3>
+        <p class="small">Advanced / Exam Sprint</p>
+        <button class="secondary" onclick="startBoss()">BOSS</button>
+      </div>
+
+    </div>
+
+    <div class="two">
+
+      <div class="card">
+        <div class="row">
+          <h2>⚔️ Current Battle</h2>
+          <span class="combo" id="comboText">Combo ×0</span>
+        </div>
+
+        <div id="challengeQuestion" class="question">
+          点击一个等级开始挑战。
+        </div>
+
+        <div id="challengeAnswers" class="answerGrid"></div>
+
+        <div style="margin-top:15px" class="row">
+          <button class="softBtn" onclick="nextChallenge()">下一题 →</button>
+          <span class="small" id="challengeInfo">0 / 5</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>👹 Boss Rules</h3>
+        <p class="muted">
+          Boss 会混合听力、语法、词汇、翻译和长句。
+        </p>
+
+        <div class="wrap">
+          <span class="pill">⏱️ Timer</span>
+          <span class="pill">🔥 Combo</span>
+          <span class="pill">💥 Critical</span>
+          <span class="pill">⭐ XP</span>
+        </div>
+
+        <div class="warningBox" style="margin-top:12px">
+          Boss 不要求每天打。状态不好时去 Chill 也算学习。
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- LISTENING -->
+  <section id="listening" class="section">
+
+    <div class="hero">
+      <h1>🎧 Listening Lab</h1>
+      <p>听力是你的重点训练区域：先听懂，再听快，再听自然。</p>
+
+      <div class="hero-actions">
+        <button class="whiteBtn" onclick="playListening()">▶ Play</button>
+        <button class="whiteBtn" onclick="slowListening()">🐢 Slow</button>
+        <button class="whiteBtn" onclick="normalListening()">🚶 Normal</button>
+        <button class="whiteBtn" onclick="fastListening()">⚡ 1.5× Challenge</button>
+      </div>
+    </div>
+
+    <div class="two">
+
+      <div class="card">
+
+        <div class="badge">INTENSIVE LISTENING</div>
+
+        <h2 id="listenSentence">
+          Technology has changed the way we live and work.
+        </h2>
+
+        <div class="choiceRow">
+          <button class="choice selected" onclick="setListenSpeed(.7,this)">0.7×</button>
+          <button class="choice" onclick="setListenSpeed(1,this)">1.0×</button>
+          <button class="choice" onclick="setListenSpeed(1.2,this)">1.2×</button>
+          <button class="choice" onclick="setListenSpeed(1.5,this)">1.5×</button>
+          <button class="choice" onclick="setListenSpeed(2,this)">2.0×</button>
+        </div>
+
+        <div style="margin-top:15px">
+          <button class="primary" onclick="playListening()">🔊 Listen</button>
+          <button class="secondary" onclick="toggleListenText()">👀 Subtitle</button>
+          <button class="secondary" onclick="repeatListening()">🔁 Loop</button>
+        </div>
+
+        <div id="listenText" class="successBox hidden" style="margin-top:15px">
+          Technology has changed the way we live and work.
+        </div>
+
+        <hr style="border:0;border-top:1px solid var(--line);margin:20px 0">
+
+        <h3>✍️ Dictation</h3>
+
+        <input id="dictationInput"
+          placeholder="听完以后，把你听到的句子写下来">
+
+        <div style="margin-top:9px">
+          <button class="primary" onclick="checkDictation()">Check</button>
+        </div>
+
+        <div id="dictationResult" style="margin-top:10px"></div>
+
+      </div>
+
+      <div class="card">
+
+        <h3>🎯 Listening Modes</h3>
+
+        <div class="resource">
+          <div>
+            <b>🔬 Intensive</b>
+            <div class="small">一句一句拆解</div>
+          </div>
+          <button class="secondary" onclick="startListeningMode('intensive')">Start</button>
+        </div>
+
+        <div class="resource">
+          <div>
+            <b>🌊 Extensive</b>
+            <div class="small">不暂停，培养整体理解</div>
+          </div>
+          <button class="secondary" onclick="startListeningMode('extensive')">Start</button>
+        </div>
+
+        <div class="resource">
+          <div>
+            <b>🗣️ Shadowing</b>
+            <div class="small">听一句，马上跟一句</div>
+          </div>
+          <button class="secondary" onclick="go('speaking')">Start</button>
+        </div>
+
+        <div class="resource">
+          <div>
+            <b>⚡ Speed Challenge</b>
+            <div class="small">1.2× → 1.5× → 2.0×</div>
+          </div>
+          <button class="secondary" onclick="fastListening()">Start</button>
         </div>
 
       </div>
 
-      <button
-        class="media-close"
-        onclick="closeMediaV5()">
+    </div>
 
-        ✕
+  </section>
 
-      </button>
+
+  <!-- SPEAKING -->
+  <section id="speaking" class="section">
+
+    <div class="hero">
+      <h1>🗣️ Speaking Lab</h1>
+      <p>你的浏览器支持语音识别时，可以直接进行跟读练习。</p>
+
+      <div class="hero-actions">
+        <button class="whiteBtn" onclick="speakCurrent()">🔊 Listen</button>
+        <button class="whiteBtn" onclick="startRecognition()">🎙️ Speak</button>
+        <button class="whiteBtn" onclick="newSpeakingSentence()">🎲 New sentence</button>
+      </div>
+    </div>
+
+    <div class="two">
+
+      <div class="card">
+
+        <div class="badge">SHADOWING</div>
+
+        <div class="question" id="speakingSentence">
+          Technology has created new opportunities for workers.
+        </div>
+
+        <div class="wrap">
+          <span class="pill">Repeat</span>
+          <span class="pill">Shadowing</span>
+          <span class="pill">Normal Speed</span>
+          <span class="pill">Retell</span>
+        </div>
+
+        <div style="margin-top:18px">
+          <button class="primary" onclick="speakCurrent()">🔊 Hear it</button>
+          <button class="secondary" onclick="startRecognition()">🎙️ Record</button>
+        </div>
+
+        <div id="speechResult" class="successBox hidden" style="margin-top:15px"></div>
+
+      </div>
+
+      <div class="card">
+
+        <h3>🧠 Speaking Challenge</h3>
+
+        <div class="resource">
+          <div>
+            <b>🖼️ Picture Speaking</b>
+            <div class="small">描述一个场景</div>
+          </div>
+          <button class="secondary" onclick="pictureSpeaking()">Start</button>
+        </div>
+
+        <div class="resource">
+          <div>
+            <b>⏱️ 1-Minute Topic</b>
+            <div class="small">连续说一分钟</div>
+          </div>
+          <button class="secondary" onclick="oneMinute()">Start</button>
+        </div>
+
+        <div class="resource">
+          <div>
+            <b>🎭 Role Play</b>
+            <div class="small">工作 / 旅行 / 日常</div>
+          </div>
+          <button class="secondary" onclick="rolePlay()">Start</button>
+        </div>
+
+        <div class="resource">
+          <div>
+            <b>📔 Voice Journal</b>
+            <div class="small">30秒英语日记</div>
+          </div>
+          <button class="secondary" onclick="voiceJournal()">Start</button>
+        </div>
+
+      </div>
 
     </div>
 
-    <p>${item.desc}</p>
+    <div class="card" style="margin-top:15px">
+      <h3>🔤 Pronunciation Lab</h3>
 
-    <div class="media-actions">
+      <div class="grid4">
 
-      <a
-        class="media-main-btn"
-        href="${item.url}"
-        target="_blank"
-        rel="noopener">
+        <div>
+          <b>/θ/</b>
+          <p class="muted">think · three · through</p>
+          <button class="softBtn" onclick="speakText('think three through')">🔊</button>
+        </div>
 
-        打开真实官方资源 ↗
+        <div>
+          <b>/ð/</b>
+          <p class="muted">this · that · they</p>
+          <button class="softBtn" onclick="speakText('this that they')">🔊</button>
+        </div>
 
-      </a>
+        <div>
+          <b>/r/</b>
+          <p class="muted">right · really · around</p>
+          <button class="softBtn" onclick="speakText('right really around')">🔊</button>
+        </div>
+
+        <div>
+          <b>/æ/</b>
+          <p class="muted">cat · map · happen</p>
+          <button class="softBtn" onclick="speakText('cat map happen')">🔊</button>
+        </div>
+
+      </div>
+
+      <div class="wrap" style="margin-top:15px">
+        <span class="pill">48 Phonemes</span>
+        <span class="pill">Linking</span>
+        <span class="pill">Reduction</span>
+        <span class="pill">Stress</span>
+        <span class="pill">Intonation</span>
+      </div>
 
     </div>
 
-    <h3 style="margin-top:24px">
-      🎯 选择学习模式
-    </h3>
+  </section>
 
-    <div class="study-modes">
 
-      ${item.modes.map(mode=>`
+  <!-- GRAMMAR -->
+  <section id="grammar" class="section">
 
-        <div
-          class="study-mode"
-          onclick='selectMode("${item.id}","${mode}")'>
+    <div class="hero">
+      <h1>🏰 Grammar Adventure</h1>
+      <p>语法不是背规则，而是不断发现自己哪里容易出错。</p>
+    </div>
 
-          <strong>${mode}</strong>
+    <div class="grid4">
 
-          <span>
-            ${modeText(mode)}
-          </span>
+      <div class="card">
+        <div class="big">🌱</div>
+        <h3>基础时态</h3>
+        <p class="small">Present / Past / Future</p>
+        <button class="secondary" onclick="grammarTopic('tenses')">练习</button>
+      </div>
+
+      <div class="card">
+        <div class="big">🧩</div>
+        <h3>从句</h3>
+        <p class="small">Relative / Noun / Adverbial</p>
+        <button class="secondary" onclick="grammarTopic('clauses')">练习</button>
+      </div>
+
+      <div class="card">
+        <div class="big">🏰</div>
+        <h3>长难句</h3>
+        <p class="small">CATTI重点</p>
+        <button class="secondary" onclick="grammarTopic('long')">练习</button>
+      </div>
+
+      <div class="card boss">
+        <div class="big">👹</div>
+        <h3>Grammar Boss</h3>
+        <p class="small">混合挑战</p>
+        <button class="primary" onclick="grammarBoss()">挑战</button>
+      </div>
+
+    </div>
+
+    <div class="two">
+
+      <div class="card">
+
+        <div class="badge">GRAMMAR BATTLE</div>
+
+        <div class="question" id="grammarQuestion">
+          He ___ to work yesterday.
+        </div>
+
+        <div id="grammarAnswers" class="answerGrid"></div>
+
+        <div id="grammarExplanation" style="margin-top:12px"></div>
+
+      </div>
+
+      <div class="card">
+
+        <h3>🌳 Grammar Tree</h3>
+
+        <div class="resource">
+          <span>🌱 Sentence Basics</span>
+          <span class="badge">72%</span>
+        </div>
+
+        <div class="resource">
+          <span>🌿 Tenses</span>
+          <span class="badge">58%</span>
+        </div>
+
+        <div class="resource">
+          <span>🌳 Clauses</span>
+          <span class="badge">41%</span>
+        </div>
+
+        <div class="resource">
+          <span>🏰 Long Sentences</span>
+          <span class="badge">28%</span>
+        </div>
+
+        <div class="warningBox">
+          这些数值会随着你的练习自动更新。
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- VOCABULARY -->
+  <section id="vocabulary" class="section">
+
+    <div class="hero">
+      <h1>🧠 Vocabulary + IPA</h1>
+      <p>单词不只是“中文意思”，还要知道怎么读、怎么用、怎么连接。</p>
+    </div>
+
+    <div class="two">
+
+      <div class="card">
+
+        <div class="badge">WORD OF THE DAY</div>
+
+        <div class="big" id="wordMain">cooperation</div>
+
+        <p class="muted" id="wordIPA">/koʊˌɑːpəˈreɪʃən/</p>
+
+        <h3>合作；协作</h3>
+
+        <p>
+          <b>Example:</b><br>
+          International cooperation is essential for sustainable development.
+        </p>
+
+        <div class="wrap">
+          <span class="pill">cooperate</span>
+          <span class="pill">cooperative</span>
+          <span class="pill">cooperation</span>
+          <span class="pill">collaboration</span>
+        </div>
+
+        <div style="margin-top:15px">
+          <button class="primary" onclick="speakText('cooperation')">🔊 Hear</button>
+          <button class="secondary" onclick="addWord()">⭐ Add to Wordbook</button>
+          <button class="secondary" onclick="nextWord()">➡️ Next</button>
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <h3>🔤 Phonics & Linking</h3>
+
+        <div class="resource">
+          <div>
+            <b>Word Stress</b>
+            <div class="small">important → imPORtant</div>
+          </div>
+          <button class="softBtn" onclick="speakText('important')">🔊</button>
+        </div>
+
+        <div class="resource">
+          <div>
+            <b>Linking</b>
+            <div class="small">pick it up → pick-it-up</div>
+          </div>
+          <button class="softBtn" onclick="speakText('pick it up')">🔊</button>
+        </div>
+
+        <div class="resource">
+          <div>
+            <b>Reduction</b>
+            <div class="small">going to → gonna</div>
+          </div>
+          <button class="softBtn" onclick="speakText('I am going to do it')">🔊</button>
+        </div>
+
+        <div class="resource">
+          <div>
+            <b>Intonation</b>
+            <div class="small">Question / Statement</div>
+          </div>
+          <button class="softBtn" onclick="speakText('Are you ready?')">🔊</button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="card" style="margin-top:15px">
+
+      <h3>⚡ Speed Flash</h3>
+
+      <div id="flashWord" class="question">technology</div>
+
+      <div class="choiceRow">
+        <button class="choice" onclick="flashAnswer('A')">A. 技术</button>
+        <button class="choice" onclick="flashAnswer('B')">B. 传统</button>
+        <button class="choice" onclick="flashAnswer('C')">C. 工业</button>
+        <button class="choice" onclick="flashAnswer('D')">D. 机会</button>
+      </div>
+
+      <div id="flashResult" style="margin-top:12px"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- READING -->
+  <section id="reading" class="section">
+
+    <div class="hero">
+      <h1>📖 Reading World</h1>
+      <p>从简单阅读慢慢进入新闻、长难句和 CATTI 风格文本。</p>
+    </div>
+
+    <div class="grid4">
+
+      <div class="card">
+        <div class="big">🌱</div>
+        <h3>L0–L1</h3>
+        <p class="small">Short Stories</p>
+        <button class="secondary" onclick="readingLevel('L1')">Read</button>
+      </div>
+
+      <div class="card">
+        <div class="big">🌿</div>
+        <h3>L2</h3>
+        <p class="small">Everyday English</p>
+        <button class="secondary" onclick="readingLevel('L2')">Read</button>
+      </div>
+
+      <div class="card">
+        <div class="big">🌳</div>
+        <h3>L3–L4</h3>
+        <p class="small">News & Articles</p>
+        <button class="secondary" onclick="readingLevel('L4')">Read</button>
+      </div>
+
+      <div class="card">
+        <div class="big">🏰</div>
+        <h3>L5–L6</h3>
+        <p class="small">Long Sentences</p>
+        <button class="secondary" onclick="readingLevel('L6')">Read</button>
+      </div>
+
+    </div>
+
+    <div class="card" style="margin-top:15px">
+
+      <div class="badge">TODAY'S READING</div>
+
+      <h2>Technology and the Future of Work</h2>
+
+      <p style="line-height:1.9">
+        Technology has transformed the workplace in ways that were difficult to imagine only a few decades ago.
+        Digital platforms allow businesses to communicate more efficiently, develop new products and reach customers
+        in different parts of the world.
+      </p>
+
+      <p style="line-height:1.9">
+        However, technological progress also creates new challenges. Workers may need to learn new skills,
+        adapt to changing job requirements and work alongside increasingly sophisticated technologies.
+      </p>
+
+      <div class="warningBox">
+        💡 精读任务：找出 however 的逻辑作用，并尝试用中文概括第二段。
+      </div>
+
+      <button class="primary" onclick="saveReading()">✓ Mark as completed</button>
+
+    </div>
+
+  </section>
+
+
+  <!-- WRITING -->
+  <section id="writing" class="section">
+
+    <div class="hero">
+      <h1>✍️ Writing Studio</h1>
+      <p>写作 → 自己检查 → 对比范文 → 建立 Good Sentence Bank。</p>
+    </div>
+
+    <div class="grid4">
+
+      <div class="card">
+        <div class="big">📧</div>
+        <h3>Business Email</h3>
+        <button class="secondary" onclick="setWritingPrompt('business')">Start</button>
+      </div>
+
+      <div class="card">
+        <div class="big">📔</div>
+        <h3>Daily Journal</h3>
+        <button class="secondary" onclick="setWritingPrompt('journal')">Start</button>
+      </div>
+
+      <div class="card">
+        <div class="big">🖼️</div>
+        <h3>Picture Writing</h3>
+        <button class="secondary" onclick="setWritingPrompt('picture')">Start</button>
+      </div>
+
+      <div class="card">
+        <div class="big">⚖️</div>
+        <h3>Argument</h3>
+        <button class="secondary" onclick="setWritingPrompt('argument')">Start</button>
+      </div>
+
+    </div>
+
+    <div class="two">
+
+      <div class="card">
+
+        <div class="badge">WRITING TASK</div>
+
+        <h2 id="writingPrompt">
+          Write a short email asking a customer about the status of your quotation.
+        </h2>
+
+        <textarea id="writingInput"
+          placeholder="Write here..."></textarea>
+
+        <div style="margin-top:10px">
+          <button class="primary" onclick="saveWriting()">Save Writing</button>
+          <button class="secondary" onclick="selfCheckWriting()">Self Check</button>
+        </div>
+
+        <div id="writingFeedback" style="margin-top:12px"></div>
+
+      </div>
+
+      <div class="card">
+
+        <h3>✨ Good Sentence Bank</h3>
+
+        <div id="sentenceBank">
+
+          <div class="resource">
+            <div>
+              <b>I look forward to hearing from you.</b>
+              <div class="small">商务邮件</div>
+            </div>
+            <button class="softBtn" onclick="speakText('I look forward to hearing from you.')">🔊</button>
+          </div>
+
+          <div class="resource">
+            <div>
+              <b>Please feel free to let me know if you have any questions.</b>
+              <div class="small">自然、温和</div>
+            </div>
+            <button class="softBtn" onclick="speakText('Please feel free to let me know if you have any questions.')">🔊</button>
+          </div>
 
         </div>
 
-      `).join("")}
+      </div>
 
     </div>
 
-    <div
-      id="modePanel"
-      class="mode-panel">
+  </section>
 
-      <h4>
-        🎯 选择一个学习模式
-      </h4>
 
-      <p style="color:#777">
-        选择上面的学习模式开始。
-        真实课程内容来自官方资源。
+  <!-- CATTI -->
+  <section id="catti" class="section">
+
+    <div class="hero">
+      <h1>🇨🇳 CATTI 3 Translation Adventure</h1>
+      <p>你的长期主线：英译中 + 中译英 + 术语 + 技巧 + 真题强度。</p>
+
+      <div class="hero-actions">
+        <button class="whiteBtn" onclick="cattiQuestion('en-cn')">英译中</button>
+        <button class="whiteBtn" onclick="cattiQuestion('cn-en')">中译英</button>
+        <button class="whiteBtn" onclick="cattiQuestion('term')">术语</button>
+        <button class="whiteBtn" onclick="cattiQuestion('technique')">技巧</button>
+      </div>
+    </div>
+
+    <div class="two">
+
+      <div class="card">
+
+        <div class="badge">TRANSLATION QUEST</div>
+
+        <h2 id="cattiPrompt">
+          Technology has created new opportunities, but workers also need support to adapt to change.
+        </h2>
+
+        <textarea id="cattiInput"
+          placeholder="先自己翻译。系统不会直接告诉你答案。"></textarea>
+
+        <div style="margin-top:10px">
+          <button class="primary" onclick="saveCattiAttempt()">Save Attempt</button>
+          <button class="secondary" onclick="showCattiHint()">💡 Hint</button>
+          <button class="softBtn" onclick="nextCatti()">Next</button>
+        </div>
+
+        <div id="cattiHint" class="warningBox hidden" style="margin-top:12px">
+          注意逻辑关系：but / also / adapt to。
+        </div>
+
+        <div id="cattiSaved" style="margin-top:12px"></div>
+
+      </div>
+
+      <div class="card">
+
+        <h3>🧰 Translation Toolbox</h3>
+
+        <div class="resource">
+          <span>➕ Addition</span>
+          <span class="badge">增译</span>
+        </div>
+
+        <div class="resource">
+          <span>➖ Omission</span>
+          <span class="badge">省译</span>
+        </div>
+
+        <div class="resource">
+          <span>🔄 Transformation</span>
+          <span class="badge">转换</span>
+        </div>
+
+        <div class="resource">
+          <span>✂️ Splitting</span>
+          <span class="badge">拆句</span>
+        </div>
+
+        <div class="resource">
+          <span>🔗 Combining</span>
+          <span class="badge">合句</span>
+        </div>
+
+        <div class="successBox">
+          CATTI 训练原则：先自己翻，再看解析。不要提前看答案。
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="card" style="margin-top:15px">
+
+      <h3>📚 Terminology Bank</h3>
+
+      <div class="grid4">
+
+        <div>
+          <b>digital economy</b>
+          <p class="small">数字经济</p>
+        </div>
+
+        <div>
+          <b>sustainable development</b>
+          <p class="small">可持续发展</p>
+        </div>
+
+        <div>
+          <b>technological innovation</b>
+          <p class="small">技术创新</p>
+        </div>
+
+        <div>
+          <b>globalization</b>
+          <p class="small">全球化</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- MEDIA -->
+  <section id="media" class="section">
+
+    <div class="hero">
+      <h1>🎬 Media World</h1>
+      <p>真实英语资源。点击后进入官方/公开资源网站。</p>
+    </div>
+
+    <div class="card" style="margin-top:15px">
+
+      <div class="row">
+        <h2>🌍 Resource Library</h2>
+        <span class="badge" id="mediaCompleted">0 completed</span>
+      </div>
+
+      <div id="resourceList"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- REVIEW -->
+  <section id="review" class="section">
+
+    <div class="hero">
+      <h1>🔄 Smart Review</h1>
+      <p>错误不是失败。错误是系统告诉你下一步该练什么。</p>
+    </div>
+
+    <div class="grid4">
+
+      <div class="card">
+        <div class="big" id="mistakeCount">0</div>
+        <h3>Mistakes</h3>
+      </div>
+
+      <div class="card">
+        <div class="big" id="wordCount">0</div>
+        <h3>Saved Words</h3>
+      </div>
+
+      <div class="card">
+        <div class="big" id="translationCount">0</div>
+        <h3>CATTI Attempts</h3>
+      </div>
+
+      <div class="card">
+        <div class="big" id="reviewDue">0</div>
+        <h3>Due Today</h3>
+      </div>
+
+    </div>
+
+    <div class="card" style="margin-top:15px">
+
+      <div class="row">
+        <h2>📕 Mistake Book</h2>
+        <button class="danger softBtn" onclick="clearMistakes()">Clear</button>
+      </div>
+
+      <div id="mistakeList"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CHILL -->
+  <section id="chill" class="section">
+
+    <div class="hero">
+      <h1>😌 Chill & Learn</h1>
+      <p>累的时候，不需要逼自己刷题。保持和英语的连接就已经很好。</p>
+    </div>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="big">🎵</div>
+        <h2>Music English</h2>
+        <p class="muted">
+          找一首你喜欢的英文歌：先听 → 看歌词 → 找生词 → 跟唱。
+        </p>
+        <button class="primary" onclick="musicGame()">🎵 Music Game</button>
+      </div>
+
+      <div class="card">
+        <div class="big">🎬</div>
+        <h2>Movie Mode</h2>
+        <p class="muted">
+          选择短片 / 影视资源，不要求自己全部听懂。
+        </p>
+        <button class="primary" onclick="go('media')">Choose Media</button>
+      </div>
+
+      <div class="card">
+        <div class="big">🎮</div>
+        <h2>Mini Game</h2>
+        <p class="muted">
+          拼词、猜词、快速反应，让大脑轻松接触英语。
+        </p>
+        <button class="primary" onclick="miniGame()">Play</button>
+      </div>
+
+    </div>
+
+    <div class="card" style="margin-top:15px">
+
+      <h3>🌙 Night English</h3>
+
+      <p class="muted">
+        适合晚上不想学习的时候。
       </p>
 
+      <button class="secondary" onclick="nightEnglish()">▶ Start slow English</button>
+
     </div>
 
-    <div class="mode-panel">
+  </section>
 
-      <h4>
-        📝 我的学习笔记
-      </h4>
 
-      <textarea
-        class="note-area"
-        id="mediaNotes">${(notes[id]||"")
-          .replace(/</g,"&lt;")
-          .replace(/>/g,"&gt;")}</textarea>
+  <!-- PROGRESS -->
+  <section id="progress" class="section">
 
-      <div
-        class="media-actions"
-        style="margin-top:10px">
+    <div class="hero">
+      <h1>📊 Your English Journey</h1>
+      <p>看到自己一点点变强，比每天逼自己更重要。</p>
+    </div>
 
-        <button
-          class="media-secondary-btn"
-          onclick="saveNote('${id}')">
+    <div class="grid4">
 
-          保存笔记
+      <div class="card">
+        <div class="big" id="progressXP">0</div>
+        <h3>Total XP</h3>
+      </div>
 
+      <div class="card">
+        <div class="big" id="progressLevel">L2</div>
+        <h3>Level</h3>
+      </div>
+
+      <div class="card">
+        <div class="big" id="progressDays">0</div>
+        <h3>Learning Days</h3>
+      </div>
+
+      <div class="card">
+        <div class="big" id="progressStreak">0🔥</div>
+        <h3>Streak</h3>
+      </div>
+
+    </div>
+
+    <div class="two">
+
+      <div class="card">
+
+        <h3>📈 Weekly Activity</h3>
+
+        <div class="chart" id="activityChart"></div>
+
+      </div>
+
+      <div class="card">
+
+        <h3>🎯 Skill Radar</h3>
+
+        <div class="radar" id="skillRadar"></div>
+
+      </div>
+
+    </div>
+
+    <div class="card" style="margin-top:15px">
+
+      <h3>🔥 Learning Heatmap</h3>
+
+      <div class="heatmap" id="heatmap"></div>
+
+    </div>
+
+    <div class="card" style="margin-top:15px">
+
+      <h3>🏆 Achievements</h3>
+
+      <div id="achievements" class="grid4"></div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SETTINGS -->
+  <section id="settings" class="section">
+
+    <div class="hero">
+      <h1>⚙️ Settings</h1>
+      <p>你的数据目前保存在这个浏览器里。</p>
+    </div>
+
+    <div class="two">
+
+      <div class="card">
+
+        <h3>🎯 Goal</h3>
+
+        <div class="field">
+          <label>Long-term goal</label>
+
+          <select id="goalSelect" onchange="updateGoal(this.value)">
+            <option value="CATTI 3">CATTI 3 三级笔译</option>
+            <option value="communication">Daily Communication</option>
+            <option value="work">Workplace English</option>
+            <option value="study">Study Abroad</option>
+            <option value="interest">English for Interest</option>
+          </select>
+
+        </div>
+
+        <div class="field">
+          <label>Daily study time</label>
+
+          <select id="timeSelect" onchange="updateStudyTime(this.value)">
+            <option value="10">10 min</option>
+            <option value="20">20 min</option>
+            <option value="30">30 min</option>
+            <option value="45">45 min</option>
+            <option value="60">60 min</option>
+          </select>
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <h3>💾 Data</h3>
+
+        <p class="muted">
+          你现在使用的是 localStorage，本设备可以自动保存。
+        </p>
+
+        <button class="primary" onclick="exportData()">⬇️ Export Backup</button>
+
+        <label class="secondary" style="display:inline-block;margin-top:8px;cursor:pointer">
+          ⬆️ Import Backup
+          <input type="file" accept=".json" onchange="importData(event)" style="display:none">
+        </label>
+
+        <button class="softBtn danger" onclick="resetAll()" style="margin-top:8px">
+          Reset Everything
         </button>
 
       </div>
 
     </div>
 
-    ${item.id==="voa-l1"?renderVOALessons():""}
+    <div class="card" style="margin-top:15px">
 
-  `;
+      <h3>🚧 Future Upgrade</h3>
 
-  document
-    .getElementById("mediaModalV5")
-    .classList.add("show");
+      <div class="grid4">
 
-}
+        <div>
+          <b>☁️ Cloud Sync</b>
+          <p class="small">需要后端数据库</p>
+        </div>
 
+        <div>
+          <b>🤖 AI Correction</b>
+          <p class="small">需要 AI API</p>
+        </div>
 
-let speechRate=1;
+        <div>
+          <b>🗣️ Advanced Pronunciation</b>
+          <p class="small">需要语音分析服务</p>
+        </div>
 
-let currentSpeech=null;
-
-
-function selectMode(id,mode){
-
-  const item=
-    MEDIA_RESOURCES.find(item=>item.id===id);
-
-  if(!item)return;
-
-  const panel=
-    document.getElementById("modePanel");
-
-  let audioTools="";
-
-  const listeningModes=[
-    "听力",
-    "精听",
-    "跟读",
-    "观看",
-    "电影",
-    "短视频",
-    "视频"
-  ];
-
-  if(listeningModes.includes(mode)){
-
-    audioTools=`
-
-      <div class="player-card">
-
-        <strong>
-          🎧 听力辅助
-        </strong>
-
-        <p class="player-note">
-
-          官方课程里的真实音频/视频请通过
-          「打开官方资源」播放。
-          Vicky's English 不伪造第三方音频。
-          如果当前浏览器支持语音合成，
-          下面也可以用系统声音进行辅助跟读。
-
-        </p>
-
-        <div class="player-controls">
-
-          <button onclick="speakResource('${id}')">
-            🔊 朗读辅助
-          </button>
-
-          <button onclick="stopSpeech()">
-            ⏹ 停止
-          </button>
-
-          <button onclick="changeSpeechRate(.8)">
-            🐢 0.8×
-          </button>
-
-          <button onclick="changeSpeechRate(1)">
-            ▶ 1×
-          </button>
-
-          <button onclick="changeSpeechRate(1.25)">
-            ⚡ 1.25×
-          </button>
-
+        <div>
+          <b>📱 PWA Offline</b>
+          <p class="small">后续加入 Service Worker</p>
         </div>
 
       </div>
 
-    `;
-
-  }
-
-  panel.innerHTML=`
-
-    <h4>
-      🎯 ${mode}模式
-    </h4>
-
-    <p>
-      ${modeText(mode)}
-    </p>
-
-    <div class="check-list">
-
-      <label>
-        <input type="checkbox">
-        第一遍：完整输入，不急着查词
-      </label>
-
-      <label>
-        <input type="checkbox">
-        第二遍：处理听不懂的部分
-      </label>
-
-      <label>
-        <input type="checkbox">
-        第三遍：主动输出 / 跟读 / 复述
-      </label>
-
-      <label>
-        <input type="checkbox">
-        记录本次最重要的 3 个词或表达
-      </label>
+      <div class="warningBox" style="margin-top:12px">
+        这些功能我没有假装“已经实现”。当前版本先把真正可以在静态网站里运行的功能做好。
+      </div>
 
     </div>
 
-    ${audioTools}
+  </section>
 
-    <div
-      class="media-actions"
-      style="margin-top:14px">
 
-      <a
-        class="media-main-btn"
-        href="${item.url}"
-        target="_blank"
-        rel="noopener">
+  <div class="footer">
+    Vicky's English · Learn a little. Level up a little. 🌱
+  </div>
 
-        现在去官方资源学习 ↗
+</div>
 
-      </a>
 
-      <button
-        class="media-done-btn"
-        onclick="completeResource('${id}');closeMediaV5()">
+<!-- ONBOARDING -->
+<div class="modal hidden" id="onboarding">
 
-        完成本资源 +20 XP
+  <div class="modalBox">
 
+    <div class="step active" id="step1">
+
+      <h1>🌍 Welcome to Vicky's English</h1>
+
+      <p class="muted">
+        先做一个简单的「入学体检」。不是考试，只是为了让系统知道从哪里开始。
+      </p>
+
+      <h3>你的整体英语感觉？</h3>
+
+      <div class="optionGrid">
+
+        <div class="option" onclick="selectProfileLevel('L0',this)">
+          🌱 L0<br>
+          <span class="small">几乎从零开始</span>
+        </div>
+
+        <div class="option" onclick="selectProfileLevel('L1',this)">
+          🌿 L1<br>
+          <span class="small">能看懂简单句</span>
+        </div>
+
+        <div class="option selected" onclick="selectProfileLevel('L2',this)">
+          🌳 L2<br>
+          <span class="small">基础英语，有明显短板</span>
+        </div>
+
+        <div class="option" onclick="selectProfileLevel('L3',this)">
+          🏕️ L3<br>
+          <span class="small">能进行一般交流</span>
+        </div>
+
+        <div class="option" onclick="selectProfileLevel('L4',this)">
+          🏰 L4<br>
+          <span class="small">比较熟练</span>
+        </div>
+
+        <div class="option" onclick="selectProfileLevel('L5',this)">
+          🐉 L5<br>
+          <span class="small">高级</span>
+        </div>
+
+      </div>
+
+      <button class="primary" style="margin-top:18px" onclick="nextOnboard(2)">
+        Continue →
       </button>
 
     </div>
 
-  `;
+
+    <div class="step" id="step2">
+
+      <h1>🎯 What's your goal?</h1>
+
+      <p class="muted">可以选择一个最重要的，也可以以后修改。</p>
+
+      <div class="optionGrid">
+
+        <div class="option" onclick="selectGoal('CATTI 3',this)">
+          🇨🇳 CATTI 3
+          <br><span class="small">三级笔译</span>
+        </div>
+
+        <div class="option" onclick="selectGoal('communication',this)">
+          🗣️ Daily Communication
+        </div>
+
+        <div class="option" onclick="selectGoal('work',this)">
+          💼 Workplace English
+        </div>
+
+        <div class="option" onclick="selectGoal('study',this)">
+          🎓 Study Abroad
+        </div>
+
+        <div class="option" onclick="selectGoal('interest',this)">
+          🎬 English for Interest
+        </div>
+
+      </div>
+
+      <button class="primary" style="margin-top:18px" onclick="nextOnboard(3)">
+        Continue →
+      </button>
+
+    </div>
+
+
+    <div class="step" id="step3">
+
+      <h1>⏰ How much time do you have?</h1>
+
+      <div class="optionGrid">
+
+        <div class="option" onclick="selectTime(10,this)">
+          10 min<br>
+          <span class="small">Minimum mode</span>
+        </div>
+
+        <div class="option" onclick="selectTime(20,this)">
+          20 min<br>
+          <span class="small">Light mode</span>
+        </div>
+
+        <div class="option selected" onclick="selectTime(30,this)">
+          30 min<br>
+          <span class="small">Balanced</span>
+        </div>
+
+        <div class="option" onclick="selectTime(45,this)">
+          45 min<br>
+          <span class="small">Deep study</span>
+        </div>
+
+        <div class="option" onclick="selectTime(60,this)">
+          60 min<br>
+          <span class="small">Full training</span>
+        </div>
+
+      </div>
+
+      <button class="primary" style="margin-top:18px" onclick="nextOnboard(4)">
+        Continue →
+      </button>
+
+    </div>
+
+
+    <div class="step" id="step4">
+
+      <h1>💪 Where are your weak points?</h1>
+
+      <p class="muted">
+        可以多选。系统以后会优先给你安排这些内容。
+      </p>
+
+      <div class="choiceRow">
+
+        <button class="choice" onclick="toggleWeak('listening',this)">🎧 Listening</button>
+
+        <button class="choice" onclick="toggleWeak('speaking',this)">🗣️ Speaking</button>
+
+        <button class="choice" onclick="toggleWeak('grammar',this)">🏰 Grammar</button>
+
+        <button class="choice" onclick="toggleWeak('vocabulary',this)">🧠 Vocabulary</button>
+
+        <button class="choice" onclick="toggleWeak('reading',this)">📖 Reading</button>
+
+        <button class="choice" onclick="toggleWeak('writing',this)">✍️ Writing</button>
+
+        <button class="choice" onclick="toggleWeak('translation',this)">🇨🇳 Translation</button>
+
+      </div>
+
+      <button class="primary" style="margin-top:18px" onclick="finishOnboarding()">
+        🚀 Create My Learning World
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- WARMUP -->
+<div class="modal hidden" id="warmupModal">
+
+  <div class="modalBox">
+
+    <h1>🔥 2-Minute Warm-up</h1>
+
+    <p class="muted">不用认真考试，只是让大脑切换到 English Mode。</p>
+
+    <div class="card">
+
+      <div class="badge">STEP 1</div>
+
+      <h2>👄 Mouth Warm-up</h2>
+
+      <p>think → this → really → technology</p>
+
+      <button class="secondary" onclick="speakText('think, this, really, technology')">
+        🔊 Listen
+      </button>
+
+    </div>
+
+    <div class="card" style="margin-top:10px">
+
+      <div class="badge">STEP 2</div>
+
+      <h2>🗣️ Shadow</h2>
+
+      <p>Technology is changing our lives.</p>
+
+      <button class="secondary" onclick="speakText('Technology is changing our lives.')">
+        🔊 Listen
+      </button>
+
+      <button class="primary" onclick="startRecognition()">
+        🎙️ Repeat
+      </button>
+
+    </div>
+
+    <div class="card" style="margin-top:10px">
+
+      <div class="badge">STEP 3</div>
+
+      <h2>🧠 Quick Question</h2>
+
+      <p class="question" style="font-size:18px">
+        What does "opportunity" mean?
+      </p>
+
+      <div class="answerGrid">
+        <button class="answer" onclick="warmAnswer(this,true)">机会</button>
+        <button class="answer" onclick="warmAnswer(this,false)">挑战</button>
+      </div>
+
+    </div>
+
+    <button class="primary" onclick="closeModal('warmupModal')" style="margin-top:15px">
+      ✨ Finish Warm-up
+    </button>
+
+  </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =========================================================
+   DATA
+========================================================= */
+
+const DEFAULT_DATA = {
+  xp:0,
+  total:0,
+  mistakes:[],
+  days:0,
+  translations:[],
+  mediaDone:[],
+  coins:0,
+  streak:0,
+  badges:[],
+  profile:{
+    level:"L2",
+    skills:{
+      listening:35,
+      speaking:25,
+      grammar:40,
+      vocabulary:45,
+      reading:42,
+      writing:30,
+      translation:20
+    },
+    weak:["listening","speaking","grammar","translation"]
+  },
+  goal:{
+    type:"CATTI 3",
+    dailyMinutes:30
+  },
+  daily:{
+    date:"",
+    completed:0,
+    total:5
+  },
+  words:[],
+  writings:[],
+  activity:[],
+  settings:{
+    onboarded:false
+  }
+};
+
+
+let data = JSON.parse(localStorage.getItem("vqData") || "{}");
+
+data = Object.assign({},DEFAULT_DATA,data);
+
+data.profile = Object.assign(
+  {},
+  DEFAULT_DATA.profile,
+  data.profile || {}
+);
+
+data.profile.skills = Object.assign(
+  {},
+  DEFAULT_DATA.profile.skills,
+  data.profile.skills || {}
+);
+
+data.goal = Object.assign(
+  {},
+  DEFAULT_DATA.goal,
+  data.goal || {}
+);
+
+data.daily = Object.assign(
+  {},
+  DEFAULT_DATA.daily,
+  data.daily || {}
+);
+
+if(!Array.isArray(data.mistakes)) data.mistakes=[];
+if(!Array.isArray(data.translations)) data.translations=[];
+if(!Array.isArray(data.mediaDone)) data.mediaDone=[];
+if(!Array.isArray(data.words)) data.words=[];
+if(!Array.isArray(data.writings)) data.writings=[];
+if(!Array.isArray(data.badges)) data.badges=[];
+if(!Array.isArray(data.activity)) data.activity=[];
+
+
+/* =========================================================
+   BASIC HELPERS
+========================================================= */
+
+function save(){
+  localStorage.setItem("vqData",JSON.stringify(data));
+  updateUI();
+}
+
+function toast(text){
+  const el=document.getElementById("toast");
+  el.textContent=text;
+  el.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer=setTimeout(()=>{
+    el.classList.remove("show");
+  },2300);
+}
+
+function go(page){
+
+  document.querySelectorAll(".section")
+    .forEach(x=>x.classList.remove("active"));
+
+  const target=document.getElementById(page);
+
+  if(target) target.classList.add("active");
+
+  document.querySelectorAll("#nav button")
+    .forEach(b=>{
+      b.classList.toggle(
+        "active",
+        b.dataset.page===page
+      );
+    });
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+document.querySelectorAll("#nav button")
+.forEach(btn=>{
+  btn.onclick=()=>go(btn.dataset.page);
+});
+
+
+function addXP(amount,reason="Learning"){
+  data.xp+=amount;
+  data.coins+=Math.max(1,Math.floor(amount/5));
+
+  data.total++;
+
+  addActivity();
+
+  checkBadges();
+
+  save();
+
+  toast(`+${amount} XP · ${reason}`);
+}
+
+
+function addActivity(){
+  const today=new Date().toISOString().slice(0,10);
+
+  const found=data.activity.find(x=>x.date===today);
+
+  if(found){
+    found.value++;
+  }else{
+    data.activity.push({
+      date:today,
+      value:1
+    });
+  }
+
+  if(data.activity.length>60){
+    data.activity=data.activity.slice(-60);
+  }
+}
+
+
+function levelFromXP(xp){
+
+  if(xp>=5000) return "L6";
+  if(xp>=3000) return "L5";
+  if(xp>=1800) return "L4";
+  if(xp>=900) return "L3";
+  if(xp>=300) return "L2";
+  if(xp>=100) return "L1";
+
+  return "L0";
+}
+
+
+function ensureDaily(){
+
+  const today=new Date().toISOString().slice(0,10);
+
+  if(data.daily.date!==today){
+
+    data.daily={
+      date:today,
+      completed:0,
+      total:5
+    };
+
+    data.days++;
+
+    if(data.streak===undefined){
+      data.streak=1;
+    }else{
+      data.streak++;
+    }
+
+    save();
+  }
+}
+
+
+function updateUI(){
+
+  const level=levelFromXP(data.xp);
+
+  data.profile.level=level;
+
+  document.getElementById("levelStat").textContent="🌱 "+level;
+
+  document.getElementById("xpStat").textContent=
+    "⭐ "+data.xp+" XP";
+
+  document.getElementById("coinStat").textContent=
+    "🪙 "+data.coins;
+
+  document.getElementById("streakStat").textContent=
+    "🔥 "+data.streak;
+
+  document.getElementById("progressXP").textContent=data.xp;
+  document.getElementById("progressLevel").textContent=level;
+  document.getElementById("progressDays").textContent=data.days;
+  document.getElementById("progressStreak").textContent=data.streak+"🔥";
+
+  document.getElementById("dailyProgressText").textContent=
+    `${data.daily.completed} / ${data.daily.total} tasks`;
+
+  const pct=
+    Math.min(
+      100,
+      Math.round(
+        data.daily.completed/data.daily.total*100
+      )
+    );
+
+  document.getElementById("dailyProgress").style.width=pct+"%";
+
+  document.getElementById("dailyQuestText").textContent=
+    buildDailyText();
+
+  document.getElementById("badgeCount").textContent=
+    "🏆 "+data.badges.length+" badges";
+
+  document.getElementById("mistakeCount").textContent=
+    data.mistakes.length;
+
+  document.getElementById("wordCount").textContent=
+    data.words.length;
+
+  document.getElementById("translationCount").textContent=
+    data.translations.length;
+
+  document.getElementById("reviewDue").textContent=
+    data.mistakes.length;
+
+  document.getElementById("mediaCompleted").textContent=
+    data.mediaDone.length+" completed";
+
+  updateSkills();
+  renderMistakes();
+  renderProgress();
+}
+
+
+function buildDailyText(){
+
+  const weak=data.profile.weak || [];
+
+  if(weak.includes("listening")){
+    return "今天优先：听力精听 + 跟读 + 一个短语法挑战，再做一点 CATTI。";
+  }
+
+  if(weak.includes("translation")){
+    return "今天优先：CATTI 英译中 + 术语 + 长难句拆解。";
+  }
+
+  return "今天：Warm-up → Listening → Speaking → Grammar → CATTI。";
+}
+
+
+/* =========================================================
+   ONBOARDING
+========================================================= */
+
+let onboardingState={
+  level:"L2",
+  goal:"CATTI 3",
+  time:30,
+  weak:[]
+};
+
+
+function openOnboarding(){
+
+  document.getElementById("onboarding")
+    .classList.remove("hidden");
 
 }
 
 
-function speakResource(id){
+function nextOnboard(step){
 
-  const item=
-    MEDIA_RESOURCES.find(item=>item.id===id);
+  document.querySelectorAll(".step")
+    .forEach(x=>x.classList.remove("active"));
 
-  if(!item)return;
+  document.getElementById("step"+step)
+    .classList.add("active");
+}
 
-  if(!("speechSynthesis" in window)){
 
-    toast("当前浏览器不支持语音朗读");
+function selectProfileLevel(level,el){
+
+  onboardingState.level=level;
+
+  document.querySelectorAll("#step1 .option")
+    .forEach(x=>x.classList.remove("selected"));
+
+  el.classList.add("selected");
+}
+
+
+function selectGoal(goal,el){
+
+  onboardingState.goal=goal;
+
+  document.querySelectorAll("#step2 .option")
+    .forEach(x=>x.classList.remove("selected"));
+
+  el.classList.add("selected");
+}
+
+
+function selectTime(time,el){
+
+  onboardingState.time=time;
+
+  document.querySelectorAll("#step3 .option")
+    .forEach(x=>x.classList.remove("selected"));
+
+  el.classList.add("selected");
+}
+
+
+function toggleWeak(skill,el){
+
+  if(onboardingState.weak.includes(skill)){
+
+    onboardingState.weak=
+      onboardingState.weak.filter(x=>x!==skill);
+
+    el.classList.remove("selected");
+
+  }else{
+
+    onboardingState.weak.push(skill);
+
+    el.classList.add("selected");
+  }
+}
+
+
+function finishOnboarding(){
+
+  data.profile.level=onboardingState.level;
+
+  data.profile.weak=
+    onboardingState.weak.length
+      ? onboardingState.weak
+      : ["listening","grammar"];
+
+  data.goal.type=onboardingState.goal;
+  data.goal.dailyMinutes=onboardingState.time;
+
+  data.settings.onboarded=true;
+
+  save();
+
+  closeModal("onboarding");
+
+  toast("🎉 Your English World is ready!");
+
+}
+
+
+function closeModal(id){
+  document.getElementById(id).classList.add("hidden");
+}
+
+
+/* =========================================================
+   TODAY / DAILY QUEST
+========================================================= */
+
+function startWarmup(){
+
+  document.getElementById("warmupModal")
+    .classList.remove("hidden");
+
+}
+
+
+function warmAnswer(btn,correct){
+
+  if(correct){
+
+    btn.classList.add("correct");
+
+    addXP(5,"Warm-up");
+
+    setTimeout(()=>{
+      toast("🔥 Brain activated!");
+    },300);
+
+  }else{
+
+    btn.classList.add("wrong");
+
+    toast("再想一下～");
+  }
+
+}
+
+
+function startDailyQuest(){
+
+  const weak=data.profile.weak || [];
+
+  if(weak.includes("listening")){
+    go("listening");
+  }else if(weak.includes("speaking")){
+    go("speaking");
+  }else{
+    go("challenge");
+  }
+
+}
+
+
+function completeDailyTask(){
+
+  if(data.daily.completed<data.daily.total){
+
+    data.daily.completed++;
+
+    save();
+
+    if(data.daily.completed===data.daily.total){
+
+      addXP(50,"Daily Quest Complete");
+
+      unlockBadge("🌟 Daily Hero");
+
+    }else{
+
+      toast("✓ Daily task complete");
+
+    }
+
+  }
+
+}
+
+
+function surpriseQuest(){
+
+  const choices=[
+    "🎧 Listening Dictation",
+    "🗣️ Shadowing",
+    "🏰 Grammar Battle",
+    "🧠 Speed Vocabulary",
+    "🇨🇳 CATTI Translation",
+    "🎬 Media Quest"
+  ];
+
+  const choice=
+    choices[Math.floor(Math.random()*choices.length)];
+
+  toast("🎲 "+choice);
+
+  if(choice.includes("Listening")) go("listening");
+  else if(choice.includes("Speaking")) go("speaking");
+  else if(choice.includes("Grammar")) go("grammar");
+  else if(choice.includes("Vocabulary")) go("vocabulary");
+  else if(choice.includes("CATTI")) go("catti");
+  else go("media");
+
+}
+
+
+/* =========================================================
+   CHALLENGE
+========================================================= */
+
+const challengeBank=[
+
+  {
+    q:"Technology ___ changed the way we live.",
+    a:["has","have","are","were"],
+    c:"has",
+    type:"grammar"
+  },
+
+  {
+    q:"Which word means “合作”?",
+    a:["cooperation","competition","condition","collection"],
+    c:"cooperation",
+    type:"vocabulary"
+  },
+
+  {
+    q:"Sustainable development requires international ___.",
+    a:["cooperation","competition","condition","permission"],
+    c:"cooperation",
+    type:"vocabulary"
+  },
+
+  {
+    q:"He ___ to work yesterday.",
+    a:["went","go","goes","going"],
+    c:"went",
+    type:"grammar"
+  },
+
+  {
+    q:"“adapt to change” means:",
+    a:[
+      "适应变化",
+      "阻止变化",
+      "创造变化",
+      "解释变化"
+    ],
+    c:"适应变化",
+    type:"translation"
+  },
+
+  {
+    q:"Globalization has made countries more ___.",
+    a:[
+      "interdependent",
+      "independent",
+      "different",
+      "isolated"
+    ],
+    c:"interdependent",
+    type:"vocabulary"
+  }
+
+];
+
+
+let challengeIndex=0;
+let challengeCorrect=0;
+let combo=0;
+let challengeLevel="L2";
+let challengeTimer=60;
+let challengeInterval=null;
+
+
+function startLevelQuest(level){
+
+  challengeLevel=level;
+
+  challengeIndex=0;
+  challengeCorrect=0;
+  combo=0;
+
+  document.getElementById("questLevelTitle").textContent=
+    level+" Adventure";
+
+  challengeTimer=60;
+
+  clearInterval(challengeInterval);
+
+  challengeInterval=setInterval(()=>{
+
+    challengeTimer--;
+
+    document.getElementById("questTimer").textContent=
+      challengeTimer;
+
+    if(challengeTimer<=0){
+
+      clearInterval(challengeInterval);
+
+      toast("⏰ Time's up!");
+
+    }
+
+  },1000);
+
+  renderChallenge();
+
+}
+
+
+function startBoss(){
+
+  startLevelQuest("BOSS");
+
+  toast("👹 BOSS BATTLE START!");
+
+}
+
+
+function renderChallenge(){
+
+  const q=
+    challengeBank[
+      challengeIndex%challengeBank.length
+    ];
+
+  document.getElementById("challengeQuestion")
+    .textContent=q.q;
+
+  document.getElementById("challengeInfo")
+    .textContent=
+    `${challengeIndex+1} / 5`;
+
+  document.getElementById("comboText")
+    .textContent=
+    "Combo ×"+combo;
+
+  const answers=[...q.a]
+    .sort(()=>Math.random()-.5);
+
+  document.getElementById("challengeAnswers")
+    .innerHTML=
+      answers.map(x=>`
+        <button
+          class="answer"
+          onclick="answerChallenge(this,${JSON.stringify(x)})">
+          ${x}
+        </button>
+      `).join("");
+
+}
+
+
+function answerChallenge(btn,value){
+
+  const q=
+    challengeBank[
+      challengeIndex%challengeBank.length
+    ];
+
+  if(value===q.c){
+
+    btn.classList.add("correct");
+
+    combo++;
+
+    challengeCorrect++;
+
+    const bonus=
+      challengeLevel==="BOSS"
+        ? 20
+        : 10+combo;
+
+    addXP(bonus,"Quest");
+
+    if(combo>=3){
+      toast("🔥 COMBO ×"+combo+"!");
+    }
+
+    if(challengeCorrect>=5){
+
+      completeDailyTask();
+
+      unlockBadge(
+        challengeLevel==="BOSS"
+          ? "👹 Boss Slayer"
+          : "⚔️ Quest Clear"
+      );
+
+      clearInterval(challengeInterval);
+
+      setTimeout(()=>{
+        toast("🏆 Quest Complete!");
+      },300);
+
+      return;
+    }
+
+  }else{
+
+    btn.classList.add("wrong");
+
+    combo=0;
+
+    data.mistakes.unshift({
+      q:q.q,
+      correct:q.c,
+      val:value,
+      module:q.type,
+      date:new Date().toLocaleDateString()
+    });
+
+    save();
+
+    toast("❌ Added to Mistake Book");
+
+  }
+
+}
+
+
+function nextChallenge(){
+
+  challengeIndex++;
+
+  if(challengeIndex>=challengeBank.length){
+    challengeIndex=0;
+  }
+
+  renderChallenge();
+
+}
+
+
+/* =========================================================
+   LISTENING
+========================================================= */
+
+let listenRate=.7;
+
+
+function setListenSpeed(rate,btn){
+
+  listenRate=rate;
+
+  document.querySelectorAll("#listening .choice")
+    .forEach(x=>x.classList.remove("selected"));
+
+  btn.classList.add("selected");
+
+  playListening();
+
+}
+
+
+function playListening(){
+
+  speakText(
+    document.getElementById("listenSentence").textContent,
+    listenRate
+  );
+
+}
+
+
+function slowListening(){
+
+  listenRate=.7;
+
+  playListening();
+
+}
+
+
+function normalListening(){
+
+  listenRate=1;
+
+  playListening();
+
+}
+
+
+function fastListening(){
+
+  listenRate=1.5;
+
+  playListening();
+
+}
+
+
+function repeatListening(){
+
+  playListening();
+
+  setTimeout(
+    playListening,
+    2600
+  );
+
+}
+
+
+function toggleListenText(){
+
+  document.getElementById("listenText")
+    .classList.toggle("hidden");
+
+}
+
+
+function checkDictation(){
+
+  const input=
+    document.getElementById("dictationInput")
+      .value
+      .trim()
+      .toLowerCase();
+
+  const correct=
+    document.getElementById("listenSentence")
+      .textContent
+      .trim()
+      .toLowerCase();
+
+  if(!input){
+
+    toast("先写下来再检查哦");
 
     return;
 
   }
 
-  stopSpeech();
+  if(input===correct){
 
-  const text=
-    item.name+
-    ". "+
-    item.desc+
-    ". "+
-    modeText(
-      getJSON(STORAGE.mode,{})[id]||"听力"
-    );
+    document.getElementById("dictationResult")
+      .innerHTML=
+      `<div class="successBox">
+        🎉 Perfect! +15 XP
+      </div>`;
 
-  currentSpeech=
+    addXP(15,"Listening Dictation");
+
+    completeDailyTask();
+
+  }else{
+
+    document.getElementById("dictationResult")
+      .innerHTML=
+      `<div class="warningBox">
+        不完全正确。先别急着看答案，再听一次。
+      </div>`;
+
+    data.mistakes.unshift({
+      q:"Listening Dictation",
+      correct:correct,
+      val:input,
+      module:"listening",
+      date:new Date().toLocaleDateString()
+    });
+
+    save();
+
+  }
+
+}
+
+
+function startListeningMode(mode){
+
+  if(mode==="intensive"){
+    toast("🔬 Intensive Listening: 一句一句听");
+  }else{
+    toast("🌊 Extensive Listening: 不暂停");
+  }
+
+  playListening();
+
+}
+
+
+/* =========================================================
+   SPEAKING
+========================================================= */
+
+const speakingSentences=[
+  "Technology has changed the way we live.",
+  "I would like to know more about your quotation.",
+  "International cooperation is important for sustainable development.",
+  "I am looking forward to hearing from you.",
+  "Could you please send me the updated drawing?"
+];
+
+
+function speakText(text,rate=1){
+
+  if(!("speechSynthesis" in window)){
+
+    toast("浏览器不支持语音播放");
+
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const u=
     new SpeechSynthesisUtterance(text);
 
-  currentSpeech.lang="en-US";
+  u.lang="en-US";
+  u.rate=rate;
 
-  currentSpeech.rate=speechRate;
-
-  window.speechSynthesis.speak(currentSpeech);
+  speechSynthesis.speak(u);
 
 }
 
 
-function stopSpeech(){
+function speakCurrent(){
 
-  if("speechSynthesis" in window){
+  speakText(
+    document.getElementById("speakingSentence")
+      .textContent
+  );
 
-    window.speechSynthesis.cancel();
+}
 
+
+function newSpeakingSentence(){
+
+  const sentence=
+    speakingSentences[
+      Math.floor(Math.random()*speakingSentences.length)
+    ];
+
+  document.getElementById("speakingSentence")
+    .textContent=sentence;
+
+  speakText(sentence);
+
+}
+
+
+function startRecognition(){
+
+  const Recognition=
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  if(!Recognition){
+
+    toast("当前浏览器不支持 Speech Recognition。可以继续使用 Listen & Repeat。");
+
+    return;
   }
 
-}
+  const recognition=new Recognition();
 
+  recognition.lang="en-US";
+  recognition.interimResults=false;
 
-function changeSpeechRate(rate){
+  recognition.onresult=function(event){
 
-  speechRate=rate;
+    const text=
+      event.results[0][0].transcript;
 
-  toast("朗读速度 "+rate+"×");
+    const target=
+      document.getElementById("speakingSentence")
+        .textContent;
 
-}
-
-
-function saveNote(id){
-
-  const textarea=
-    document.getElementById("mediaNotes");
-
-  if(!textarea)return;
-
-  const notes=getNotes();
-
-  notes[id]=textarea.value;
-
-  saveJSON(STORAGE.notes,notes);
-
-  toast("📝 笔记已保存");
-
-}
-
-
-function closeMediaV5(){
-
-  document
-    .getElementById("mediaModalV5")
-    .classList.remove("show");
-
-  stopSpeech();
-
-}
-
-
-document
-  .getElementById("mediaFilter")
-  .addEventListener("click",event=>{
-
-    const button=
-      event.target.closest("button");
-
-    if(!button)return;
-
-    document
-      .querySelectorAll("#mediaFilter button")
-      .forEach(item=>
-        item.classList.remove("active")
+    const similarity=
+      simpleSimilarity(
+        text.toLowerCase(),
+        target.toLowerCase()
       );
 
-    button.classList.add("active");
+    document.getElementById("speechResult")
+      .classList.remove("hidden");
 
-    renderMediaV5(button.dataset.filter);
+    document.getElementById("speechResult")
+      .innerHTML=
+      `🎙️ You said: <b>${text}</b>
+       <br>
+       📊 Browser similarity estimate:
+       <b>${Math.round(similarity*100)}%</b>
+       <br>
+       <span class="small">
+       注意：这里是文字匹配，不是真正的专业发音评分。
+       </span>`;
 
+    if(similarity>.8){
+
+      addXP(15,"Speaking");
+
+    }else{
+
+      data.mistakes.unshift({
+        q:"Speaking",
+        correct:target,
+        val:text,
+        module:"speaking",
+        date:new Date().toLocaleDateString()
+      });
+
+      save();
+
+    }
+
+  };
+
+  recognition.onerror=function(){
+
+    toast("没有识别到声音，再试一次。");
+
+  };
+
+  recognition.start();
+
+}
+
+
+function simpleSimilarity(a,b){
+
+  const aw=a.split(/\s+/);
+  const bw=b.split(/\s+/);
+
+  let match=0;
+
+  aw.forEach(word=>{
+    if(bw.includes(word)) match++;
   });
 
+  return match/
+    Math.max(aw.length,bw.length,1);
 
-document
-  .getElementById("mediaSearch")
-  .addEventListener(
-    "input",
-    ()=>{
-      renderMediaV5(
-        document
-          .querySelector("#mediaFilter button.active")
-          ?.dataset.filter||
-        "全部"
-      );
-    }
-  );
+}
 
 
-document
-  .getElementById("mediaLevel")
-  .addEventListener(
-    "change",
-    ()=>{
-      renderMediaV5(
-        document
-          .querySelector("#mediaFilter button.active")
-          ?.dataset.filter||
-        "全部"
-      );
-    }
-  );
+function pictureSpeaking(){
+
+  toast("🖼️ Imagine a person working in a modern office. Describe what you see.");
+
+}
 
 
-document.addEventListener(
-  "keydown",
-  event=>{
-    if(event.key==="Escape"){
-      closeMediaV5();
-    }
+function oneMinute(){
+
+  toast("⏱️ Topic: How has technology changed your work? Start speaking.");
+
+}
+
+
+function rolePlay(){
+
+  document.getElementById("speakingSentence")
+    .textContent=
+    "Hello, I am following up on the quotation we sent last week.";
+
+  go("speaking");
+
+}
+
+
+function voiceJournal(){
+
+  toast("📔 Topic: What did you do today? Speak for 30 seconds.");
+
+}
+
+
+/* =========================================================
+   GRAMMAR
+========================================================= */
+
+const grammarBank=[
+
+  {
+    q:"He ___ to work yesterday.",
+    a:["went","go","goes","going"],
+    c:"went",
+    e:"Yesterday 表示过去时间，所以使用一般过去时 went。"
+  },
+
+  {
+    q:"She ___ English every day.",
+    a:["studies","study","studied","studying"],
+    c:"studies",
+    e:"主语 She 为第三人称单数，一般现在时动词加 s。"
+  },
+
+  {
+    q:"Technology ___ created new opportunities.",
+    a:["has","have","is","are"],
+    c:"has",
+    e:"Technology 是不可数名词，使用 has。"
+  },
+
+  {
+    q:"If workers ___ new skills, they can adapt more easily.",
+    a:["learn","learned","learning","will learn"],
+    c:"learn",
+    e:"第一条件句中 if 从句使用一般现在时。"
   }
-);
+
+];
 
 
-renderMediaV5();
+let grammarIndex=0;
+
+
+function renderGrammar(){
+
+  const q=
+    grammarBank[
+      grammarIndex%grammarBank.length
+    ];
+
+  document.getElementById("grammarQuestion")
+    .textContent=q.q;
+
+  document.getElementById("grammarAnswers")
+    .innerHTML=
+      q.a.map(x=>`
+        <button class="answer"
+          onclick="answerGrammar(this,${JSON.stringify(x)})">
+          ${x}
+        </button>
+      `).join("");
+
+  document.getElementById("grammarExplanation")
+    .innerHTML="";
+
+}
+
+
+function answerGrammar(btn,value){
+
+  const q=
+    grammarBank[
+      grammarIndex%grammarBank.length
+    ];
+
+  if(value===q.c){
+
+    btn.classList.add("correct");
+
+    document.getElementById("grammarExplanation")
+      .innerHTML=
+      `<div class="successBox">
+        🎉 Correct! ${q.e}
+      </div>`;
+
+    data.profile.skills.grammar=
+      Math.min(
+        100,
+        data.profile.skills.grammar+1
+      );
+
+    addXP(10,"Grammar");
+
+    completeDailyTask();
+
+  }else{
+
+    btn.classList.add("wrong");
+
+    document.getElementById("grammarExplanation")
+      .innerHTML=
+      `<div class="warningBox">
+        再想一下。提示：${q.e}
+      </div>`;
+
+    data.mistakes.unshift({
+      q:q.q,
+      correct:q.c,
+      val:value,
+      module:"grammar",
+      date:new Date().toLocaleDateString()
+    });
+
+    save();
+
+  }
+
+  grammarIndex++;
+
+  setTimeout(
+    renderGrammar,
+    900
+  );
+
+}
+
+
+function grammarTopic(topic){
+
+  toast("🏰 "+topic+" practice loaded");
+
+  renderGrammar();
+
+}
+
+
+function grammarBoss(){
+
+  startLevelQuest("BOSS");
+
+  go("challenge");
+
+}
+
+
+renderGrammar();
+
+
+/* =========================================================
+   VOCABULARY
+========================================================= */
+
+const words=[
+
+  {
+    word:"cooperation",
+    ipa:"/koʊˌɑːpəˈreɪʃən/",
+    cn:"合作；协作",
+    example:"International cooperation is essential for sustainable development."
+  },
+
+  {
+    word:"sustainable",
+    ipa:"/səˈsteɪnəbəl/",
+    cn:"可持续的",
+    example:"We need sustainable economic development."
+  },
+
+  {
+    word:"opportunity",
+    ipa:"/ˌɑːpərˈtuːnəti/",
+    cn:"机会",
+    example:"Technology has created new opportunities."
+  },
+
+  {
+    word:"innovation",
+    ipa:"/ˌɪnəˈveɪʃən/",
+    cn:"创新",
+    example:"Innovation plays an important role in economic growth."
+  },
+
+  {
+    word:"adapt",
+    ipa:"/əˈdæpt/",
+    cn:"适应",
+    example:"Workers need to adapt to technological change."
+  }
+
+];
+
+let wordIndex=0;
+
+
+function renderWord(){
+
+  const w=words[wordIndex%words.length];
+
+  document.getElementById("wordMain")
+    .textContent=w.word;
+
+  document.getElementById("wordIPA")
+    .textContent=w.ipa;
+
+  document.querySelector("#vocabulary h3")
+    .textContent=w.cn;
+
+}
+
+
+function nextWord(){
+
+  wordIndex++;
+
+  renderWord();
+
+}
+
+
+function addWord(){
+
+  const w=
+    words[wordIndex%words.length];
+
+  if(!data.words.includes(w.word)){
+
+    data.words.push(w.word);
+
+    addXP(5,"Wordbook");
+
+  }else{
+
+    toast("Already in your Wordbook");
+
+  }
+
+}
+
+
+function flashAnswer(answer){
+
+  const result=
+    document.getElementById("flashResult");
+
+  if(answer==="A"){
+
+    result.innerHTML=
+      `<div class="successBox">🎉 Correct! +5 XP</div>`;
+
+    addXP(5,"Speed Flash");
+
+  }else{
+
+    result.innerHTML=
+      `<div class="warningBox">再想一下，technology = 技术。</div>`;
+
+  }
+
+}
+
+
+renderWord();
+
+
+/* =========================================================
+   READING
+========================================================= */
+
+function readingLevel(level){
+
+  toast("📖 Reading level "+level+" selected");
+
+}
+
+
+function saveReading(){
+
+  addXP(15,"Reading");
+
+  completeDailyTask();
+
+  toast("📖 Reading completed!");
+
+}
+
+
+/* =========================================================
+   WRITING
+========================================================= */
+
+const writingPrompts={
+
+  business:
+    "Write a short email asking a customer about the status of your quotation.",
+
+  journal:
+    "Write 5–8 sentences about your day.",
+
+  picture:
+    "Imagine a busy international airport. Describe what people are doing.",
+
+  argument:
+    "Do you think technology creates more opportunities than challenges? Explain why."
+
+};
+
+
+function setWritingPrompt(type){
+
+  document.getElementById("writingPrompt")
+    .textContent=writingPrompts[type];
+
+  document.getElementById("writingInput")
+    .value="";
+
+  go("writing");
+
+}
+
+
+function saveWriting(){
+
+  const text=
+    document.getElementById("writingInput")
+      .value
+      .trim();
+
+  if(!text){
+
+    toast("先写一点内容哦");
+
+    return;
+  }
+
+  data.writings.push({
+    prompt:
+      document.getElementById("writingPrompt")
+        .textContent,
+    text,
+    date:new Date().toLocaleDateString()
+  });
+
+  addXP(15,"Writing");
+
+  completeDailyTask();
+
+  document.getElementById("writingFeedback")
+    .innerHTML=
+      `<div class="successBox">
+        ✓ 已保存。以后可以继续扩展成 AI 自动批改。
+      </div>`;
+
+}
+
+
+function selfCheckWriting(){
+
+  const text=
+    document.getElementById("writingInput")
+      .value.trim();
+
+  if(!text){
+
+    toast("先写一点内容");
+
+    return;
+  }
+
+  const sentences=
+    text.split(/[.!?]+/)
+      .filter(Boolean).length;
+
+  const words=
+    text.split(/\s+/).filter(Boolean).length;
+
+  document.getElementById("writingFeedback")
+    .innerHTML=
+      `<div class="successBox">
+        📊 Words: ${words}<br>
+        📝 Sentences: ${sentences}<br>
+        💡 下一步：检查时态、冠词、介词、连接词和句子之间的逻辑。
+      </div>`;
+
+}
+
+
+/* =========================================================
+   CATTI
+========================================================= */
+
+const cattiBank=[
+
+  {
+    type:"en-cn",
+    q:"Technology has created new opportunities, but workers also need support to adapt to change.",
+    hint:"注意 but 的转折，以及 adapt to。",
+  },
+
+  {
+    type:"en-cn",
+    q:"Sustainable development requires international cooperation and long-term planning.",
+    hint:"注意 requires 的主谓关系。",
+  },
+
+  {
+    type:"cn-en",
+    q:"科技进步为企业创造了新的机遇。",
+    hint:"可以使用 technological progress / create new opportunities。",
+  },
+
+  {
+    type:"cn-en",
+    q:"各国需要加强合作，以应对全球性挑战。",
+    hint:"strengthen cooperation / global challenges。",
+  }
+
+];
+
+let cattiIndex=0;
+
+
+function cattiQuestion(type){
+
+  const filtered=
+    cattiBank.filter(x=>x.type===type);
+
+  if(!filtered.length){
+
+    toast("暂无该类型");
+
+    return;
+  }
+
+  const item=
+    filtered[
+      Math.floor(Math.random()*filtered.length)
+    ];
+
+  document.getElementById("cattiPrompt")
+    .textContent=item.q;
+
+  document.getElementById("cattiInput")
+    .value="";
+
+  document.getElementById("cattiHint")
+    .textContent=item.hint;
+
+  go("catti");
+
+}
+
+
+function showCattiHint(){
+
+  document.getElementById("cattiHint")
+    .classList.remove("hidden");
+
+}
+
+
+function saveCattiAttempt(){
+
+  const text=
+    document.getElementById("cattiInput")
+      .value.trim();
+
+  if(!text){
+
+    toast("先自己翻译");
+
+    return;
+  }
+
+  data.translations.push({
+    question:
+      document.getElementById("cattiPrompt")
+        .textContent,
+    answer:text,
+    date:new Date().toLocaleDateString()
+  });
+
+  addXP(10,"CATTI Translation");
+
+  completeDailyTask();
+
+  document.getElementById("cattiSaved")
+    .innerHTML=
+      `<div class="successBox">
+        ✓ 已保存到你的 CATTI Translation Bank。
+        <br>
+        这版不会假装 AI 已经批改你的译文。
+      </div>`;
+
+}
+
+
+function nextCatti(){
+
+  cattiIndex++;
+
+  const item=
+    cattiBank[
+      cattiIndex%cattiBank.length
+    ];
+
+  document.getElementById("cattiPrompt")
+    .textContent=item.q;
+
+  document.getElementById("cattiInput")
+    .value="";
+
+  document.getElementById("cattiHint")
+    .textContent=item.hint;
+
+  document.getElementById("cattiHint")
+    .classList.add("hidden");
+
+}
+
+
+/* =========================================================
+   MEDIA
+========================================================= */
+
+const resources=[
+
+  {
+    name:"🌱 Starting Out",
+    level:"A1–A2",
+    source:"British Council",
+    url:"https://learnenglish.britishcouncil.org/free-resources/general/video-series/starting-out"
+  },
+
+  {
+    name:"🏙️ Word on the Street",
+    level:"B1–B2",
+    source:"British Council",
+    url:"https://learnenglish.britishcouncil.org/free-resources/general/video-series/word-street"
+  },
+
+  {
+    name:"🇬🇧 Britain is GREAT",
+    level:"B2–C1",
+    source:"British Council",
+    url:"https://learnenglish.britishcouncil.org/free-resources/general/video-series/britain-great"
+  },
+
+  {
+    name:"🎭 Shakespeare",
+    level:"B2",
+    source:"British Council",
+    url:"https://learnenglish.britishcouncil.org/free-resources/general/video-series/shakespeare"
+  },
+
+  {
+    name:"📺 British Council Video Zone",
+    level:"Mixed",
+    source:"British Council",
+    url:"https://learnenglish.britishcouncil.org/free-resources/general/video-zone"
+  },
+
+  {
+    name:"🇺🇸 VOA Let's Learn English Level 1",
+    level:"Beginner",
+    source:"VOA",
+    url:"https://learningenglish.voanews.com/p/5644.html"
+  },
+
+  {
+    name:"🇺🇸 VOA Let's Learn English Level 2",
+    level:"Intermediate",
+    source:"VOA",
+    url:"https://learningenglish.voanews.com/p/6765.html"
+  },
+
+  {
+    name:"🎞️ VOA English @ the Movies",
+    level:"Mixed",
+    source:"VOA",
+    url:"https://learningenglish.voanews.com/z/4691"
+  },
+
+  {
+    name:"⏱️ VOA English in a Minute",
+    level:"Short",
+    source:"VOA",
+    url:"https://learningenglish.voanews.com/z/3619"
+  },
+
+  {
+    name:"📺 VOA Learning English",
+    level:"Mixed",
+    source:"VOA",
+    url:"https://learningenglish.voanews.com/"
+  },
+
+  {
+    name:"🇬🇧 BBC Learning English",
+    level:"Mixed",
+    source:"BBC",
+    url:"https://www.bbc.co.uk/learningenglish"
+  },
+
+  {
+    name:"📚 USA Learns",
+    level:"Beginner+",
+    source:"USA Learns",
+    url:"https://www.usalearns.org/"
+  },
+
+  {
+    name:"📰 News in Levels",
+    level:"Levelled",
+    source:"News in Levels",
+    url:"https://www.newsinlevels.com/"
+  },
+
+  {
+    name:"💡 TED-Ed",
+    level:"Mixed",
+    source:"TED",
+    url:"https://ed.ted.com/"
+  },
+
+  {
+    name:"▶️ YouTube English Learning",
+    level:"Mixed",
+    source:"YouTube",
+    url:"https://www.youtube.com/results?search_query=English+learning"
+  },
+
+  {
+    name:"📱 Bilibili English Learning",
+    level:"Mixed",
+    source:"Bilibili",
+    url:"https://search.bilibili.com/all?keyword=%E8%8B%B1%E8%AF%AD%E5%AD%A6%E4%B9%A0"
+  }
+
+];
+
+
+function renderResources(){
+
+  document.getElementById("resourceList")
+    .innerHTML=
+      resources.map((r,i)=>{
+
+        const done=
+          data.mediaDone.includes(i);
+
+        return `
+        <div class="resource">
+
+          <div>
+            <div class="resourceTitle">
+              ${r.name}
+              ${done ? " ✓" : ""}
+            </div>
+
+            <div class="small">
+              ${r.level} · ${r.source}
+            </div>
+
+            <div class="wrap" style="margin-top:7px">
+              <span class="pill">Watch</span>
+              <span class="pill">Listen</span>
+              <span class="pill">Shadow</span>
+              <span class="pill">Quiz</span>
+            </div>
+          </div>
+
+          <div class="wrap">
+
+            <button
+              class="secondary"
+              onclick="openResource(${i})">
+              Open
+            </button>
+
+            <button
+              class="softBtn"
+              onclick="markMedia(${i})">
+              ${done ? "✓ Done" : "Mark"}
+            </button>
+
+          </div>
+
+        </div>
+        `;
+
+      }).join("");
+
+}
+
+
+function openResource(index){
+
+  const resource=resources[index];
+
+  window.open(
+    resource.url,
+    "_blank",
+    "noopener,noreferrer"
+  );
+
+}
+
+
+function markMedia(index){
+
+  if(!data.mediaDone.includes(index)){
+
+    data.mediaDone.push(index);
+
+    addXP(10,"Media");
+
+  }else{
+
+    toast("Already completed");
+
+  }
+
+  renderResources();
+
+}
+
+
+renderResources();
+
+
+/* =========================================================
+   REVIEW
+========================================================= */
+
+function renderMistakes(){
+
+  const list=
+    document.getElementById("mistakeList");
+
+  if(!data.mistakes.length){
+
+    list.innerHTML=
+      `<div class="successBox">
+        🎉 目前没有错题。继续保持！
+      </div>`;
+
+    return;
+  }
+
+  list.innerHTML=
+    data.mistakes
+      .slice(0,30)
+      .map((m,i)=>`
+
+        <div class="resource mistake">
+
+          <div>
+
+            <b>❌ ${escapeHTML(m.q)}</b>
+
+            <div class="small">
+              Your answer:
+              ${escapeHTML(m.val || "")}
+            </div>
+
+            <div class="small">
+              Correct:
+              ${escapeHTML(m.correct || "")}
+            </div>
+
+            <div class="small">
+              ${m.module || "general"} · ${m.date || ""}
+            </div>
+
+          </div>
+
+          <button
+            class="secondary"
+            onclick="redoMistake(${i})">
+            Redo
+          </button>
+
+        </div>
+
+      `).join("");
+
+}
+
+
+function redoMistake(index){
+
+  const m=data.mistakes[index];
+
+  toast("🔄 "+m.q);
+
+  if(m.module==="grammar"){
+    go("grammar");
+  }else if(m.module==="listening"){
+    go("listening");
+  }else if(m.module==="speaking"){
+    go("speaking");
+  }else{
+    go("challenge");
+  }
+
+}
+
+
+function clearMistakes(){
+
+  if(!confirm("确定清空错题本吗？")) return;
+
+  data.mistakes=[];
+
+  save();
+
+  toast("Mistake Book cleared");
+
+}
+
+
+/* =========================================================
+   CHILL
+========================================================= */
+
+function musicGame(){
+
+  const word="opportunity";
+
+  const scrambled=
+    word.split("")
+      .sort(()=>Math.random()-.5)
+      .join("");
+
+  const answer=prompt(
+    "🎵 Unscramble this word:\n\n"+scrambled
+  );
+
+  if(answer &&
+     answer.toLowerCase().trim()===word){
+
+    addXP(10,"Music Mini Game");
+
+  }else{
+
+    toast("答案是 opportunity");
+
+  }
+
+}
+
+
+function miniGame(){
+
+  const words=[
+    "technology",
+    "cooperation",
+    "sustainable",
+    "innovation",
+    "opportunity"
+  ];
+
+  const word=
+    words[Math.floor(Math.random()*words.length)];
+
+  speakText(word);
+
+  const answer=prompt(
+    "🔊 You heard a word. Type it:"
+  );
+
+  if(answer &&
+     answer.toLowerCase().trim()===word){
+
+    addXP(10,"Mini Game");
+
+  }else{
+
+    toast("Correct: "+word);
+
+  }
+
+}
+
+
+function nightEnglish(){
+
+  speakText(
+    "Take a deep breath. You do not need to understand everything. Just listen."
+    ,0.65
+  );
+
+}
+
+
+/* =========================================================
+   ACHIEVEMENTS
+========================================================= */
+
+function unlockBadge(name){
+
+  if(!data.badges.includes(name)){
+
+    data.badges.push(name);
+
+    toast("🏆 Badge unlocked: "+name);
+
+    save();
+
+  }
+
+}
+
+
+function checkBadges(){
+
+  if(data.xp>=100){
+    unlockBadge("🌱 First 100 XP");
+  }
+
+  if(data.total>=10){
+    unlockBadge("⚔️ 10 Challenges");
+  }
+
+  if(data.words.length>=5){
+    unlockBadge("🧠 Word Collector");
+  }
+
+  if(data.translations.length>=5){
+    unlockBadge("🇨🇳 Translation Apprentice");
+  }
+
+}
+
+
+function renderAchievements(){
+
+  const achievements=[
+    ["🌱","First 100 XP",data.xp>=100],
+    ["⚔️","10 Challenges",data.total>=10],
+    ["🧠","Word Collector",data.words.length>=5],
+    ["🇨🇳","Translation Apprentice",data.translations.length>=5],
+    ["🎬","Media Explorer",data.mediaDone.length>=5],
+    ["🔥","7 Day Streak",data.streak>=7]
+  ];
+
+  document.getElementById("achievements")
+    .innerHTML=
+      achievements.map(a=>`
+
+        <div class="card"
+             style="opacity:${a[2]?1:.45}">
+
+          <div class="big">${a[0]}</div>
+          <b>${a[1]}</b>
+
+          <div class="small">
+            ${a[2] ? "Unlocked ✓" : "Locked"}
+          </div>
+
+        </div>
+
+      `).join("");
+
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+function updateSkills(){
+
+  const skills=data.profile.skills;
+
+  document.getElementById("skillRadar")
+    .innerHTML=
+      Object.entries(skills)
+        .map(([name,value])=>`
+
+          <div class="skillLine">
+
+            <span>${skillName(name)}</span>
+
+            <div class="progress">
+              <i style="width:${value}%"></i>
+            </div>
+
+            <span>${value}%</span>
+
+          </div>
+
+        `).join("");
+
+}
+
+
+function skillName(name){
+
+  const map={
+    listening:"🎧",
+    speaking:"🗣️",
+    grammar:"🏰",
+    vocabulary:"🧠",
+    reading:"📖",
+    writing:"✍️",
+    translation:"🇨🇳"
+  };
+
+  return map[name] || name;
+
+}
+
+
+function renderProgress(){
+
+  const chart=
+    document.getElementById("activityChart");
+
+  const values=[];
+
+  for(let i=6;i>=0;i--){
+
+    const d=
+      new Date();
+
+    d.setDate(
+      d.getDate()-i
+    );
+
+    const date=
+      d.toISOString().slice(0,10);
+
+    const found=
+      data.activity.find(x=>x.date===date);
+
+    values.push(
+      found ? found.value : 0
+    );
+
+  }
+
+  const max=
+    Math.max(...values,1);
+
+  chart.innerHTML=
+    values.map((v,i)=>`
+
+      <div
+        class="bar"
+        style="height:${Math.max(5,v/max*120)}px">
+
+        <span>
+          ${i===6 ? "Today" : "-"+(6-i)}
+        </span>
+
+      </div>
+
+    `).join("");
+
+  const heat=
+    document.getElementById("heatmap");
+
+  heat.innerHTML="";
+
+  for(let i=0;i<56;i++){
+
+    const index=
+      data.activity.length-56+i;
+
+    const value=
+      index>=0
+        ? data.activity[index].value
+        : 0;
+
+    let cls="heat";
+
+    if(value>=1) cls+=" l1";
+    if(value>=3) cls+=" l2";
+    if(value>=5) cls+=" l3";
+    if(value>=8) cls+=" l4";
+
+    heat.innerHTML+=
+      `<div class="${cls}" title="${value} activities"></div>`;
+
+  }
+
+  renderAchievements();
+
+}
+
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+function updateGoal(value){
+
+  data.goal.type=value;
+
+  save();
+
+  toast("🎯 Goal updated");
+
+}
+
+
+function updateStudyTime(value){
+
+  data.goal.dailyMinutes=
+    Number(value);
+
+  save();
+
+  toast("⏰ Daily time updated");
+
+}
+
+
+/* =========================================================
+   BACKUP
+========================================================= */
+
+function exportData(){
+
+  const blob=
+    new Blob(
+      [
+        JSON.stringify(data,null,2)
+      ],
+      {
+        type:"application/json"
+      }
+    );
+
+  const url=
+    URL.createObjectURL(blob);
+
+  const a=
+    document.createElement("a");
+
+  a.href=url;
+
+  a.download=
+    "Vickys-English-backup.json";
+
+  a.click();
+
+  URL.revokeObjectURL(url);
+
+  toast("💾 Backup exported");
+
+}
+
+
+function importData(event){
+
+  const file=
+    event.target.files[0];
+
+  if(!file) return;
+
+  const reader=
+    new FileReader();
+
+  reader.onload=function(){
+
+    try{
+
+      const imported=
+        JSON.parse(reader.result);
+
+      data=
+        Object.assign(
+          {},
+          DEFAULT_DATA,
+          imported
+        );
+
+      save();
+
+      toast("✓ Backup imported");
+
+    }catch(e){
+
+      toast("❌ Invalid backup file");
+
+    }
+
+  };
+
+  reader.readAsText(file);
+
+}
+
+
+function resetAll(){
+
+  if(!confirm(
+    "确定要删除 Vicky's English 的全部学习数据吗？"
+  )) return;
+
+  localStorage.removeItem("vqData");
+
+  location.reload();
+
+}
+
+
+/* =========================================================
+   UTILS
+========================================================= */
+
+function escapeHTML(text){
+
+  return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+ensureDaily();
+
+if(!data.settings.onboarded){
+
+  setTimeout(
+    openOnboarding,
+    500
+  );
+
+}
+
+document.getElementById("goalSelect").value=
+  data.goal.type;
+
+document.getElementById("timeSelect").value=
+  data.goal.dailyMinutes;
+
+updateUI();
+
+renderResources();
+
+renderMistakes();
+
+renderProgress();
 
 </script>
 
 </body>
 </html>
-```
